@@ -1,0 +1,13 @@
+/build/**
+/coverage/**
+/docs/**
+/jsdoc/**
+/templates/**
+/tests/bench/**
+/test-config/**
+/tests/fixtures/**
+/tests/performance/**
+/tmp/**
+next.config.js
+
+# Add any other files or folders that you want eslint to ignore
