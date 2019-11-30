@@ -1,0 +1,43 @@
+@import '../../../sass/abstract/variables';
+@import '../../../sass/components/input';
+
+.p-signupPage {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+
+    &__heading {
+        font-size: 3rem;
+        font-weight: 500;
+    }
+
+    .a-formAuth {
+        width: 100%;
+        font-size: 1.8rem;
+
+        &__check-btn {
+            color: $color-grey-dark;
+        }
+
+        &__button {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .b-button {
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            background: linear-gradient(
+                to right,
+                $color-primary,
+                $color-secondary
+            );
+            box-shadow: 0px 9px 7px rgba(24, 119, 242, 0.24);
+            border-radius: 7px;
+            text-transform: capitalize;
+            padding: 0.9rem 6rem;
+            color: $color-white;
+        }
+    }
+}
