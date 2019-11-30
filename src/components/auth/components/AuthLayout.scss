@@ -1,0 +1,50 @@
+@import '../../../sass/abstract/variables';
+
+.l-authLayout {
+    height: 100vh;
+
+    &__brand {
+        display: flex;
+    }
+
+    &__img {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    &__brandName {
+        font-weight: 600;
+        font-size: 4rem;
+        margin-left: 2rem;
+    }
+
+    &__brandDesc {
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 400;
+        font-size: 4rem;
+    }
+
+    .left {
+        background-image: url(../../../assets/img/world-img.png);
+        background-color: $color-primary;
+        background-blend-mode: multiply;
+        background-size: cover;
+        background-position: center;
+        color: $color-white;
+        padding: 5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .right {
+        padding: 5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

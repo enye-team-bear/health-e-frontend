@@ -114,6 +114,7 @@
         "react/jsx-no-literals": "error",
         "react/jsx-wrap-multilines": "error",
         "react/jsx-no-comment-textnodes": "error",
+        "react/jsx-fragments": "off",
         "jsx-a11y/anchor-is-valid": 0,
         "import/prefer-default-export": "off"
     },
