@@ -1,0 +1,25 @@
+.i-textInput {
+    width: 100%;
+    background-color: $color-grey-light;
+    font-size: 50px;
+    color: $color-grey-light-1;
+}
+
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: $color-primary !important;
+}
+
+.MuiInputBase-input {
+    font-size: 1.2rem !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.MuiInputLabel-outlined {
+    font-size: 1.2rem !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.MuiSwitch-colorPrimary.Mui-checked {
+    color: $color-primary !important;
+}
