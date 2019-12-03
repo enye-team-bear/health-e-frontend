@@ -23,18 +23,5 @@ const userFormData = {
 		type: 'password',
 	},
 };
-/**
- * Defines the classes used in application.
- *
- * @constant
- */
-const cssClasses = {
-	AUTH_LAYOUT_IMG: 'l-authLayout__img',
-	FORM_AUTH: 'a-formAuth',
-	FORM_AUTH_BTN: 'a-formAuth__button',
-	FORM_AUTH_CHECK_BTN: 'a-formAuth__check-btn',
-	SIGNIN_PAGE: 'p-signinPage',
-	SIGNIN_PAGE_HEADING: 'p-signinPage__heading',
-};
 
-export { cssClasses, signInData, userFormData };
+export { signInData, userFormData };
