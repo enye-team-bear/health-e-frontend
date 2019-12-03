@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { userFormData } from './constants';
 
 const useInputFields = () => {

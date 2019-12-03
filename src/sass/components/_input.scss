@@ -3,22 +3,22 @@
     background-color: $color-grey-light;
     font-size: 50px;
     color: $color-grey-light-1;
-}
 
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: $color-primary !important;
-}
+    .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: $color-primary;
+    }
 
-.MuiInputBase-input {
-    font-size: 1.4rem !important;
-    font-family: 'Poppins', sans-serif !important;
-}
+    .MuiInputBase-input {
+        font-size: 1.4rem;
+        font-family: 'Poppins', sans-serif;
+    }
 
-.MuiInputLabel-outlined {
-    font-size: 1.4rem !important;
-    font-family: 'Poppins', sans-serif !important;
-}
+    .MuiInputLabel-outlined {
+        font-size: 1.4rem;
+        font-family: 'Poppins', sans-serif;
+    }
 
-.MuiSwitch-colorPrimary.Mui-checked {
-    color: $color-primary !important;
+    .MuiSwitch-colorPrimary.Mui-checked {
+        color: $color-primary;
+    }
 }

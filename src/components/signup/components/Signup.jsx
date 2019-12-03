@@ -3,19 +3,10 @@ import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import { AuthLayout } from '../../auth';
 import { TextInput } from '../../utils/input';
-import { cssClasses, signUpData } from '../constants';
+import { signUpData } from '../constants';
 
 // APPLICATION STATES
 import { useInputFields, useCheckedLabel } from '../states';
-
-// Deconstructing css lasses
-const {
-    FORM_AUTH,
-    FORM_AUTH_BTN,
-    FORM_AUTH_CHECK_BTN,
-    SIGNUP_PAGE,
-    SIGNUP_PAGE_HEADING,
-} = cssClasses;
 
 const handleSubmit = e => {
     e.preventDefault();
@@ -47,7 +38,7 @@ const renderInput = (formData, handleInputChange) => (
  * @function {*} renderCheckedLabel
  */
 const renderCheckedLabel = (checked, handleChecked) => (
-    <div className={FORM_AUTH_CHECK_BTN}>
+    <div className="a-formAuth__check-btn">
         {signUpData.userText}
         <Switch
             checked={checked}
@@ -66,7 +57,7 @@ const renderCheckedLabel = (checked, handleChecked) => (
  * @function {*} renderButton
  */
 const renderButton = () => (
-    <div className={FORM_AUTH_BTN}>
+    <div className="a-formAuth__button">
         <Button variant="contained" className="b-button">
             {signUpData.signupText}
         </Button>
@@ -78,11 +69,11 @@ const Signup = () => {
     const { checked, handleChecked } = useCheckedLabel();
     return (
         <AuthLayout>
-            <div className={SIGNUP_PAGE}>
-                <div className={SIGNUP_PAGE_HEADING}>
+            <div className="p-signupPage">
+                <div className="p-signupPage__heading">
                     {signUpData.signupText}
                 </div>
-                <form className={FORM_AUTH} onSubmit={handleSubmit}>
+                <form className="a-formAuth" onSubmit={handleSubmit}>
                     {renderInput(formData, handleInputChange)}
                     {renderCheckedLabel(checked, handleChecked)}
                     {renderButton()}
