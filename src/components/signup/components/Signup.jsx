@@ -1,40 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import { AuthLayout } from '../../auth';
 import { TextInput } from '../../utils/input';
-import { signUpData, userFormData } from '../constants';
+import { signUpData } from '../constants';
 
-const useInputFields = () => {
-    const [formData, setFormData] = useState(userFormData);
-
-    const handleInputChange = event => {
-        event.persist();
-        const newFormData = { ...formData };
-        const newField = { ...newFormData[event.target.name] };
-        newField.value = event.target.value;
-        newFormData[event.target.name] = newField;
-        setFormData(newFormData);
-    };
-    return {
-        formData,
-        handleInputChange,
-    };
-};
-const useCheckedLabel = () => {
-    const [checked, setChecked] = useState(true);
-
-    const handleChecked = () => setChecked(!checked);
-    return {
-        checked,
-        handleChecked,
-    };
-};
+// APPLICATION STATES
+import { useInputFields, useCheckedLabel } from '../states';
 
 const handleSubmit = e => {
     e.preventDefault();
 };
 
+/**
+ * function used to render text input on form dynamically
+ *
+ * @function {*} renderInput
+ */
 const renderInput = (formData, handleInputChange) => (
     <React.Fragment>
         {Object.keys(formData).map((el, i) => (
@@ -50,6 +32,11 @@ const renderInput = (formData, handleInputChange) => (
     </React.Fragment>
 );
 
+/**
+ * function used to render checkbox label on form
+ *
+ * @function {*} renderCheckedLabel
+ */
 const renderCheckedLabel = (checked, handleChecked) => (
     <div className="a-formAuth__check-btn">
         {signUpData.userText}
@@ -64,6 +51,11 @@ const renderCheckedLabel = (checked, handleChecked) => (
     </div>
 );
 
+/**
+ * function used to render submit button label on form
+ *
+ * @function {*} renderButton
+ */
 const renderButton = () => (
     <div className="a-formAuth__button">
         <Button variant="contained" className="b-button">
@@ -78,7 +70,6 @@ const Signup = () => {
     return (
         <AuthLayout>
             <div className="p-signupPage">
-                {/* <p className="p-signupPage__alreadyUser">{data}</p> */}
                 <div className="p-signupPage__heading">
                     {signUpData.signupText}
                 </div>

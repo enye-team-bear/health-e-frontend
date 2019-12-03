@@ -1,9 +1,19 @@
+/**
+ * Defines the text data on page.
+ *
+ * @constant
+ */
 const signUpData = {
 	userText: 'User',
 	medicalText: 'Medical',
 	signupText: 'Sign up',
 };
 
+/**
+ * Data rendered for application state.
+ *
+ * @constant
+ */
 const userFormData = {
 	userName: {
 		label: 'User Name',

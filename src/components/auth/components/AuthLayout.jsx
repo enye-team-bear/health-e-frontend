@@ -3,6 +3,11 @@ import Grid from '@material-ui/core/Grid';
 import logo from '../../../assets/img/logo.png';
 import { siteData } from '../constants';
 
+/**
+ * function used to render left side of authentication layout
+ *
+ * @function {*} renderCheckedLabel
+ */
 const authLeftInfo = () => (
     <div className="l-authLayout__brand">
         <img src={logo} alt="site logo" className="l-authLayout__img" />
@@ -19,7 +24,7 @@ const AuthLayout = props => {
                     <div>{siteData.siteDesc1Text}</div>
                 </div>
             </Grid>
-            <Grid item md={6} className="right">
+            <Grid item md={6} sm={12} className="right">
                 {props.children}
             </Grid>
         </Grid>

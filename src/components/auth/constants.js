@@ -1,3 +1,8 @@
+/**
+ * Defines the text data on page.
+ *
+ * @constant
+ */
 const siteData = {
 	siteNameText: 'health-e',
 	siteDesc1Text:

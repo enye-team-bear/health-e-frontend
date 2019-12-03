@@ -2,6 +2,7 @@
 
 .l-authLayout {
     height: 100vh;
+    position: relative;
 
     &__brand {
         display: flex;
@@ -10,12 +11,21 @@
     &__img {
         width: 6rem;
         height: 6rem;
+
+        @media only screen and (max-width: $bp-larger) {
+            width: 4rem;
+            height: 4rem;
+        }
     }
 
     &__brandName {
         font-weight: 600;
         font-size: 4rem;
         margin-left: 2rem;
+
+        @media only screen and (max-width: 960px) {
+            font-size: 3rem;
+        }
     }
 
     &__brandDesc {
@@ -25,6 +35,10 @@
         justify-content: center;
         font-size: 400;
         font-size: 4rem;
+
+        @media only screen and (max-width: 960px) {
+            display: none;
+        }
     }
 
     .left {
@@ -38,6 +52,11 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        @media only screen and (max-width: 960px) {
+            padding: 2rem;
+            width: 100%;
+        }
     }
 
     .right {
