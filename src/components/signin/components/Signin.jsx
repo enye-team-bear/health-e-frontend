@@ -44,6 +44,11 @@ const renderButton = () => (
     </div>
 );
 
+/**
+ * function used to render signin component
+ *
+ * @function {*} Signin
+ */
 const Signin = () => {
     const { formData, handleInputChange } = useInputFields();
     return (

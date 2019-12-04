@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,6 @@ const { signupText } = signUpData;
 const handleSubmit = (e, userData, dispatch) => {
     e.preventDefault();
 
-    // console.log(userData);
     dispatch({ type: SIGN_UP_USER, payload: userData });
 };
 
@@ -24,7 +23,7 @@ const handleSubmit = (e, userData, dispatch) => {
  * @function {*} renderInput
  */
 const renderInput = (formData, handleInputChange) => (
-    <React.Fragment>
+    <Fragment>
         {Object.keys(formData).map((el, i) => (
             <TextInput
                 key={i}
@@ -35,7 +34,7 @@ const renderInput = (formData, handleInputChange) => (
                 type={formData[el].type}
             />
         ))}
-    </React.Fragment>
+    </Fragment>
 );
 
 /**
