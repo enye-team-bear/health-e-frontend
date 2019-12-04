@@ -1,13 +1,13 @@
 import { takeEvery, put, fork, take } from 'redux-saga/effects';
-import { SIGN_UP_USER } from './signupActionTypes';
+import { SIGN_IN_USER } from './signinActionTypes';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-function* signupUserAsync(userData) {
+function* signinUserAsync(userData) {
 	yield delay(2000);
-	console.log('signup', userData);
+	console.log('signin', userData);
 }
 
 export default function* root() {
-	yield takeEvery(SIGN_UP_USER, signupUserAsync);
+	yield takeEvery(SIGN_IN_USER, signinUserAsync);
 }

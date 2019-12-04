@@ -13,8 +13,6 @@ const { signupText } = signUpData;
 
 const handleSubmit = (e, userData, dispatch) => {
     e.preventDefault();
-
-    // console.log(userData);
     dispatch({ type: SIGN_UP_USER, payload: userData });
 };
 
