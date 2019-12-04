@@ -69,6 +69,11 @@ const renderButton = () => (
     </div>
 );
 
+/**
+ * function used to render signup component
+ *
+ * @function {*} Signup
+ */
 const Signup = () => {
     const { formData, handleInputChange } = useInputFields();
     const { checked, handleChecked } = useCheckedLabel();
