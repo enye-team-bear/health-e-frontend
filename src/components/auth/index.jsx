@@ -1,3 +1,4 @@
 import AuthLayout from './components';
+import authReducer from './authReducer';
 
-export { AuthLayout };
+export { AuthLayout, authReducer };
