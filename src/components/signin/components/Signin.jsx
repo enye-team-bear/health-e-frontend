@@ -1,14 +1,19 @@
 import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
+import { useDispatch } from 'react-redux';
 import { AuthLayout } from '../../auth';
 import { TextInput } from '../../utils/input';
 import { signInData } from '../constants';
+import { SIGN_IN_USER } from '../signinActionTypes';
 
 // APPLICATION STATES
 import { useInputFields } from '../states';
 
-const handleSubmit = e => {
+const { signinText } = signInData;
+
+const handleSubmit = (e, userData, dispatch) => {
     e.preventDefault();
+    dispatch({ type: SIGN_IN_USER, payload: userData });
 };
 
 /**
@@ -38,8 +43,8 @@ const renderInput = (formData, handleInputChange) => (
  */
 const renderButton = () => (
     <div className="a-formAuth__button">
-        <Button variant="contained" className="b-button">
-            {signInData.signinText}
+        <Button variant="contained" className="b-button" type="submit">
+            {signinText}
         </Button>
     </div>
 );
@@ -51,13 +56,15 @@ const renderButton = () => (
  */
 const Signin = () => {
     const { formData, handleInputChange } = useInputFields();
+    const dispatch = useDispatch();
     return (
         <AuthLayout>
             <div className="p-signinPage">
-                <div className="p-signinPage__heading">
-                    {signInData.signinText}
-                </div>
-                <form className="a-formAuth" onSubmit={handleSubmit}>
+                <div className="p-signinPage__heading">{signinText}</div>
+                <form
+                    className="a-formAuth"
+                    onSubmit={e => handleSubmit(e, formData, dispatch)}
+                >
                     {renderInput(formData, handleInputChange)}
                     {renderButton()}
                 </form>
