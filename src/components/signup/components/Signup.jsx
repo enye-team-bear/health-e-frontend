@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
+import { useDispatch } from 'react-redux';
 import { AuthLayout } from '../../auth';
 import { TextInput } from '../../utils/input';
 import { signUpData } from '../constants';
-
+import { SIGN_UP_USER } from '../signupActionTypes';
 // APPLICATION STATES
 import { useInputFields, useCheckedLabel } from '../states';
 
-const handleSubmit = e => {
+const { signupText } = signUpData;
+
+const handleSubmit = (e, userData, dispatch) => {
     e.preventDefault();
+
+    dispatch({ type: SIGN_UP_USER, payload: userData });
 };
 
 /**
@@ -18,7 +23,7 @@ const handleSubmit = e => {
  * @function {*} renderInput
  */
 const renderInput = (formData, handleInputChange) => (
-    <React.Fragment>
+    <Fragment>
         {Object.keys(formData).map((el, i) => (
             <TextInput
                 key={i}
@@ -29,7 +34,7 @@ const renderInput = (formData, handleInputChange) => (
                 type={formData[el].type}
             />
         ))}
-    </React.Fragment>
+    </Fragment>
 );
 
 /**
@@ -58,22 +63,29 @@ const renderCheckedLabel = (checked, handleChecked) => (
  */
 const renderButton = () => (
     <div className="a-formAuth__button">
-        <Button variant="contained" className="b-button">
-            {signUpData.signupText}
+        <Button variant="contained" className="b-button" type="submit">
+            {signupText}
         </Button>
     </div>
 );
 
+/**
+ * function used to render signup component
+ *
+ * @function {*} Signup
+ */
 const Signup = () => {
     const { formData, handleInputChange } = useInputFields();
     const { checked, handleChecked } = useCheckedLabel();
+    const dispatch = useDispatch();
     return (
         <AuthLayout>
             <div className="p-signupPage">
-                <div className="p-signupPage__heading">
-                    {signUpData.signupText}
-                </div>
-                <form className="a-formAuth" onSubmit={handleSubmit}>
+                <div className="p-signupPage__heading">{signupText}</div>
+                <form
+                    className="a-formAuth"
+                    onSubmit={e => handleSubmit(e, formData, dispatch)}
+                >
                     {renderInput(formData, handleInputChange)}
                     {renderCheckedLabel(checked, handleChecked)}
                     {renderButton()}

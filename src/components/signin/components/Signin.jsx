@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { AuthLayout } from '../../auth';
 import { TextInput } from '../../utils/input';
@@ -17,7 +17,7 @@ const handleSubmit = e => {
  * @function {*} renderInput
  */
 const renderInput = (formData, handleInputChange) => (
-    <React.Fragment>
+    <Fragment>
         {Object.keys(formData).map((el, i) => (
             <TextInput
                 key={i}
@@ -28,7 +28,7 @@ const renderInput = (formData, handleInputChange) => (
                 type={formData[el].type}
             />
         ))}
-    </React.Fragment>
+    </Fragment>
 );
 
 /**
@@ -44,6 +44,11 @@ const renderButton = () => (
     </div>
 );
 
+/**
+ * function used to render signin component
+ *
+ * @function {*} Signin
+ */
 const Signin = () => {
     const { formData, handleInputChange } = useInputFields();
     return (
