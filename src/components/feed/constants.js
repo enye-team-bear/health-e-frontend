@@ -1,7 +1,11 @@
 const profileText = {
-    title: "Topics",
+    invite: '* invite an Expert',
+    name: 'Moses viktor',
+    prof: 'neuro surgeon',
+    suggestedExp: 'suggested Experts',
+    title: 'Topics',
     userNameText: 'Moses Sapele',
-    viewProfileText: "view profile",
+    viewProfileText: 'view profile',
 }
 
 const topics = [

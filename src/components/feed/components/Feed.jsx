@@ -2,11 +2,12 @@
 
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import Left from './experts';
 import { Navigation } from '../../Navigation';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import Right from './right';
-import RightDown from './rightDown';
+import Right from './profile';
+import RightDown from './trending';
 
 /**
  * function used to render grid
@@ -23,7 +24,8 @@ const renderGrid = () => (
             <Paper className="p-page__card">xs=12 sm=4</Paper>
         </Grid>
         <Grid item xs={12} sm={3}>
-            <Paper className="p-page__card">xs=12 sm=4</Paper>
+            <Card className="p-page__card"><Left /></Card>
+            <Card className="p-page__card"><RightDown /></Card>
         </Grid>
     </Grid>
 );
