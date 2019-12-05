@@ -1,2 +1,10 @@
 @import '../../../sass/abstract/variables';
 @import '../../../sass/components/input';
+@import '../../../sass/utils/page';
+
+.p-feedPage {
+    background-color: $color-grey-lighter;
+    height: 100vh;
+    flex-grow: 1;
+    padding-top: 4rem;
+}
