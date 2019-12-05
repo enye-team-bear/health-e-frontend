@@ -1,5 +1,3 @@
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import React from 'react';
 import defaultImg from '../../../../assets/img/defaultImg.png';
 import { profileText } from '../../constants';
@@ -11,16 +9,23 @@ const { userNameText, viewProfileText } = profileText;
  * @function {*} renderImage
  */
 const renderImage = () => (
-    <Avatar alt="Display Picture" src={defaultImg} className="prof" />
+    <img src={defaultImg} alt='profile' className='prof' />
 );
 
 const renderButton = () => (
     <div className="a-view__button">
-        <Button variant="contained" className="view-button">
+        <button  className="butt" type='button'>
             {viewProfileText}
-        </Button>
+        </button>
     </div>
 );
+
+const renderGrid = () => (
+    <div className='grid'>
+        <div className='item1'><h1 className='number'>412</h1><p>connections</p></div>
+        <div className='item2'><h1 className='number'>21</h1><p>all posts</p></div>
+    </div>
+)
 
 /**
  * function used to render Feed component
@@ -33,6 +38,7 @@ const Right = () => (
             <div className="">{renderImage()}</div>
             <p className="userName">{userNameText}</p>
             {renderButton()}
+            {renderGrid()}
         </div>
     </div>
 );
