@@ -1,0 +1,32 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.p-right {
+}
+.prof {
+    margin: auto;
+    min-width: 108.29px;
+    min-height: 108.29px;
+}
+
+.userName {
+    margin-top: 8px;
+}
+
+.cont {
+    padding: 10px;
+}
+
+.a-view {
+
+    &__button {
+        text-align: center;
+        margin-top: 1.4rem;
+    }
+
+    
+    .view-button {
+        background-color: white;
+    }
+}
