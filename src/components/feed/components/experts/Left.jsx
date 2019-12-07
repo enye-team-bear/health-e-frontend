@@ -3,7 +3,7 @@ import React from 'react';
 import defaultImg from '../../../../assets/img/defaultImg.png';
 import { profileText } from '../../constants';
 
-const { suggestedExp, name, prof, invite } = profileText
+const { suggestedExp, name, prof, invite } = profileText;
 
 const renderChip = () => (
     <div>
