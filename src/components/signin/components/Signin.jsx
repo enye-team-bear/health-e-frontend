@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import useReactRouter from 'use-react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthLayout } from '../../auth';
 import { TextInput } from '../../utils/input';
 import { signInData } from '../constants';
@@ -11,9 +13,13 @@ import { useInputFields } from '../states';
 
 const { signinText } = signInData;
 
-const handleSubmit = (e, userData, dispatch) => {
+const handleSubmit = (e, userData, dispatch, history) => {
     e.preventDefault();
-    dispatch({ type: SIGN_IN_USER, payload: userData });
+    const userInfo = {};
+    Object.keys(userData).forEach(el => {
+        userInfo[el] = userData[el].value;
+    });
+    dispatch({ type: SIGN_IN_USER, payload: userInfo, history });
 };
 
 /**
@@ -41,9 +47,17 @@ const renderInput = (formData, handleInputChange) => (
  *
  * @function {*} renderButton
  */
-const renderButton = () => (
+const renderButton = state => (
     <div className="a-formAuth__button">
-        <Button variant="contained" className="b-button" type="submit">
+        <Button
+            variant="contained"
+            className="b-button"
+            type="submit"
+            disabled={state.loading}
+        >
+            {state.loading ? (
+                <CircularProgress className="b-button__progress" size={25} />
+            ) : null}
             {signinText}
         </Button>
     </div>
@@ -57,16 +71,18 @@ const renderButton = () => (
 const Signin = () => {
     const { formData, handleInputChange } = useInputFields();
     const dispatch = useDispatch();
+    const { history } = useReactRouter();
+    const signinState = useSelector(state => state.signin);
     return (
         <AuthLayout>
             <div className="p-signinPage">
                 <div className="p-signinPage__heading">{signinText}</div>
                 <form
                     className="a-formAuth"
-                    onSubmit={e => handleSubmit(e, formData, dispatch)}
+                    onSubmit={e => handleSubmit(e, formData, dispatch, history)}
                 >
                     {renderInput(formData, handleInputChange)}
-                    {renderButton()}
+                    {renderButton(signinState)}
                 </form>
             </div>
         </AuthLayout>

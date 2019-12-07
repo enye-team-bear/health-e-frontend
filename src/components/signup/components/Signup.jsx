@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthLayout } from '../../auth';
 import { TextInput } from '../../utils/input';
 import { signUpData } from '../constants';
@@ -11,10 +12,14 @@ import { useInputFields, useCheckedLabel } from '../states';
 
 const { signupText } = signUpData;
 
-const handleSubmit = (e, userData, dispatch) => {
+const handleSubmit = (e, userData, dispatch, checked) => {
     e.preventDefault();
-
-    dispatch({ type: SIGN_UP_USER, payload: userData });
+    const userInfo = {};
+    Object.keys(userData).forEach(el => {
+        userInfo[el] = userData[el].value;
+    });
+    userInfo.userStatus = checked ? 'medical' : 'user';
+    dispatch({ type: SIGN_UP_USER, payload: userInfo });
 };
 
 /**
@@ -61,9 +66,17 @@ const renderCheckedLabel = (checked, handleChecked) => (
  *
  * @function {*} renderButton
  */
-const renderButton = () => (
+const renderButton = state => (
     <div className="a-formAuth__button">
-        <Button variant="contained" className="b-button" type="submit">
+        <Button
+            variant="contained"
+            className="b-button"
+            type="submit"
+            disabled={state.loading}
+        >
+            {state.loading ? (
+                <CircularProgress className="b-button__progress" size={25} />
+            ) : null}
             {signupText}
         </Button>
     </div>
@@ -78,17 +91,18 @@ const Signup = () => {
     const { formData, handleInputChange } = useInputFields();
     const { checked, handleChecked } = useCheckedLabel();
     const dispatch = useDispatch();
+    const signupState = useSelector(state => state.signup);
     return (
         <AuthLayout>
             <div className="p-signupPage">
                 <div className="p-signupPage__heading">{signupText}</div>
                 <form
                     className="a-formAuth"
-                    onSubmit={e => handleSubmit(e, formData, dispatch)}
+                    onSubmit={e => handleSubmit(e, formData, dispatch, checked)}
                 >
                     {renderInput(formData, handleInputChange)}
                     {renderCheckedLabel(checked, handleChecked)}
-                    {renderButton()}
+                    {renderButton(signupState)}
                 </form>
             </div>
         </AuthLayout>

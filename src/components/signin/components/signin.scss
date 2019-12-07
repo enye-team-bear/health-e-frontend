@@ -54,6 +54,15 @@
             text-transform: capitalize;
             padding: 0.9rem 6rem;
             color: $color-white;
+
+            &__progress {
+                color: $color-white;
+                position: absolute;
+            }
+            &:disabled,
+            &[disabled] {
+                opacity: 0.5;
+            }
         }
     }
 }

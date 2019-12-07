@@ -24,4 +24,12 @@ const userFormData = {
 	},
 };
 
-export { signInData, userFormData };
+/**
+ * Defines the url for the database.
+ *
+ * @constant
+ */
+const DATABASE_API_URL =
+	'https://us-central1-health-e-api.cloudfunctions.net/api';
+
+export { signInData, userFormData, DATABASE_API_URL };

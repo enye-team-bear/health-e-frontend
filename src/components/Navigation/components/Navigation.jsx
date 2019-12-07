@@ -29,8 +29,8 @@ const iconButtons = [
  * @function {*} badgeIcons
  * @return {Component} react component
  */
-const badgeIcons = (ariaLabel, badgeContent, Component) => (
-    <IconButton aria-label={ariaLabel} color="inherit">
+const badgeIcons = (ariaLabel, badgeContent, Component, key) => (
+    <IconButton aria-label={ariaLabel} color="inherit" key={key}>
         <Badge badgeContent={badgeContent} color="secondary">
             {Component}
         </Badge>
@@ -58,8 +58,8 @@ const renderNavBrand = () => (
  */
 const renderNavMenuItems = () => (
     <div className="n-navigation__items">
-        {iconButtons.map(el =>
-            badgeIcons(el.ariaLabel, el.badgeContent, el.Component)
+        {iconButtons.map((el, i) =>
+            badgeIcons(el.ariaLabel, el.badgeContent, el.Component, i)
         )}
 
         <IconButton
