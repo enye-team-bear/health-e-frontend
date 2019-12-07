@@ -12,11 +12,9 @@ const { title } = profileText;
  * @function {*} Feed
  */
 const Right = () => (
-    <div>
-        <div className="p-right">
-            <h2>{title}</h2>
-            {topics.map(topic => <p className='topics' key={topic.id}>{topic}</p>)}
-        </div>
+    <div className="p-right">
+        <h2>{title}</h2>
+        {topics.map(topic => <p className='topics' key={topic.id}>{topic}</p>)}
     </div>
 );
 
