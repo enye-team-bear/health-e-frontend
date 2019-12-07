@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
-	isWorking: true,
+	isAuthenticated: false,
+	user: {},
 };
 
 export default (state = INITIAL_STATE, action) => {

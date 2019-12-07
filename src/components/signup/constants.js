@@ -30,7 +30,7 @@ const userFormData = {
 		value: '',
 		type: 'email',
 	},
-	phoneNumber: {
+	number: {
 		label: 'Phone Number',
 		value: '',
 		type: 'text',
@@ -47,4 +47,12 @@ const userFormData = {
 	},
 };
 
-export { signUpData, userFormData };
+/**
+ * Defines the url for the database.
+ *
+ * @constant
+ */
+const DATABASE_API_URL =
+	'https://us-central1-health-e-api.cloudfunctions.net/api';
+
+export { signUpData, userFormData, DATABASE_API_URL };
