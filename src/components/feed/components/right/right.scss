@@ -1,0 +1,57 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.p-right {
+}
+.prof {
+    margin: auto;
+    width: 108.29px;
+    height: 108.29px;
+    border-radius: 50%;
+}
+
+.userName {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+.cont {
+    padding: 10px;
+}
+
+.butt {
+    background-color: transparent;
+    margin: 10px;
+    width: 157px;
+    height: 35px;
+    border: 1px solid #1877f2;
+    color: #1877f2;
+    font-size: 14px;
+    border-radius: 7px;
+}
+
+.butt:hover {
+    cursor: pointer;
+}
+
+.grid{
+    margin: 10px;
+    display: flex;
+    height: 30px;
+}
+.item1 {
+    border-right: 1px solid grey;
+    border-right-width: thin;
+    flex: 1;
+}
+
+.number {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.item2 {
+    flex: 1;
+}
