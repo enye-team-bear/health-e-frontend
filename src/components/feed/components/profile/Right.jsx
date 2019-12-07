@@ -9,7 +9,7 @@ const { userNameText, viewProfileText } = profileText;
  * @function {*} renderImage
  */
 const renderImage = () => (
-    <img src={defaultImg} alt='profile' className='prof' />
+    <img src={defaultImg} alt='profile' className='profileImage' />
 );
 
 const renderButton = () => (
@@ -33,13 +33,11 @@ const renderGrid = () => (
  * @function {*} Feed
  */
 const Right = () => (
-    <div>
-        <div className="p-right">
-            <div className="">{renderImage()}</div>
-            <p className="userName">{userNameText}</p>
-            {renderButton()}
-            {renderGrid()}
-        </div>
+    <div className="p-right">
+        <div className="">{renderImage()}</div>
+        <p className="userName">{userNameText}</p>
+        {renderButton()}
+        {renderGrid()}
     </div>
 );
 

@@ -30,12 +30,10 @@ const renderChip = () => (
  * @function {*} Feed
  */
 const Left = () => (
-    <div>
-        <div className="p-right">
-            <h2 className="exp">{suggestedExp}</h2>
-            <h3 className='inv'>{invite}</h3>
-            {renderChip()}
-        </div>
+    <div className="p-right">
+        <h2 className="exp">{suggestedExp}</h2>
+        <h3 className='inv'>{invite}</h3>
+        {renderChip()}
     </div>
 );
 

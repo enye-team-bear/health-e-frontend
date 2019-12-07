@@ -40,7 +40,6 @@ const Feed = () => {
         <div>
             <Navigation />
             <div className="p-feedPage">
-                {/* <div>{Right}</div> */}
                 <div className="p-page__center">{renderGrid()}</div>
             </div>
         </div>
