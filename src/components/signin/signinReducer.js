@@ -1,4 +1,5 @@
 import { SIGN_IN_LOADING, SIGN_IN_NOT_LOADING } from './signinActionTypes';
+
 const INITIAL_STATE = {
 	error: '',
 	loading: false,
@@ -15,6 +16,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
+				error: action.payload,
 			};
 		}
 		default:

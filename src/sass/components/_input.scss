@@ -8,6 +8,23 @@
         border-color: $color-primary;
     }
 
+    &__error-text {
+        font-size: 1rem;
+        font-weight: 100;
+        color: red;
+        position: absolute;
+    }
+
+    &.--error {
+        .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+            border-color: red;
+        }
+
+        .MuiOutlinedInput-notchedOutline {
+            border-color: red;
+        }
+    }
+
     .MuiInputBase-input {
         font-size: 1.4rem;
         font-family: 'Poppins', sans-serif;

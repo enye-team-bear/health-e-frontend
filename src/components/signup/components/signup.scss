@@ -63,5 +63,9 @@
                 opacity: 0.5;
             }
         }
+        &__error {
+            font-size: 1.2rem;
+            color: red;
+        }
     }
 }
