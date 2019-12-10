@@ -1,5 +1,5 @@
 import Signup from './components';
-import signupSaga from './signupSaga';
+import sagas from './sagas';
 import signupReducer from './signupReducer';
 
-export { Signup, signupSaga, signupReducer };
+export { Signup, sagas, signupReducer };

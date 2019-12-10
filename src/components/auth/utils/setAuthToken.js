@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+/**
+ * Helper function that is used to set authenticaton token on all headers
+ *
+ * @function setAuthToken
+ * @param {String} token - jwt token
+ */
 const setAuthToken = token => {
 	if (token) {
 		// Apply to every request

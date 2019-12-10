@@ -1,5 +1,5 @@
 import Signin from './components';
-import signinSaga from './signinSaga';
+import sagas from './sagas';
 import signinReducer from './signinReducer';
 
-export { Signin, signinSaga, signinReducer };
+export { Signin, sagas, signinReducer };

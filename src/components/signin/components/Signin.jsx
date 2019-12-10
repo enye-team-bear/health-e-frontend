@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import useReactRouter from 'use-react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthLayout } from '../../auth';
+import { AuthLayout, renderError } from '../../auth';
 import { TextInput } from '../../utils/input';
 import { signInData } from '../constants';
 import { SIGN_IN_USER } from '../signinActionTypes';
@@ -27,7 +27,7 @@ const handleSubmit = (e, userData, dispatch, history) => {
  *
  * @function {*} renderInput
  */
-const renderInput = (formData, handleInputChange) => (
+const renderInput = (formData, handleInputChange, error = false) => (
     <Fragment>
         {Object.keys(formData).map((el, i) => (
             <TextInput
@@ -37,6 +37,7 @@ const renderInput = (formData, handleInputChange) => (
                 name={el}
                 label={formData[el].label}
                 type={formData[el].type}
+                error={error.error[el]}
             />
         ))}
     </Fragment>
@@ -81,7 +82,8 @@ const Signin = () => {
                     className="a-formAuth"
                     onSubmit={e => handleSubmit(e, formData, dispatch, history)}
                 >
-                    {renderInput(formData, handleInputChange)}
+                    {renderError(signinState)}
+                    {renderInput(formData, handleInputChange, signinState)}
                     {renderButton(signinState)}
                 </form>
             </div>

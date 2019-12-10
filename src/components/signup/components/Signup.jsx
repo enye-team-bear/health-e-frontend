@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import useReactRouter from 'use-react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthLayout } from '../../auth';
+import { AuthLayout, renderError } from '../../auth';
 import { TextInput } from '../../utils/input';
 import { signUpData } from '../constants';
 import { SIGN_UP_USER } from '../signupActionTypes';
@@ -12,14 +13,14 @@ import { useInputFields, useCheckedLabel } from '../states';
 
 const { signupText } = signUpData;
 
-const handleSubmit = (e, userData, dispatch, checked) => {
+const handleSubmit = (e, userData, dispatch, checked, history) => {
     e.preventDefault();
     const userInfo = {};
     Object.keys(userData).forEach(el => {
         userInfo[el] = userData[el].value;
     });
     userInfo.userStatus = checked ? 'medical' : 'user';
-    dispatch({ type: SIGN_UP_USER, payload: userInfo });
+    dispatch({ type: SIGN_UP_USER, payload: userInfo, history });
 };
 
 /**
@@ -27,7 +28,7 @@ const handleSubmit = (e, userData, dispatch, checked) => {
  *
  * @function {*} renderInput
  */
-const renderInput = (formData, handleInputChange) => (
+const renderInput = (formData, handleInputChange, error = false) => (
     <Fragment>
         {Object.keys(formData).map((el, i) => (
             <TextInput
@@ -37,6 +38,7 @@ const renderInput = (formData, handleInputChange) => (
                 name={el}
                 label={formData[el].label}
                 type={formData[el].type}
+                error={error.error[el]}
             />
         ))}
     </Fragment>
@@ -91,6 +93,7 @@ const Signup = () => {
     const { formData, handleInputChange } = useInputFields();
     const { checked, handleChecked } = useCheckedLabel();
     const dispatch = useDispatch();
+    const { history } = useReactRouter();
     const signupState = useSelector(state => state.signup);
     return (
         <AuthLayout>
@@ -98,9 +101,12 @@ const Signup = () => {
                 <div className="p-signupPage__heading">{signupText}</div>
                 <form
                     className="a-formAuth"
-                    onSubmit={e => handleSubmit(e, formData, dispatch, checked)}
+                    onSubmit={e =>
+                        handleSubmit(e, formData, dispatch, checked, history)
+                    }
                 >
-                    {renderInput(formData, handleInputChange)}
+                    {renderError(signupState)}
+                    {renderInput(formData, handleInputChange, signupState)}
                     {renderCheckedLabel(checked, handleChecked)}
                     {renderButton(signupState)}
                 </form>
