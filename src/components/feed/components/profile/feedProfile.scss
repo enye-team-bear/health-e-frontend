@@ -1,0 +1,73 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.p-feedProfile {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &__top {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    &__image {
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    &__name {
+        font-size: 1.4rem;
+        color: $color-grey-darker;
+        margin-top: 1rem;
+    }
+
+    &__button {
+        margin-top: 1rem;
+        a {
+            text-decoration: none;
+            padding: 0.6rem 3.5rem;
+            border: 1px solid $color-secondary;
+            color: $color-secondary;
+            font-size: 1.2rem;
+            border-radius: 7px;
+            display: block;
+            box-sizing: content-box;
+            transition: all 0.2s;
+
+            &:hover {
+                border: 1px solid $color-primary;
+                color: $color-primary;
+                border-width: 2px;
+                background-color: lighten($color-primary, 40);
+            }
+        }
+    }
+
+    &__count {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-divider {
+            height: 3rem;
+            background-color: $color-grey-dark;
+            width: 1px;
+            margin: 0 1rem;
+        }
+
+        &-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: $color-grey-darker;
+        }
+
+        &-desc {
+            color: $color-grey-light-1;
+        }
+    }
+}

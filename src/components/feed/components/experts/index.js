@@ -1,5 +1,4 @@
-import Left from './Left';
-import './left.scss';
+import './feedExpert.scss';
+import FeedExperts from './FeedExperts';
 
-export default Left;
-
+export default FeedExperts;

@@ -1,21 +1,34 @@
-const profileText = {
-    invite: '* invite an Expert',
-    name: 'Moses viktor',
-    prof: 'neuro surgeon',
-    suggestedExp: 'suggested Experts',
-    title: "Topics",
-    userNameText: 'Moses Sapele',
-    viewProfileText: "view profile",
-}
+/**
+ * Defines the text data on page.
+ *
+ * @constant
+ */
+const pageData = {
+	inviteExp: 'invite an Expert',
+	expertName: 'Daniel Mayers',
+	expertProf: 'Medical Doctor',
+	suggestedExp: 'Suggested Experts',
+	topicTitle: 'Topics',
+	userNameText: 'Samuel Danielson',
+	viewProfileText: 'View profile',
+	text412: '412',
+	connText: 'connection',
+	text20: '20',
+	allPostText: 'All posts',
+};
 
+/**
+ * Defines the toics data on page.
+ *
+ * @constant
+ */
 const topics = [
-    'breast Cancer',
-    'malaria',
-    'child Birth',
-    'breast Cancer',
-    'malaria',
-    'child Birth',
-]
+	'breast Cancer',
+	'malaria',
+	'child Birth',
+	'breast Cancer',
+	'malaria',
+	'child Birth',
+];
 
-export { profileText, topics };
-
+export { pageData, topics };

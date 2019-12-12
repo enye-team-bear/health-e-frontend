@@ -1,6 +1,5 @@
-import './right.scss';
+import './feedProfile.scss';
 
-import Right from './Right';
+import FeedProfile from './FeedProfile';
 
-export default Right;
-
+export default FeedProfile;
