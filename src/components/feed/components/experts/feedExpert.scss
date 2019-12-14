@@ -1,0 +1,44 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.e-feedExperts {
+    text-align: left;
+
+    &__head {
+        font-weight: 500;
+        color: $color-grey-darker;
+        font-size: 1.6rem;
+    }
+
+    &__subHead {
+        font-weight: 400;
+        color: $color-primary;
+        font-size: 1.4rem;
+    }
+
+    &__experts {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__expertBlock {
+        display: flex;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+
+    &__details {
+        margin-left: 1rem;
+    }
+
+    &__name {
+        font-size: 1.4rem;
+        color: $color-grey-darker;
+    }
+
+    &__proff {
+        font-size: 1.1rem;
+        color: $color-grey-light-1;
+    }
+}

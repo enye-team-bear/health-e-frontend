@@ -14,6 +14,54 @@
             margin-left: 1rem;
         }
     }
+
+    &__form {
+        width: 40%;
+        position: relative;
+        background-color: rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+    &__input {
+        width: 90%;
+        border: none;
+        border-radius: 5px;
+        background-color: transparent;
+        padding: 1.5rem 1rem;
+        color: var(--color-white);
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.2);
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    &__search-icon {
+        color: #fff;
+    }
+
     &__logo {
         width: 4rem;
     }
