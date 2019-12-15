@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import FeedProfile from './profile';
 import Topic from './topic';
+import { Feeds } from './feeds';
 
 /**
  * function used to render grid
@@ -25,7 +26,7 @@ const renderGrid = () => (
             </Card>
         </Grid>
         <Grid item xs={12} sm={6}>
-            <Paper className="p-page__card">xs=12 sm=4</Paper>
+            <Feeds />
         </Grid>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">
