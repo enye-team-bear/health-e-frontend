@@ -15,6 +15,8 @@ const pageData = {
 	connText: 'connection',
 	text20: '20',
 	allPostText: 'All posts',
+	saveText: 'Save',
+	createNewPost: 'Create new post',
 };
 
 /**

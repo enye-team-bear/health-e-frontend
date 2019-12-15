@@ -1,0 +1,90 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.f-postForm {
+    text-align: left;
+
+    &__heading {
+        font-size: 1.6rem;
+        color: $color-grey-dark;
+        border-bottom: 1px solid #d0d0d0;
+        padding-bottom: 1rem;
+    }
+
+    &__textInput {
+        width: 100%;
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        font-family: 'Poppins', sans-serif;
+        color: $color-grey-dark;
+        padding: 1rem;
+        border: none;
+        transition: all 0.3s;
+
+        &::placeholder {
+            color: #c1c0c0;
+            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom: 2px solid $color-primary;
+        }
+    }
+
+    &__photoIcon {
+        height: 3.5rem;
+        background: transparent;
+        transition: all 0.2s;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 5px 7px 4px rgba(24, 119, 242, 0.24);
+            transform: translateY(-3px);
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+
+        .b-button {
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            background: linear-gradient(
+                to right,
+                $color-primary,
+                $color-secondary
+            );
+            box-shadow: 0px 9px 7px rgba(24, 119, 242, 0.24);
+            border-radius: 7px;
+            text-transform: capitalize;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            color: $color-white;
+
+            .MuiButton-label {
+                display: flex;
+                justify-items: space-between;
+            }
+
+            &__progress {
+                color: $color-white;
+                position: absolute;
+            }
+            &:disabled,
+            &[disabled] {
+                opacity: 0.5;
+            }
+
+            img {
+                margin-left: 2rem;
+            }
+        }
+    }
+}
