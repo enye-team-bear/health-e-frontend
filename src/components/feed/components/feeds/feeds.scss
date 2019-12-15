@@ -1,4 +1,5 @@
 @import '../../../../sass/abstract/variables';
+@import '../../../../sass/abstract/mixin';
 @import '../../../../sass/components/input';
 @import '../../../../sass/utils/page';
 
@@ -53,38 +54,118 @@
         justify-content: space-between;
 
         .b-button {
-            font-size: 1.5rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 300;
-            background: linear-gradient(
-                to right,
-                $color-primary,
-                $color-secondary
-            );
-            box-shadow: 0px 9px 7px rgba(24, 119, 242, 0.24);
-            border-radius: 7px;
-            text-transform: capitalize;
-            padding-top: 0.4rem;
-            padding-bottom: 0.4rem;
-            color: $color-white;
+            @include defaultBtn;
+        }
+    }
+}
 
-            .MuiButton-label {
-                display: flex;
-                justify-items: space-between;
-            }
+.f-postCard {
+    text-align: left;
 
-            &__progress {
-                color: $color-white;
-                position: absolute;
-            }
-            &:disabled,
-            &[disabled] {
-                opacity: 0.5;
-            }
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #d0d0d0;
+        padding-bottom: 1.5rem;
+    }
 
-            img {
-                margin-left: 2rem;
-            }
+    &__userImg {
+        border-radius: 50%;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__userData {
+        margin-left: 1rem;
+    }
+
+    &__userName {
+        font-size: 1.4rem;
+        color: $color-grey-darker;
+    }
+
+    &__userProfession {
+        font-size: 1.2rem;
+        color: $color-grey-light-1;
+        font-weight: 300;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+
+    &__time {
+        color: $color-grey-light-1;
+    }
+
+    &__body {
+        padding-top: 2rem;
+        border-bottom: 1px solid #d0d0d0;
+        padding-bottom: 1.5rem;
+    }
+
+    &__postText {
+        font-size: 1.2rem;
+        color: $color-grey-dark;
+    }
+
+    &__img {
+        width: 100%;
+        margin-top: 2rem;
+        img {
+            width: 100%;
+            border-radius: 1rem;
+        }
+    }
+
+    &__feedback {
+        display: flex;
+        margin-top: 1rem;
+    }
+
+    &__like {
+        margin-right: 1rem;
+    }
+
+    &__like,
+    &__comment {
+        display: flex;
+        align-items: center;
+
+        span {
+            font-size: 1.4rem;
+            color: $color-grey-light-1;
+            margin-left: 5px;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+
+        .b-button {
+            @include defaultBtn;
+        }
+    }
+
+    &__input {
+        flex: 1 1;
+        background-color: #f5f3f4;
+        padding: 1.2rem;
+        border-radius: 7px;
+        border: none;
+        transition: all 0.2s;
+
+        &:focus {
+            outline: none;
+            border: 1px solid #e7e7e7;
+            box-shadow: 2px 6px 7px rgba(0, 0, 0, 0.03);
+            transform: translateY(-2px);
         }
     }
 }
