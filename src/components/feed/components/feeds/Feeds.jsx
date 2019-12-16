@@ -1,5 +1,6 @@
 import React from 'react';
 import PostForm from './PostForm';
+import PostCard from './PostCard';
 
 /**
  * function used to render Feed component
@@ -10,7 +11,7 @@ const Feeds = () => {
     return (
         <div className="f-feedsSection">
             <PostForm />
-            {/* TODO: Add posts cards */}
+            <PostCard />
         </div>
     );
 };

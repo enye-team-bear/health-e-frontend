@@ -17,6 +17,13 @@ const pageData = {
 	allPostText: 'All posts',
 	saveText: 'Save',
 	createNewPost: 'Create new post',
+	postDefaultText:
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+	postTime: '12 minutes ago',
+	postUserJob: 'Lab technician',
+	postUserType: 'Medical',
+	likeNum: '23',
+	commentNum: '11',
 };
 
 /**

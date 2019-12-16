@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultImg from '../../../../assets/img/defaultImg.png';
+import defaultImg from '../../../../assets/img/profile1.png';
 import { pageData } from '../../constants';
 
 /**
