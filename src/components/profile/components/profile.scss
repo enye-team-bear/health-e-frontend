@@ -1,7 +1,8 @@
 @import '../../../sass/abstract/variables';
 @import '../../../sass/components/input';
 
-.MuiPaper-root.p-page__card.p-profileOverview {
+.MuiPaper-root.p-page__card.p-profileOverview,
+.MuiPaper-root.p-page__card.p-profileAbout {
     padding: 0;
     border-radius: 1rem;
 }
@@ -65,8 +66,9 @@
 
     &__desc {
         padding-right: 10rem;
-        color: #4e4e57;
+        color: $color-grey-darker;
         font-size: 1.2rem;
+        font-weight: 300;
     }
 
     &__userType {
@@ -78,5 +80,74 @@
         text-align: right;
         padding-right: 3rem;
         padding-bottom: 3rem;
+    }
+}
+
+.p-profileAbout {
+    text-align: left;
+
+    &__head {
+        padding: 1.5rem;
+        border-bottom: 1px solid #d0d0d0;
+    }
+
+    &__title {
+        font-weight: 500;
+        font-size: 1.8rem;
+        color: $color-grey-darker;
+    }
+
+    &__body {
+        padding: 2rem;
+
+        .p-profileAbout__block:first-child {
+            border-bottom: 1px solid #d0d0d0;
+        }
+    }
+
+    &__block {
+        display: flex;
+        padding: 2rem 0;
+    }
+
+    &__item {
+        flex-basis: 50%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__img.--text {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background: linear-gradient(
+            to bottom right,
+            $color-secondary,
+            $color-primary
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+        color: $color-white;
+    }
+
+    &__info {
+        margin-left: 2rem;
+    }
+
+    &__sub {
+        color: #838383;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    &__main {
+        font-size: 1.4rem;
+        color: $color-grey-darker;
+    }
+
+    &__edit {
+        text-align: right;
     }
 }
