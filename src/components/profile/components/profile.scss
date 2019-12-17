@@ -1,0 +1,82 @@
+@import '../../../sass/abstract/variables';
+@import '../../../sass/components/input';
+
+.MuiPaper-root.p-page__card.p-profileOverview {
+    padding: 0;
+    border-radius: 1rem;
+}
+
+.p-profileOverview {
+    &__top {
+        height: 100px;
+        width: 100%;
+        background: linear-gradient(
+                to right,
+                rgba($color-primary, 0.68),
+                rgba($color-secondary, 0.68)
+            ),
+            url(../../../assets/img/checkup.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        color: $color-white;
+        position: relative;
+
+        &--data {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+        }
+    }
+
+    &__img {
+        height: 10rem;
+        width: 10rem;
+        border-radius: 50%;
+        border: 3px solid $color-white;
+        box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.05);
+    }
+
+    &__userInfo {
+        margin-left: 2rem;
+    }
+
+    &__userName {
+        font-size: 1.8rem;
+    }
+
+    &__userJob {
+        font-size: 1.6rem;
+        font-weight: 300;
+    }
+
+    &__bottom {
+        display: flex;
+        text-align: left;
+        margin-left: 14rem;
+        padding-right: 3rem;
+        margin-top: 1.2rem;
+    }
+
+    &__desc {
+        padding-right: 10rem;
+        color: #4e4e57;
+        font-size: 1.2rem;
+    }
+
+    &__userType {
+        font-size: 1.2rem;
+        color: $color-secondary;
+    }
+
+    &__edit {
+        text-align: right;
+        padding-right: 3rem;
+        padding-bottom: 3rem;
+    }
+}
