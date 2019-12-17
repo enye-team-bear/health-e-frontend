@@ -1,11 +1,9 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import Experts from './experts';
 import { Navigation } from '../../Navigation';
-import FeedProfile from './profile';
-import Topic from './topic';
-import { Feeds } from './feeds';
+import { Experts } from '../../feed/components';
+import Overview from './Overview';
 
 /**
  * function used to render grid
@@ -14,16 +12,8 @@ import { Feeds } from './feeds';
  */
 const renderGrid = () => (
     <Grid container spacing={3}>
-        <Grid item xs={12} sm={3}>
-            <Card className="p-page__card">
-                <FeedProfile />
-            </Card>
-            <Card className="p-page__card">
-                <Topic />
-            </Card>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-            <Feeds />
+        <Grid item xs={12} sm={9}>
+            <Overview />
         </Grid>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">
@@ -34,11 +24,11 @@ const renderGrid = () => (
 );
 
 /**
- * function used to render Feed component
+ * function used to render profile component
  *
- * @function {*} Feed
+ * @function {*} Profile
  */
-const Feed = () => {
+const Profile = () => {
     return (
         <div>
             <Navigation />
@@ -49,4 +39,4 @@ const Feed = () => {
     );
 };
 
-export default Feed;
+export default Profile;
