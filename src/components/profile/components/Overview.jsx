@@ -1,8 +1,8 @@
-import React from 'react';
 import Card from '@material-ui/core/Card';
-import profileImg from '../../../assets/img/profile3.png';
-import pencilIcon from '../../../assets/img/pencilIcon.svg';
+import React from 'react';
 import { pageData } from '../constants';
+import pencilIcon from '../../../assets/img/pencilIcon.svg';
+import profileImg from '../../../assets/img/profile3.png';
 
 /**
  * function used to render overview top section

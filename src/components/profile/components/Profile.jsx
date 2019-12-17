@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import { Navigation } from '../../Navigation';
 import { Experts } from '../../feed/components';
+import About from './About';
 import Overview from './Overview';
 
 /**
@@ -14,6 +15,7 @@ const renderGrid = () => (
     <Grid container spacing={3}>
         <Grid item xs={12} sm={9}>
             <Overview />
+            <About />
         </Grid>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">
