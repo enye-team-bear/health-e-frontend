@@ -1,5 +1,6 @@
 @import '../../../sass/abstract/variables';
 @import '../../../sass/components/input';
+@import '../../../sass/abstract/mixin';
 
 .MuiPaper-root.p-page__card.p-profileOverview,
 .MuiPaper-root.p-page__card.p-profileAbout {
@@ -80,6 +81,10 @@
         text-align: right;
         padding-right: 3rem;
         padding-bottom: 3rem;
+
+        &--icon {
+            cursor: pointer;
+        }
     }
 }
 
@@ -149,5 +154,52 @@
 
     &__edit {
         text-align: right;
+
+        &--icon {
+            cursor: pointer;
+        }
+    }
+}
+
+.p-profilePassword {
+    text-align: left;
+
+    &__head {
+        padding: 1.5rem;
+        border-bottom: 1px solid #d0d0d0;
+    }
+
+    &__title {
+        font-weight: 500;
+        font-size: 1.8rem;
+        color: $color-grey-darker;
+    }
+
+    &__body {
+        padding: 2rem;
+    }
+    &__block {
+        display: flex;
+        padding: 2rem 0;
+    }
+
+    &__item {
+        flex-basis: 50%;
+        display: flex;
+        align-items: center;
+        padding-right: 2rem;
+
+        .f-postCard__input {
+            padding: 2rem;
+        }
+    }
+
+    &__save {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 2rem;
+        .b-button {
+            @include defaultBtn;
+        }
     }
 }

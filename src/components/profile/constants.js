@@ -15,7 +15,9 @@ const pageData = {
 	phoneNo: '+234 909 8647 876',
 	aboutTxt: 'About',
 	abbrev: 'TH',
-	editIcon: "edit data"
+	editIcon: 'edit data',
+	passTxt: 'Password Change',
+	saveText: 'Save',
 };
 
 export { pageData };
