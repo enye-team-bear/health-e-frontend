@@ -42,7 +42,7 @@ const renderBottom = () => (
  *
  * @function {*} Overview
  */
-const Overview = () => {
+const Overview = (props) => {
     return (
         <Card className="p-page__card p-profileOverview">
             {renderTop()}
@@ -52,6 +52,7 @@ const Overview = () => {
                     src={pencilIcon}
                     alt="edit data"
                     className="p-profileOverview__edit--icon"
+                    onClick={props.handleModalOpen}
                 />
             </div>
         </Card>

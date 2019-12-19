@@ -3,7 +3,8 @@
 @import '../../../sass/abstract/mixin';
 
 .MuiPaper-root.p-page__card.p-profileOverview,
-.MuiPaper-root.p-page__card.p-profileAbout {
+.MuiPaper-root.p-page__card.p-profileAbout,
+.MuiPaper-root.p-page__card.p-modal {
     padding: 0;
     border-radius: 1rem;
 }

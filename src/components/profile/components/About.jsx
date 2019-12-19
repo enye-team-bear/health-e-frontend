@@ -1,5 +1,5 @@
-import Card from '@material-ui/core/Card';
 import React from 'react';
+import Card from '@material-ui/core/Card';
 import emailIcon from '../../../assets/img/emailIcon.svg';
 import { pageData } from '../constants';
 import pencilIcon from '../../../assets/img/pencilIcon.svg';
@@ -46,12 +46,23 @@ const renderSecondBlock = () => (
     </div>
 );
 
+const renderEditBtn = (handleModalOpen) => (
+    <div className="p-profileAbout__edit">
+        <img
+            src={pencilIcon}
+            alt={pageData.editIcon}
+            className="p-profileAbout__edit--icon"
+            onClick={handleModalOpen}
+        />
+    </div>
+);
+
 /**
  * function used to render About component
  *
  * @function {*} About
  */
-const About = () => {
+const About = ({ handleModalOpen }) => {
     return (
         <Card className="p-page__card p-profileAbout">
             <div className="p-profileAbout__head">
@@ -60,13 +71,7 @@ const About = () => {
             <div className="p-profileAbout__body">
                 {renderFirstBlock()}
                 {renderSecondBlock()}
-                <div className="p-profileAbout__edit">
-                    <img
-                        src={pencilIcon}
-                        alt={pageData.editIcon}
-                        className="p-profileAbout__edit--icon"
-                    />
-                </div>
+                {renderEditBtn(handleModalOpen)}
             </div>
         </Card>
     );
