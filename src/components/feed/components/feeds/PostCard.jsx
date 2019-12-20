@@ -1,4 +1,8 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable max-lines-per-function */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import profileImg from '../../../../assets/img/profile2.png';
@@ -7,6 +11,7 @@ import heartImg from '../../../../assets/img/heart.svg';
 import commentImg from '../../../../assets/img/comment.svg';
 import sendIcon from '../../../../assets/img/sendIcon.svg';
 import { pageData } from '../../constants';
+import { likeSinglePost } from '../../actions';
 
 /**
  * function used to render post head section
@@ -41,24 +46,38 @@ const renderPostHead = () => (
  *
  * @function {*} renderPostBody
  */
-const renderPostBody = () => (
-    <div className="f-postCard__body">
-        <div className="f-postCard__postText">{pageData.postDefaultText}</div>
-        <div className="f-postCard__img">
-            <img src={postImg} alt="" />
-        </div>
-        <div className="f-postCard__feedback">
-            <div className="f-postCard__like">
-                <img src={heartImg} alt="" />
-                <span>{pageData.likeNum}</span>
+const renderPostBody = (postData, dispatch) => {
+    return (
+        <div className="f-postCard__body">
+            <div className="f-postCard__postText">{postData.thread}</div>
+            {postData.imageUrl ? (
+                <div className="f-postCard__img">
+                    <img src={postData.imageUrl} alt="" />
+                </div>
+            ) : null}
+            <div className="f-postCard__feedback">
+                <div className="f-postCard__like">
+                    <img
+                        src={heartImg}
+                        alt=""
+                        onClick={() =>
+                            dispatch(
+                                likeSinglePost(
+                                    postData.id ? postData.id : postData.postId,
+                                ),
+                            )
+                        }
+                    />
+                    <span>{postData.likeCount}</span>
+                </div>
+                <div className="f-postCard__comment">
+                    <img src={commentImg} alt="" />
+                    <span>{postData.commentCount}</span>
+                </div>
             </div>
-            <div className="f-postCard__comment">
-                <img src={commentImg} alt="" />
-                <span>{pageData.commentNum}</span>
-            </div>
         </div>
-    </div>
-);
+    );
+};
 
 /**
  * function used to render post bottom section
@@ -84,12 +103,13 @@ const renderPostBottom = () => (
  *
  * @function {*} PostCard
  */
-const PostCard = () => {
+const PostCard = ({ postData }) => {
+    const dispatch = useDispatch();
     return (
         <Paper className="p-page__card">
             <div className="f-postCard">
                 {renderPostHead()}
-                {renderPostBody()}
+                {renderPostBody(postData, dispatch)}
                 {renderPostBottom()}
             </div>
         </Paper>

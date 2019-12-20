@@ -11,9 +11,9 @@ const pageData = {
 	topicTitle: 'Topics',
 	userNameText: 'Samuel Danielson',
 	viewProfileText: 'View profile',
-	text412: '412',
+	text412: '0',
 	connText: 'connection',
-	text20: '20',
+	text20: '0',
 	allPostText: 'All posts',
 	saveText: 'Save',
 	createNewPost: 'Create new post',
@@ -40,4 +40,15 @@ const topics = [
 	'child Birth',
 ];
 
-export { pageData, topics };
+/**
+ * Defines the url for the database.
+ *
+ * @constant
+ */
+const DATABASE_API_URL =
+	'https://us-central1-health-e-api.cloudfunctions.net/api';
+const NEW_POST_URL = `${DATABASE_API_URL}/new_post`;
+const ALL_POST_URL = `${DATABASE_API_URL}/get_posts`;
+const POST_URL = `${DATABASE_API_URL}/post`;
+
+export { pageData, topics, NEW_POST_URL, ALL_POST_URL, POST_URL };

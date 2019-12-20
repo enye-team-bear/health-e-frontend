@@ -8,8 +8,7 @@ const pageData = {
 	userName: 'Daniel Mayers',
 	profession: 'Lab technician',
 	userType: 'Medical',
-	profileDesc:
-		'Am a dog lover blah blah blah Lorem ipsum dolor sit amet,	consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit am Am a dog lover blah blah blah Lorem ipsum dolor	sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit am',
+	profileDesc: 'No Profile description yet... Add one now',
 	workLocation: 'Teresa Hospital',
 	email: 'danielmayers@gmail.com',
 	phoneNo: '+234 909 8647 876',
@@ -19,5 +18,13 @@ const pageData = {
 	passTxt: 'Password Change',
 	saveText: 'Save',
 };
+
+/**
+ * Defines the url for the database.
+ *
+ * @constant
+ */
+const DATABASE_API_URL =
+	'https://us-central1-health-e-api.cloudfunctions.net/api';
 
 export { pageData };

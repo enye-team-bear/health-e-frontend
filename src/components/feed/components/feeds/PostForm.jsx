@@ -1,9 +1,32 @@
+/* eslint-disable max-lines-per-function */
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { store } from 'react-notifications-component';
 import photoImg from '../../../../assets/img/photoIcon.svg';
 import sendIcon from '../../../../assets/img/sendIcon.svg';
 import { pageData } from '../../constants';
+import { usePostInput } from '../../states';
+import { newPost } from '../../actions';
+
+const handleSubmit = (e, data, dispatch, resetState) => {
+    e.preventDefault();
+    dispatch(newPost(data));
+    resetState();
+
+    store.addNotification({
+        title: 'Success',
+        message: 'Post created successfully',
+        type: 'success', // 'default', 'success', 'info', 'warning'
+        container: 'bottom-left', // where to position the notifications
+        animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
+        animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
+        dismiss: {
+            duration: 3000,
+        },
+    });
+};
 
 /**
  * function used to render form bottom items
@@ -26,9 +49,16 @@ const renderFormBottom = () => (
  * @function {*} PostForm
  */
 const PostForm = () => {
+    const { handlePostTextChanged, postText, resetState } = usePostInput();
+    const dispatch = useDispatch();
     return (
         <Paper className="p-page__card">
-            <div className="f-postForm">
+            <form
+                className="f-postForm"
+                onSubmit={(e) =>
+                    handleSubmit(e, postText, dispatch, resetState)
+                }
+            >
                 <div className="f-postForm__heading">
                     {pageData.createNewPost}
                 </div>
@@ -36,9 +66,11 @@ const PostForm = () => {
                     rows="4"
                     className="f-postForm__textInput"
                     placeholder="Write a new post"
+                    onChange={handlePostTextChanged}
+                    value={postText}
                 />
                 {renderFormBottom()}
-            </div>
+            </form>
         </Paper>
     );
 };

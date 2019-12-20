@@ -1,11 +1,14 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode';
 import { Provider } from 'react-redux';
+import ReactNotifications from 'react-notifications-component';
 import store from './store';
 import setAuthToken from './components/auth/utils/setAuthToken';
 import { AUTH_USER, AUTH_LOGOUT_USER } from './components/auth/authActionTypes';
 import { Routes } from './router/components';
 // general style
+import 'react-notifications-component/dist/theme.css';
+import 'animate.css';
 import './sass/main.scss';
 
 if (localStorage.jwtToken) {
@@ -23,6 +26,7 @@ if (localStorage.jwtToken) {
 const App = () => {
     return (
         <Provider store={store}>
+            <ReactNotifications />
             <Routes />
         </Provider>
     );

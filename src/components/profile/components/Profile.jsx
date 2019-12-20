@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import { Navigation } from '../../Navigation';
@@ -7,17 +8,18 @@ import About from './About';
 import Overview from './Overview';
 import Password from './Password';
 import UpdateModal from './UpdateModal';
+import { actions as userActions } from '../../auth';
 
 /**
  * function used to render grid
  *
  * @function {*} renderGrid
  */
-const renderGrid = (handleModalOpen) => (
+const renderGrid = (handleModalOpen, userData) => (
     <Grid container spacing={3}>
         <Grid item xs={12} sm={9}>
-            <Overview handleModalOpen={handleModalOpen} />
-            <About handleModalOpen={handleModalOpen} />
+            <Overview handleModalOpen={handleModalOpen} userData={userData} />
+            <About handleModalOpen={handleModalOpen} userData={userData} />
             <Password />
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -33,8 +35,17 @@ const renderGrid = (handleModalOpen) => (
  *
  * @function {*} Profile
  */
+// eslint-disable-next-line max-lines-per-function
 const Profile = () => {
     const [modalOpen, setModalOpen] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(userActions.getUserData());
+    }, []);
+
+    const userData = useSelector((state) => state.auth.userData);
+
     const handleModalOpen = () => {
         setModalOpen(true);
     };
@@ -46,7 +57,7 @@ const Profile = () => {
             <Navigation />
             <div className="p-feedPage">
                 <div className="p-page__center">
-                    {renderGrid(handleModalOpen)}
+                    {renderGrid(handleModalOpen, userData)}
                 </div>
             </div>
             <UpdateModal modalOpen={modalOpen} handleClose={handleModalClose} />
