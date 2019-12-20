@@ -136,6 +136,14 @@
         display: flex;
         align-items: center;
 
+        img {
+            cursor: pointer;
+            transition: all 0.3s;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
         span {
             font-size: 1.4rem;
             color: $color-grey-light-1;
@@ -167,5 +175,17 @@
             box-shadow: 2px 6px 7px rgba(0, 0, 0, 0.03);
             transform: translateY(-2px);
         }
+    }
+}
+
+.l-loading {
+    &__block {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__progress.MuiCircularProgress-colorPrimary {
+        color: $color-primary;
     }
 }

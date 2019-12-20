@@ -1,5 +1,6 @@
 import React from 'react';
-import defaultImg from '../../../../assets/img/profile1.png';
+import { useState } from 'react-redux';
+import defaultImg from '../../../../assets/img/defaultImg.png';
 import { pageData } from '../../constants';
 
 /**
@@ -30,21 +31,24 @@ const renderProfileCount = () => (
  *
  * @function {*} FeedProfile
  */
-const FeedProfile = () => (
-    <div className="p-feedProfile">
-        <div className="p-feedProfile__top">
-            <img
-                src={defaultImg}
-                alt="profile img"
-                className="p-feedProfile__image"
-            />
-            <div className="p-feedProfile__name">{pageData.userNameText}</div>
-            <div className="p-feedProfile__button">
-                <a href="/profile">{pageData.viewProfileText}</a>
+const FeedProfile = ({ userData }) => {
+    const image = userData.imageUrl ? userData.imageUrl : defaultImg;
+    return (
+        <div className="p-feedProfile">
+            <div className="p-feedProfile__top">
+                <img
+                    src={image}
+                    alt="profile img"
+                    className="p-feedProfile__image"
+                />
+                <div className="p-feedProfile__name">{userData.fullName}</div>
+                <div className="p-feedProfile__button">
+                    <a href="/profile">{pageData.viewProfileText}</a>
+                </div>
             </div>
+            {renderProfileCount()}
         </div>
-        {renderProfileCount()}
-    </div>
-);
+    );
+};
 
 export default FeedProfile;

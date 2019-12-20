@@ -9,4 +9,13 @@ const siteData = {
 		'Connect with friends around the world with great health topics',
 };
 
-export { siteData };
+/**
+ * Defines the url for the database.
+ *
+ * @constant
+ */
+const DATABASE_API_URL =
+	'https://us-central1-health-e-api.cloudfunctions.net/api';
+const USER_DATA_URL = `${DATABASE_API_URL}/user`;
+
+export { siteData, USER_DATA_URL };
