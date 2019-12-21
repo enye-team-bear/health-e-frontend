@@ -9,9 +9,13 @@ export const NEW_POST_SUCCESS = 'NEW_POST_SUCCESS';
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS';
 export const SET_ALL_POSTS = 'SET_ALL_POSTS';
+export const GET_ALL_POSTS_FAILED = 'GET_POST_FAILED';
 
 export const NEW_POST_LOADING = 'NEW_POST_LOADING';
 export const NEW_POST_NOT_LOADING = 'NEW_POST_NOT_LOADING';
 
 export const LIKE_POST = 'LIKE_POST';
 export const SET_LIKE_POST = 'SET_LIKE_POST';
+
+export const COMMENT_POST = 'COMMENT_POST';
+export const SET_COMMENT_POST = 'SET_COMMENT_POST';

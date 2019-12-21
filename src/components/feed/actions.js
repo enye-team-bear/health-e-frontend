@@ -21,6 +21,11 @@ export const setAllPosts = (data) => ({
 	payload: data,
 });
 
+export const getAllPostsFailed = (info) => ({
+	type: actionTypes.GET_ALL_POSTS_FAILED,
+	payload: info,
+});
+
 export const likeSinglePost = (id) => ({
 	type: actionTypes.LIKE_POST,
 	payload: id,
@@ -29,4 +34,14 @@ export const likeSinglePost = (id) => ({
 export const setLikePost = (data) => ({
 	type: actionTypes.SET_LIKE_POST,
 	payload: data,
+});
+
+export const commentPost = (id, body) => ({
+	type: actionTypes.COMMENT_POST,
+	payload: { id, body },
+});
+
+export const setCommentPost = (id) => ({
+	type: actionTypes.SET_COMMENT_POST,
+	payload: id,
 });

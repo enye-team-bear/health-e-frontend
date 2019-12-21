@@ -85,3 +85,7 @@ yarn.lock
 
 # DynamoDB Local files
 .dynamodb/
+
+build
+
+*.firebase/

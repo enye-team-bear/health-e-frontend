@@ -1,13 +1,20 @@
 import { store } from 'react-notifications-component';
 import { takeEvery, put } from 'redux-saga/effects';
-import { NEW_POST, GET_ALL_POSTS, LIKE_POST } from './actionTypes';
+import {
+	NEW_POST,
+	GET_ALL_POSTS,
+	LIKE_POST,
+	COMMENT_POST,
+} from './actionTypes';
 import {
 	newPostNotLoading,
 	setAllPosts,
 	setLikePost,
 	getAllPosts as getNewPosts,
+	getAllPostsFailed,
+	setCommentPost,
 } from './actions';
-import { createPost, getPosts, postLike } from './services';
+import { createPost, getPosts, postLike, postComment } from './services';
 
 /**
  * Watches for the {@link actionTypes.SIGN_UP_USER SIGN_UP_USER} action.
@@ -35,7 +42,7 @@ function* getAllPosts() {
 			yield put(setAllPosts(res.data.data));
 		}
 	} catch (err) {
-		console.log(err);
+		yield put(getAllPostsFailed('Unable to load posts'));
 	}
 }
 
@@ -50,8 +57,20 @@ function* likePost(data) {
 	}
 }
 
+function* commentPost(data) {
+	try {
+		const res = yield postComment(data.payload);
+		if (res.data.status === 'success') {
+			yield put(setCommentPost(data.payload));
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
+
 export default function* root() {
 	yield takeEvery(NEW_POST, createNewPost);
 	yield takeEvery(GET_ALL_POSTS, getAllPosts);
 	yield takeEvery(LIKE_POST, likePost);
+	yield takeEvery(COMMENT_POST, commentPost);
 }

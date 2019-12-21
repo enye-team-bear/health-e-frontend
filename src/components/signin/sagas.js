@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import axios from 'axios';
 import { takeEvery, put } from 'redux-saga/effects';
 import { DATABASE_API_URL } from './constants';
@@ -20,17 +21,24 @@ function* signinUserAsync(userData) {
 		yield put({ type: SIGN_IN_LOADING });
 		const res = yield axios.post(
 			`${DATABASE_API_URL}/login`,
-			userData.payload
+			userData.payload,
 		);
 		const { data } = res.data;
-		const decoded = setAuthData(data);
-		yield put({ type: SIGN_IN_NOT_LOADING, payload: {} });
-		yield put({ type: AUTH_USER, payload: decoded });
-		userData.history.push('/');
+		if (res.data) {
+			const decoded = setAuthData(data);
+			yield put({ type: SIGN_IN_NOT_LOADING, payload: {} });
+			yield put({ type: AUTH_USER, payload: decoded });
+			userData.history.push('/');
+		} else {
+			yield put({
+				type: SIGN_IN_NOT_LOADING,
+				payload: 'something went wrong',
+			});
+		}
 	} catch (err) {
 		yield put({
 			type: SIGN_IN_NOT_LOADING,
-			payload: err.response.data.message,
+			payload: 'Something went wrong',
 		});
 	}
 }
