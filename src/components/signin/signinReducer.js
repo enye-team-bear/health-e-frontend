@@ -1,4 +1,4 @@
-import { SIGN_IN_LOADING, SIGN_IN_NOT_LOADING } from './signinActionTypes';
+import { SIGN_IN_USER, UPDATE_SIGN_IN_STATUS } from './signinActionTypes';
 
 const INITIAL_STATE = {
 	error: '',
@@ -6,13 +6,13 @@ const INITIAL_STATE = {
 };
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case SIGN_IN_LOADING: {
+		case SIGN_IN_USER: {
 			return {
 				...state,
 				loading: true,
 			};
 		}
-		case SIGN_IN_NOT_LOADING: {
+		case UPDATE_SIGN_IN_STATUS: {
 			return {
 				...state,
 				error: action.payload,

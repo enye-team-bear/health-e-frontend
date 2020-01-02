@@ -40,7 +40,7 @@ const handleCommentSubmit = (e, body, id, resetState, dispatch) => {
  *
  * @function {*} renderPostHead
  */
-const renderPostHead = (postData) => {
+const renderPostHead = postData => {
     const img = postData.userImage || profileImg;
     const userName = postData.userName || 'Test';
     const postTime = timeConverter(postData.createdAt);
@@ -115,7 +115,7 @@ const renderPostBottom = (
 ) => (
     <form
         className="f-postCard__bottom"
-        onSubmit={(e) =>
+        onSubmit={e =>
             handleCommentSubmit(e, commentText, postId, resetState, dispatch)
         }
     >

@@ -1,5 +1,6 @@
-import { store } from 'react-notifications-component';
 import { takeEvery, put } from 'redux-saga/effects';
+import { store } from 'react-notifications-component';
+
 import {
 	NEW_POST,
 	GET_ALL_POSTS,
@@ -14,6 +15,7 @@ import {
 	getAllPostsFailed,
 	setCommentPost,
 } from './actions';
+import { notificationsSettings } from './constants';
 import { createPost, getPosts, postLike, postComment } from './services';
 
 /**
@@ -29,6 +31,7 @@ function* createNewPost(postData) {
 		if (res.data.status === 'success') {
 			yield put(newPostNotLoading());
 			yield put(getNewPosts());
+			store.addNotification(notificationsSettings);
 		}
 	} catch (err) {
 		console.log(err);

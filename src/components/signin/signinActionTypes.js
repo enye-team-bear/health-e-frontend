@@ -5,6 +5,4 @@
  * @type {String}
  */
 export const SIGN_IN_USER = 'SIGN_IN_USER';
-
-export const SIGN_IN_LOADING = 'SIGN_IN_LOADING';
-export const SIGN_IN_NOT_LOADING = 'SIGN_IN_NOT_LOADING';
+export const UPDATE_SIGN_IN_STATUS = 'UPDATE_SIGN_IN_STATUS';

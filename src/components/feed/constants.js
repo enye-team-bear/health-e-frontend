@@ -40,6 +40,18 @@ const topics = [
 	'child Birth',
 ];
 
+const notificationsSettings = {
+	title: 'Success',
+	message: 'Post created successfully',
+	type: 'success', // 'default', 'success', 'info', 'warning'
+	container: 'bottom-left', // where to position the notifications
+	animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
+	animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
+	dismiss: {
+		duration: 3000,
+	},
+};
+
 /**
  * Defines the url for the database.
  *
@@ -51,4 +63,11 @@ const NEW_POST_URL = `${DATABASE_API_URL}/new_post`;
 const ALL_POST_URL = `${DATABASE_API_URL}/posts`;
 const POST_URL = `${DATABASE_API_URL}/post`;
 
-export { pageData, topics, NEW_POST_URL, ALL_POST_URL, POST_URL };
+export {
+	pageData,
+	topics,
+	notificationsSettings,
+	NEW_POST_URL,
+	ALL_POST_URL,
+	POST_URL,
+};

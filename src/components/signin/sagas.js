@@ -2,11 +2,7 @@
 import axios from 'axios';
 import { takeEvery, put } from 'redux-saga/effects';
 import { DATABASE_API_URL } from './constants';
-import {
-	SIGN_IN_USER,
-	SIGN_IN_LOADING,
-	SIGN_IN_NOT_LOADING,
-} from './signinActionTypes';
+import { SIGN_IN_USER, UPDATE_SIGN_IN_STATUS } from './signinActionTypes';
 import { AUTH_USER } from '../auth/authActionTypes';
 import setAuthData from '../auth/utils/setAuthData';
 
@@ -18,7 +14,7 @@ import setAuthData from '../auth/utils/setAuthData';
  */
 function* signinUserAsync(userData) {
 	try {
-		yield put({ type: SIGN_IN_LOADING });
+		// yield put({ type: SIGN_IN_LOADING });
 		const res = yield axios.post(
 			`${DATABASE_API_URL}/login`,
 			userData.payload,
@@ -26,18 +22,18 @@ function* signinUserAsync(userData) {
 		const { data } = res.data;
 		if (res.data) {
 			const decoded = setAuthData(data);
-			yield put({ type: SIGN_IN_NOT_LOADING, payload: {} });
+			yield put({ type: UPDATE_SIGN_IN_STATUS, payload: {} });
 			yield put({ type: AUTH_USER, payload: decoded });
-			userData.history.push('/');
+			window.location.href = '/';
 		} else {
 			yield put({
-				type: SIGN_IN_NOT_LOADING,
+				type: UPDATE_SIGN_IN_STATUS,
 				payload: 'something went wrong',
 			});
 		}
 	} catch (err) {
 		yield put({
-			type: SIGN_IN_NOT_LOADING,
+			type: UPDATE_SIGN_IN_STATUS,
 			payload: 'Something went wrong',
 		});
 	}

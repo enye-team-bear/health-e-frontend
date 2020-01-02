@@ -3,7 +3,6 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { store } from 'react-notifications-component';
 import photoImg from '../../../../assets/img/photoIcon.svg';
 import sendIcon from '../../../../assets/img/sendIcon.svg';
 import { pageData } from '../../constants';
@@ -14,18 +13,6 @@ const handleSubmit = (e, data, dispatch, resetState) => {
     e.preventDefault();
     dispatch(newPost(data));
     resetState();
-
-    store.addNotification({
-        title: 'Success',
-        message: 'Post created successfully',
-        type: 'success', // 'default', 'success', 'info', 'warning'
-        container: 'bottom-left', // where to position the notifications
-        animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
-        animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
-        dismiss: {
-            duration: 3000,
-        },
-    });
 };
 
 /**
@@ -55,9 +42,7 @@ const PostForm = () => {
         <Paper className="p-page__card">
             <form
                 className="f-postForm"
-                onSubmit={(e) =>
-                    handleSubmit(e, postText, dispatch, resetState)
-                }
+                onSubmit={e => handleSubmit(e, postText, dispatch, resetState)}
             >
                 <div className="f-postForm__heading">
                     {pageData.createNewPost}
