@@ -27,6 +27,14 @@
         }
     }
 
+    &__forgotPass {
+        color: $color-primary;
+        text-decoration: underline;
+        font-size: 1.4rem;
+        cursor: pointer;
+        text-align: right;
+    }
+
     .a-formAuth {
         width: 100%;
         font-size: 1.6rem;

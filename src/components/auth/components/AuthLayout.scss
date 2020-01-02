@@ -1,5 +1,11 @@
 @import '../../../sass/abstract/variables';
 
+.MuiGrid-root.l-authLayout.MuiGrid-container {
+    @media only screen and (max-width: 960px) {
+        display: block;
+    }
+}
+
 .l-authLayout {
     height: 100vh;
     position: relative;

@@ -15,13 +15,13 @@ import { useInputFields } from '../states';
 
 const { signinText } = signInData;
 
-const handleSubmit = (e, userData, dispatch, history) => {
+const handleSubmit = (e, userData, dispatch) => {
     e.preventDefault();
     const userInfo = {};
     Object.keys(userData).forEach(el => {
         userInfo[el] = userData[el].value;
     });
-    dispatch({ type: SIGN_IN_USER, payload: userInfo, history });
+    dispatch({ type: SIGN_IN_USER, payload: userInfo });
 };
 
 /**
@@ -42,6 +42,9 @@ const renderInput = (formData, handleInputChange, error = false) => (
                 error={error.error[el]}
             />
         ))}
+        <Link to="/forgotPassword" className="p-signinPage__forgotPass">
+            {signInData.forgotPass}
+        </Link>
     </Fragment>
 );
 
@@ -74,7 +77,6 @@ const renderButton = state => (
 const Signin = () => {
     const { formData, handleInputChange } = useInputFields();
     const dispatch = useDispatch();
-    const { history } = useReactRouter();
     const signinState = useSelector(state => state.signin);
     return (
         <AuthLayout>
@@ -88,7 +90,7 @@ const Signin = () => {
                 <div className="p-signinPage__heading">{signinText}</div>
                 <form
                     className="a-formAuth"
-                    onSubmit={e => handleSubmit(e, formData, dispatch, history)}
+                    onSubmit={e => handleSubmit(e, formData, dispatch)}
                 >
                     {renderError(signinState)}
                     {renderInput(formData, handleInputChange, signinState)}

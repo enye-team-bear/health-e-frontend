@@ -15,14 +15,14 @@ import { useInputFields, useCheckedLabel } from '../states';
 
 const { signupText } = signUpData;
 
-const handleSubmit = (e, userData, dispatch, checked, history) => {
+const handleSubmit = (e, userData, dispatch, checked) => {
     e.preventDefault();
     const userInfo = {};
     Object.keys(userData).forEach(el => {
         userInfo[el] = userData[el].value;
     });
     userInfo.userStatus = checked ? 'medical' : 'user';
-    dispatch({ type: SIGN_UP_USER, payload: userInfo, history });
+    dispatch({ type: SIGN_UP_USER, payload: userInfo });
 };
 
 /**
@@ -95,7 +95,6 @@ const Signup = () => {
     const { formData, handleInputChange } = useInputFields();
     const { checked, handleChecked } = useCheckedLabel();
     const dispatch = useDispatch();
-    const { history } = useReactRouter();
     const signupState = useSelector(state => state.signup);
     return (
         <AuthLayout>
@@ -109,9 +108,7 @@ const Signup = () => {
                 <div className="p-signupPage__heading">{signupText}</div>
                 <form
                     className="a-formAuth"
-                    onSubmit={e =>
-                        handleSubmit(e, formData, dispatch, checked, history)
-                    }
+                    onSubmit={e => handleSubmit(e, formData, dispatch, checked)}
                 >
                     {renderError(signupState)}
                     {renderInput(formData, handleInputChange, signupState)}

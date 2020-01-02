@@ -4,6 +4,7 @@ import { Feed } from '../../components/feed';
 import { Signup } from '../../components/signup';
 import { Signin } from '../../components/signin';
 import { Profile } from '../../components/profile';
+import { ForgotPassword } from '../../components/forgotPassword';
 import NoMatch from './NoMatch';
 import PrivateRoute from '../authRoutes/PrivateRoute';
 
@@ -12,6 +13,7 @@ const Routes = () => (
         <Switch>
             <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Signin} />
+            <Route path="/forgotPassword" component={ForgotPassword} />
             <PrivateRoute path="/feed" exact component={Feed} />
             <PrivateRoute path="/profile" exact component={Profile} />
             <PrivateRoute path="/" exact component={Feed} />

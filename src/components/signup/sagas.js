@@ -1,11 +1,8 @@
+/* eslint-disable max-lines-per-function */
 import axios from 'axios';
 import { takeEvery, put } from 'redux-saga/effects';
 import { DATABASE_API_URL } from './constants';
-import {
-	SIGN_UP_USER,
-	SIGN_UP_LOADING,
-	SIGN_UP_NOT_LOADING,
-} from './signupActionTypes';
+import { SIGN_UP_USER, UPDATE_SIGN_UP_STATUS } from './signupActionTypes';
 import { AUTH_USER } from '../auth/authActionTypes';
 import setAuthData from '../auth/utils/setAuthData';
 
@@ -18,20 +15,22 @@ import setAuthData from '../auth/utils/setAuthData';
 
 function* signupUserAsync(userData) {
 	try {
-		yield put({ type: SIGN_UP_LOADING });
 		const res = yield axios.post(
 			`${DATABASE_API_URL}/signup`,
-			userData.payload
+			userData.payload,
 		);
 		const { data } = res.data;
 		const decoded = setAuthData(data);
-		yield put({ type: SIGN_UP_NOT_LOADING, payload: {} });
+		yield put({ type: UPDATE_SIGN_UP_STATUS, payload: {} });
 		yield put({ type: AUTH_USER, payload: decoded });
-		userData.history.push('/');
+		window.location.href = '/';
 	} catch (err) {
+		const error = err.response
+			? err.response.data.message
+			: 'Something went wrong';
 		yield put({
-			type: SIGN_UP_NOT_LOADING,
-			payload: err.response.data.message,
+			type: UPDATE_SIGN_UP_STATUS,
+			payload: error,
 		});
 	}
 }
