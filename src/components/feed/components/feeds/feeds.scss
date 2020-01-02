@@ -115,6 +115,14 @@
         color: $color-grey-dark;
     }
 
+    &__link {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     &__img {
         width: 100%;
         margin-top: 2rem;

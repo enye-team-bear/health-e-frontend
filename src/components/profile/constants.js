@@ -17,6 +17,31 @@ const pageData = {
 	editIcon: 'edit data',
 	passTxt: 'Password Change',
 	saveText: 'Save',
+	changeUserTxt: 'Change user details',
+	professionalTxt: 'Professional',
+};
+
+const profInput = {
+	currentTitle: {
+		placeholder: 'Current Title',
+		value: '',
+		type: 'text',
+	},
+	currentJob: {
+		placeholder: 'Current Job',
+		value: '',
+		type: 'text',
+	},
+	phoneNumber: {
+		placeholder: 'Phone Number',
+		value: '',
+		type: 'text',
+	},
+	email: {
+		placeholder: 'Email Address',
+		value: '',
+		type: 'email',
+	},
 };
 
 /**
@@ -27,4 +52,4 @@ const pageData = {
 const DATABASE_API_URL =
 	'https://us-central1-health-e-api.cloudfunctions.net/api';
 
-export { pageData };
+export { pageData, profInput };

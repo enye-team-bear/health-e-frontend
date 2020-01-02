@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable max-lines-per-function */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { store } from 'react-notifications-component';
 import Paper from '@material-ui/core/Paper';
@@ -71,12 +72,14 @@ const renderPostHead = postData => {
 const renderPostBody = (postData, dispatch) => {
     return (
         <div className="f-postCard__body">
-            <div className="f-postCard__postText">{postData.thread}</div>
-            {postData.imageUrl ? (
-                <div className="f-postCard__img">
-                    <img src={postData.imageUrl} alt="" />
-                </div>
-            ) : null}
+            <Link to="/singlePost" className="f-postCard__link">
+                <div className="f-postCard__postText">{postData.thread}</div>
+                {postData.imageUrl ? (
+                    <div className="f-postCard__img">
+                        <img src={postData.imageUrl} alt="" />
+                    </div>
+                ) : null}
+            </Link>
             <div className="f-postCard__feedback">
                 <div className="f-postCard__like">
                     <img

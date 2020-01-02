@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -81,15 +81,16 @@ const renderNavMenuItems = () => (
         {iconButtons.map((el, i) =>
             badgeIcons(el.ariaLabel, el.badgeContent, el.Component, i),
         )}
-
-        <IconButton
-            edge="end"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            color="inherit"
-        >
-            <AccountCircle />
-        </IconButton>
+        <NavLink to="/profile">
+            <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+            >
+                <AccountCircle />
+            </IconButton>
+        </NavLink>
     </div>
 );
 

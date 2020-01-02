@@ -28,31 +28,6 @@ const renderPersonalInput = () => (
     </Fragment>
 );
 
-const renderProfessionInput = () => (
-    <Fragment>
-        <input
-            type="text"
-            className="f-postCard__input p-modal__input"
-            placeholder="Current Title"
-        />
-        <input
-            type="text"
-            className="f-postCard__input p-modal__input"
-            placeholder="Current Job"
-        />
-        <input
-            type="text"
-            className="f-postCard__input p-modal__input"
-            placeholder="Phone Number"
-        />
-        <input
-            type="email"
-            className="f-postCard__input p-modal__input"
-            placeholder="Email Address"
-        />
-    </Fragment>
-);
-
 const renderModal = () => (
     <Card className="p-page__card p-modal">
         <div className="p-modal__top">
@@ -67,9 +42,6 @@ const renderModal = () => (
                     <img src={plusIcon} alt="add" />
                 </div>
             </div>
-            <div className="p-modal__divider" />
-            <div className="p-modal__section-head">Professional</div>
-            {renderProfessionInput()}
             <div className="p-modal__btn">
                 <Button variant="contained" className="b-button" type="submit">
                     {pageData.saveText}
