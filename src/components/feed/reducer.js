@@ -6,7 +6,9 @@ import {
 	NEW_POST_NOT_LOADING,
 	GET_ALL_POSTS,
 	SET_ALL_POSTS,
+	GET_ALL_POSTS_FAILED,
 	SET_LIKE_POST,
+	SET_COMMENT_POST,
 } from './actionTypes';
 
 const INITIAL_STATE = {
@@ -15,6 +17,26 @@ const INITIAL_STATE = {
 	posting: false,
 	postLoading: false,
 };
+
+/**
+ * function used to update comments
+ * @param {object} state
+ * @param {object} action
+ * @function {*} postComment
+ */
+const postComment = (state, action) => {
+	const allPosts = state.allPosts.map((post, i) => {
+		if (post.id === action.payload.id) {
+			return {
+				...post,
+				commentCount: state.allPosts[i].commentCount + 1,
+			};
+		}
+		return post;
+	});
+	return allPosts;
+};
+
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case NEW_POST: {
@@ -48,9 +70,16 @@ export default (state = INITIAL_STATE, action) => {
 				allPosts: action.payload,
 				postLoading: false,
 			};
+		case GET_ALL_POSTS_FAILED: {
+			return {
+				...state,
+				postLoading: false,
+				error: action.payload,
+			};
+		}
 		case SET_LIKE_POST: {
 			const index = state.allPosts.findIndex(
-				(post) => post.id === action.payload.postId,
+				post => post.id === action.payload.postId,
 			);
 			return {
 				...state,
@@ -59,6 +88,12 @@ export default (state = INITIAL_STATE, action) => {
 					action.payload,
 					...state.allPosts.slice(index + 1),
 				],
+			};
+		}
+		case SET_COMMENT_POST: {
+			return {
+				...state,
+				allPosts: postComment(state, action),
 			};
 		}
 		default:

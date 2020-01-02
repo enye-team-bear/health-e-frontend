@@ -1,4 +1,6 @@
+/* eslint-disable max-lines-per-function */
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import useReactRouter from 'use-react-router';
@@ -77,6 +79,12 @@ const Signin = () => {
     return (
         <AuthLayout>
             <div className="p-signinPage">
+                <div className="p-authPage__switch">
+                    {signInData.notUser}
+                    <Link to="/signup" className="">
+                        {signInData.signupText}
+                    </Link>
+                </div>
                 <div className="p-signinPage__heading">{signinText}</div>
                 <form
                     className="a-formAuth"

@@ -15,8 +15,8 @@ export default (state = INITIAL_STATE, action) => {
 		case SIGN_IN_NOT_LOADING: {
 			return {
 				...state,
-				loading: false,
 				error: action.payload,
+				loading: false,
 			};
 		}
 		default:

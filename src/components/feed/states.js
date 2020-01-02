@@ -17,6 +17,23 @@ const usePostInput = () => {
 	};
 };
 
+const useCommentInput = () => {
+	const [commentText, setCommentText] = useState('');
+
+	const handleCommentTextChanged = (e) => {
+		e.persist();
+		setCommentText(e.target.value);
+	};
+
+	const resetState = () => setCommentText('');
+
+	return {
+		handleCommentTextChanged,
+		resetState,
+		commentText,
+	};
+};
+
 const useCheckedLabel = () => {
 	const [checked, setChecked] = useState(true);
 
@@ -27,4 +44,4 @@ const useCheckedLabel = () => {
 	};
 };
 
-export { usePostInput, useCheckedLabel };
+export { usePostInput, useCheckedLabel, useCommentInput };

@@ -3,6 +3,7 @@
 /* eslint-disable max-lines-per-function */
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { store } from 'react-notifications-component';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import profileImg from '../../../../assets/img/profile2.png';
@@ -12,34 +13,55 @@ import commentImg from '../../../../assets/img/comment.svg';
 import sendIcon from '../../../../assets/img/sendIcon.svg';
 import { pageData } from '../../constants';
 import { likeSinglePost } from '../../actions';
+import { useCommentInput } from '../../states';
+import { commentPost } from '../../actions';
+import timeConverter from '../../utils/timeConverter';
+
+const handleCommentSubmit = (e, body, id, resetState, dispatch) => {
+    e.preventDefault();
+    dispatch(commentPost(id, body));
+    resetState();
+
+    store.addNotification({
+        title: 'Success',
+        message: 'Comment added successfully',
+        type: 'success', // 'default', 'success', 'info', 'warning'
+        container: 'bottom-left', // where to position the notifications
+        animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
+        animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
+        dismiss: {
+            duration: 3000,
+        },
+    });
+};
 
 /**
  * function used to render post head section
  *
  * @function {*} renderPostHead
  */
-const renderPostHead = () => (
-    <div className="f-postCard__head">
-        <div className="f-postCard__left">
-            <img
-                src={profileImg}
-                alt="profile"
-                className="f-postCard__userImg"
-            />
-            <div className="f-postCard__userData">
-                <div className="f-postCard__userName">
-                    {pageData.expertName}
-                </div>
-                <div className="f-postCard__userProfession">
-                    {pageData.postUserJob} <span>{pageData.postUserType}</span>
+const renderPostHead = (postData) => {
+    const img = postData.userImage || profileImg;
+    const userName = postData.userName || 'Test';
+    const postTime = timeConverter(postData.createdAt);
+    return (
+        <div className="f-postCard__head">
+            <div className="f-postCard__left">
+                <img src={img} alt="profile" className="f-postCard__userImg" />
+                <div className="f-postCard__userData">
+                    <div className="f-postCard__userName">{userName}</div>
+                    <div className="f-postCard__userProfession">
+                        {pageData.postUserJob}{' '}
+                        <span>{pageData.postUserType}</span>
+                    </div>
                 </div>
             </div>
+            <div className="f-postCard__right">
+                <div className="f-postCard__time">{postTime}</div>
+            </div>
         </div>
-        <div className="f-postCard__right">
-            <div className="f-postCard__time">{pageData.postTime}</div>
-        </div>
-    </div>
-);
+    );
+};
 
 /**
  * function used to render post body section
@@ -84,18 +106,31 @@ const renderPostBody = (postData, dispatch) => {
  *
  * @function {*} renderPostBottom
  */
-const renderPostBottom = () => (
-    <div className="f-postCard__bottom">
+const renderPostBottom = (
+    handleCommentTextChanged,
+    commentText,
+    postId,
+    resetState,
+    dispatch,
+) => (
+    <form
+        className="f-postCard__bottom"
+        onSubmit={(e) =>
+            handleCommentSubmit(e, commentText, postId, resetState, dispatch)
+        }
+    >
         <input
             type="text"
             className="f-postCard__input"
             placeholder="Write a comment"
+            value={commentText}
+            onChange={handleCommentTextChanged}
         />
         <Button variant="contained" className="b-button" type="submit">
             {pageData.saveText}
             <img src={sendIcon} alt="send icon" />
         </Button>
-    </div>
+    </form>
 );
 
 /**
@@ -105,12 +140,26 @@ const renderPostBottom = () => (
  */
 const PostCard = ({ postData }) => {
     const dispatch = useDispatch();
+    const {
+        handleCommentTextChanged,
+        commentText,
+        resetState,
+    } = useCommentInput();
+
+    const postId = postData.id || postData.postId;
+
     return (
         <Paper className="p-page__card">
             <div className="f-postCard">
-                {renderPostHead()}
+                {renderPostHead(postData)}
                 {renderPostBody(postData, dispatch)}
-                {renderPostBottom()}
+                {renderPostBottom(
+                    handleCommentTextChanged,
+                    commentText,
+                    postId,
+                    resetState,
+                    dispatch,
+                )}
             </div>
         </Paper>
     );

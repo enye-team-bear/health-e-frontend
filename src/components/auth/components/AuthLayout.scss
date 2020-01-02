@@ -67,3 +67,22 @@
         align-items: center;
     }
 }
+
+.p-authPage__switch {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.6rem;
+    color: $color-grey-light-1;
+    font-weight: 300;
+
+    a {
+        color: $color-secondary;
+        text-decoration: none;
+        margin-left: 1rem;
+        font-weight: 400;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

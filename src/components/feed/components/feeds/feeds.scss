@@ -70,6 +70,8 @@
     }
 
     &__userImg {
+        height: 5rem;
+        width: 5rem;
         border-radius: 50%;
     }
 
@@ -183,6 +185,19 @@
         width: 100%;
         display: flex;
         justify-content: center;
+
+        &--error {
+            color: red;
+            font-size: 1.4rem;
+
+            button {
+                border: none;
+                background: none;
+                color: $color-primary;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
     }
 
     &__progress.MuiCircularProgress-colorPrimary {

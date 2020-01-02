@@ -4,9 +4,11 @@
  * @constant
  */
 const signUpData = {
-	userText: 'User',
+	alreadyMember: 'Already a member? ',
 	medicalText: 'Medical',
+	signinText: 'Sign in',
 	signupText: 'Sign up',
+	userText: 'User',
 };
 
 /**

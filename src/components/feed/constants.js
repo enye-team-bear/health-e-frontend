@@ -48,7 +48,7 @@ const topics = [
 const DATABASE_API_URL =
 	'https://us-central1-health-e-api.cloudfunctions.net/api';
 const NEW_POST_URL = `${DATABASE_API_URL}/new_post`;
-const ALL_POST_URL = `${DATABASE_API_URL}/get_posts`;
+const ALL_POST_URL = `${DATABASE_API_URL}/posts`;
 const POST_URL = `${DATABASE_API_URL}/post`;
 
 export { pageData, topics, NEW_POST_URL, ALL_POST_URL, POST_URL };

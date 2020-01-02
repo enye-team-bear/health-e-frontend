@@ -4,7 +4,9 @@
  * @constant
  */
 const signInData = {
+	notUser: 'Not yet a user? ',
 	signinText: 'Sign in',
+	signupText: 'Sign in',
 };
 /**
  * Data rendered for application state.
