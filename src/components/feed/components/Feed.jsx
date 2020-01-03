@@ -15,7 +15,7 @@ import { actions as userActions } from '../../auth';
  *
  * @function {*} renderGrid
  */
-const renderGrid = (userData) => (
+const renderGrid = userData => (
     <Grid container spacing={3}>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">
@@ -29,7 +29,7 @@ const renderGrid = (userData) => (
             <Feeds />
         </Grid>
         <Grid item xs={12} sm={3}>
-            <Card className="p-page__card">
+            <Card className="p-page__card mobile-none">
                 <Experts />
             </Card>
         </Grid>
@@ -43,7 +43,7 @@ const renderGrid = (userData) => (
  */
 const Feed = () => {
     const dispatch = useDispatch();
-    const userData = useSelector((state) => state.auth.userData);
+    const userData = useSelector(state => state.auth.userData);
 
     useEffect(() => {
         dispatch(getAllPosts());
