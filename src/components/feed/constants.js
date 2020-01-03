@@ -41,9 +41,6 @@ const topics = [
 ];
 
 const notificationsSettings = {
-	title: 'Success',
-	message: 'Post created successfully',
-	type: 'success', // 'default', 'success', 'info', 'warning'
 	container: 'bottom-left', // where to position the notifications
 	animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
 	animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied

@@ -31,10 +31,18 @@ function* createNewPost(postData) {
 		if (res.data.status === 'success') {
 			yield put(newPostNotLoading());
 			yield put(getNewPosts());
-			store.addNotification(notificationsSettings);
+			const notification = notificationsSettings;
+			notification.title = 'Success';
+			notification.message = 'Post created successfully';
+			notification.type = 'success';
+			store.addNotification(notification);
 		}
 	} catch (err) {
-		console.log(err);
+		const notification = notificationsSettings;
+		notification.title = 'Error';
+		notification.message = 'Unable to make post';
+		notification.type = 'danger';
+		store.addNotification(notification);
 	}
 }
 
