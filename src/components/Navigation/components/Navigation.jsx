@@ -78,6 +78,9 @@ const renderNavBrand = () => (
  */
 const renderNavMenuItems = () => (
     <div className="n-navigation__items">
+        <NavLink to="/topics" className="n-navigation_link">
+            {navData.topicText}
+        </NavLink>
         {iconButtons.map((el, i) =>
             badgeIcons(el.ariaLabel, el.badgeContent, el.Component, i),
         )}
