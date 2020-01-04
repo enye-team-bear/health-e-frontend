@@ -8,6 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import PostForm from './PostForm';
 import PostCard from './PostCard';
 import { getAllPosts } from '../../actions';
+import { pageData } from '../../constants';
 
 const renderPosts = (postData, dispatch) => {
     const { allPosts, postLoading, error } = postData;
@@ -17,18 +18,17 @@ const renderPosts = (postData, dispatch) => {
         </div>
     );
     if (allPosts.length > 0 && !postLoading) {
-        // posts = allPosts.map(post => (
-        //     <PostCard key={post.id ? post.id : post.postId} postData={post} />
-        // ));
-        posts = completePosts(allPosts);
+        posts = allPosts.map(post => (
+            <PostCard key={post.id ? post.id : post.postId} postData={post} />
+        ));
     }
 
     if (allPosts.length < 1 && error && !postLoading) {
         posts = (
             <div className="l-loading__block--error">
                 {error}{' '}
-                <button onClick={() => dispatch(getAllPosts())}>
-                    Click to retry
+                <button type="submit" onClick={() => dispatch(getAllPosts())}>
+                    {pageData.clickToRetry}
                 </button>
             </div>
         );
@@ -58,7 +58,7 @@ const completePosts = allPosts => {
                     className="List"
                     height={1000}
                     itemCount={allPosts.length}
-                    itemSize={250}
+                    itemSize={400}
                     width={width}
                 >
                     {Row}

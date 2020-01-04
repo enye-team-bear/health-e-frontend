@@ -11,8 +11,10 @@ import { newPost } from '../../actions';
 
 const handleSubmit = (e, data, dispatch, resetState) => {
     e.preventDefault();
-    dispatch(newPost(data));
-    resetState();
+    if (data !== '') {
+        dispatch(newPost(data));
+        resetState();
+    }
 };
 
 /**
