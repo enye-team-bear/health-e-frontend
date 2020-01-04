@@ -1,0 +1,94 @@
+@import '../../../sass/abstract/variables';
+@import '../../../sass/abstract/mixin';
+@import '../../../sass/components/input';
+@import '../../../sass/utils/page';
+
+.p-topics {
+    &__card.p-page__card {
+        border-radius: 1rem;
+    }
+
+    &__card {
+        text-align: left;
+    }
+
+    &__head {
+        display: flex;
+        align-items: center;
+    }
+
+    &__userImg {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+    }
+
+    &__detail {
+        margin-left: 1rem;
+    }
+
+    &__user {
+        font-size: 1.3rem;
+        color: $color-grey-darker;
+        span {
+            color: lighten($color-grey-dark, 10);
+        }
+    }
+
+    &__time {
+        font-size: 1.2rem;
+        color: $color-grey-light-1;
+    }
+
+    &__heading {
+        font-size: 1.8rem;
+        color: #393939;
+        text-decoration: underline;
+        padding-top: 1.5rem;
+    }
+
+    &__content {
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: #595959;
+        padding-top: 1rem;
+    }
+
+    &__discuss {
+        font-size: 1.2rem;
+        color: $color-grey-light-1;
+        padding-top: 1rem;
+        font-weight: 300;
+    }
+
+    &__bottom {
+        display: flex;
+        padding-top: 1rem;
+        margin-top: 1rem;
+        border-top: 1px solid $color-grey-light;
+    }
+
+    &__upvote {
+        margin-right: 1rem;
+    }
+
+    &__upvote,
+    &__comment {
+        display: flex;
+        align-items: center;
+
+        img {
+            cursor: pointer;
+            transition: all 0.3s;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        span {
+            font-size: 1.4rem;
+            color: $color-grey-light-1;
+            margin-left: 5px;
+        }
+    }
+}
