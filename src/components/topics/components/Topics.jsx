@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Navigation } from '../../Navigation';
 
-const SinglePost = () => {
+const Topics = () => {
     return (
         <Fragment>
             <Navigation />
@@ -10,4 +10,4 @@ const SinglePost = () => {
     );
 };
 
-export default SinglePost;
+export default Topics;

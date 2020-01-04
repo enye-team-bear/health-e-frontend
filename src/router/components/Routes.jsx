@@ -5,7 +5,7 @@ import { Signup } from '../../components/signup';
 import { Signin } from '../../components/signin';
 import { Profile } from '../../components/profile';
 import { ForgotPassword } from '../../components/forgotPassword';
-import { SinglePost } from '../../components/singlePost';
+import { Topics } from '../../components/topics';
 import NoMatch from './NoMatch';
 import PrivateRoute from '../authRoutes/PrivateRoute';
 
@@ -15,7 +15,7 @@ const Routes = () => (
             <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Signin} />
             <Route path="/forgotPassword" component={ForgotPassword} />
-            <PrivateRoute path="/singlePost" exact component={SinglePost} />
+            <PrivateRoute path="/topics" exact component={Topics} />
             <PrivateRoute path="/feed" exact component={Feed} />
             <PrivateRoute path="/profile" exact component={Profile} />
             <PrivateRoute path="/" exact component={Feed} />

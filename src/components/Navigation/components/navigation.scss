@@ -32,6 +32,13 @@
         }
     }
 
+    &_link {
+        font-size: 1.3rem;
+        color: $color-white;
+        text-decoration: none;
+        margin-right: 0.5rem;
+    }
+
     &__input {
         width: 90%;
         border: none;
