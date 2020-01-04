@@ -15,7 +15,7 @@ import sendIcon from '../../../../assets/img/sendIcon.svg';
 import { pageData } from '../../constants';
 import { likeSinglePost } from '../../actions';
 import { useCommentInput } from '../../states';
-import { commentPost } from '../../actions';
+import { commentPost, getComment } from '../../actions';
 import timeConverter from '../../utils/timeConverter';
 
 const handleCommentSubmit = (e, body, id, resetState, dispatch) => {
@@ -64,42 +64,60 @@ const renderPostHead = postData => {
     );
 };
 
+const singleComment = (data, key) => (
+    <div className="f-postCard__comment-card" key={key}>
+        <img
+            src={data.userImage ? data.userImage : profileImg}
+            alt="user"
+            className="f-postCard__comment-userImage"
+        />
+        <div className="f-postCard__comment-right">
+            <div className="f-postCard__comment-userName">{data.userName}</div>
+            <div className="f-postCard__comment-userProf">{'medical'}</div>
+            <div className="f-postCard__comment-comment">{data.body}</div>
+        </div>
+    </div>
+);
+
 /**
  * function used to render post body section
  *
  * @function {*} renderPostBody
  */
 const renderPostBody = (postData, dispatch) => {
+    const id = postData.id ? postData.id : postData.postId;
     return (
         <div className="f-postCard__body">
-            <Link to="/singlePost" className="f-postCard__link">
-                <div className="f-postCard__postText">{postData.thread}</div>
-                {postData.imageUrl ? (
-                    <div className="f-postCard__img">
-                        <img src={postData.imageUrl} alt="" />
-                    </div>
-                ) : null}
-            </Link>
+            <div className="f-postCard__postText">{postData.thread}</div>
+            {postData.imageUrl ? (
+                <div className="f-postCard__img">
+                    <img src={postData.imageUrl} alt="" />
+                </div>
+            ) : null}
+
             <div className="f-postCard__feedback">
                 <div className="f-postCard__like">
                     <img
                         src={heartImg}
                         alt=""
-                        onClick={() =>
-                            dispatch(
-                                likeSinglePost(
-                                    postData.id ? postData.id : postData.postId,
-                                ),
-                            )
-                        }
+                        onClick={() => dispatch(likeSinglePost(id))}
                     />
                     <span>{postData.likeCount}</span>
                 </div>
                 <div className="f-postCard__comment">
                     <img src={commentImg} alt="" />
-                    <span>{postData.commentCount}</span>
+                    <span onClick={() => dispatch(getComment(id))}>
+                        {`${postData.commentCount} comments`}
+                    </span>
                 </div>
             </div>
+            {postData.comments ? (
+                <div className="f-postCard__comment-section">
+                    {postData.comments.map((data, key) =>
+                        singleComment(data, key),
+                    )}
+                </div>
+            ) : null}
         </div>
     );
 };
@@ -131,7 +149,6 @@ const renderPostBottom = (
         />
         <Button variant="contained" className="b-button" type="submit">
             {pageData.saveText}
-            <img src={sendIcon} alt="send icon" />
         </Button>
     </form>
 );

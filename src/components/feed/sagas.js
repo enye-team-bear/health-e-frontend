@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { takeEvery, put } from 'redux-saga/effects';
 import { store } from 'react-notifications-component';
 
@@ -6,6 +7,7 @@ import {
 	GET_ALL_POSTS,
 	LIKE_POST,
 	COMMENT_POST,
+	GET_SINGLE_COMMENT,
 } from './actionTypes';
 import {
 	newPostNotLoading,
@@ -14,9 +16,16 @@ import {
 	getAllPosts as getNewPosts,
 	getAllPostsFailed,
 	setCommentPost,
+	updateComment,
 } from './actions';
 import { notificationsSettings } from './constants';
-import { createPost, getPosts, postLike, postComment } from './services';
+import {
+	createPost,
+	getPosts,
+	postLike,
+	postComment,
+	singleComment,
+} from './services';
 
 /**
  * Watches for the {@link actionTypes.SIGN_UP_USER SIGN_UP_USER} action.
@@ -73,6 +82,24 @@ function* commentPost(data) {
 		const res = yield postComment(data.payload);
 		if (res.data.status === 'success') {
 			yield put(setCommentPost(data.payload));
+			const comment = yield singleComment(data.payload.id);
+			const newComment = comment.data.data;
+			newComment.id = comment.data.data.postId;
+			yield put(updateComment(newComment));
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+function* getComments(data) {
+	const id = data.payload;
+	try {
+		const res = yield singleComment(id);
+		if (res.data.status) {
+			const newComment = res.data.data;
+			newComment.id = res.data.data.postId;
+			yield put(updateComment(newComment));
 		}
 	} catch (err) {
 		console.log(err);
@@ -84,4 +111,5 @@ export default function* root() {
 	yield takeEvery(GET_ALL_POSTS, getAllPosts);
 	yield takeEvery(LIKE_POST, likePost);
 	yield takeEvery(COMMENT_POST, commentPost);
+	yield takeEvery(GET_SINGLE_COMMENT, getComments);
 }

@@ -23,3 +23,8 @@ export const postComment = async ({ id, body }) => {
 	const res = await Axios.post(`${POST_URL}/${id}/comment`, { body });
 	return res;
 };
+
+export const singleComment = async id => {
+	const res = await Axios.get(`${POST_URL}/${id}`);
+	return res;
+};

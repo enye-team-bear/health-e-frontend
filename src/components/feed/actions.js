@@ -45,3 +45,13 @@ export const setCommentPost = id => ({
 	type: actionTypes.SET_COMMENT_POST,
 	payload: id,
 });
+
+export const getComment = id => ({
+	type: actionTypes.GET_SINGLE_COMMENT,
+	payload: id,
+});
+
+export const updateComment = data => ({
+	type: actionTypes.UPDATE_SINGLE_COMMENT,
+	payload: data,
+});

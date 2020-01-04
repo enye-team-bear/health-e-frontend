@@ -24,6 +24,7 @@ const pageData = {
 	postUserType: 'Medical',
 	likeNum: '23',
 	commentNum: '11',
+	clickToRetry: 'Click to retry',
 };
 
 /**

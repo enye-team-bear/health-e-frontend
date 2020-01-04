@@ -9,6 +9,7 @@ import {
 	GET_ALL_POSTS_FAILED,
 	SET_LIKE_POST,
 	SET_COMMENT_POST,
+	UPDATE_SINGLE_COMMENT,
 } from './actionTypes';
 
 const INITIAL_STATE = {
@@ -94,6 +95,19 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				allPosts: postComment(state, action),
+			};
+		}
+		case UPDATE_SINGLE_COMMENT: {
+			const index = state.allPosts.findIndex(
+				post => post.id === action.payload.id,
+			);
+			return {
+				...state,
+				allPosts: [
+					...state.allPosts.slice(0, index),
+					action.payload,
+					...state.allPosts.slice(index + 1),
+				],
 			};
 		}
 		default:
