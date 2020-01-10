@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+// eslint-disable-next-line no-unused-vars
 import useReactRouter from 'use-react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthLayout, renderError } from '../../auth';
@@ -21,6 +22,7 @@ const handleSubmit = (e, userData, dispatch) => {
     Object.keys(userData).forEach(el => {
         userInfo[el] = userData[el].value;
     });
+    // eslint-disable-next-line sort-keys
     dispatch({ type: SIGN_IN_USER, payload: userInfo });
 };
 

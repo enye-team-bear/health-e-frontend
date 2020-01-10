@@ -15,7 +15,7 @@ const pageData = {
 	connText: 'connection',
 	text20: '0',
 	allPostText: 'All posts',
-	saveText: 'Save',
+	saveText: 'Send',
 	createNewPost: 'Create new post',
 	postDefaultText:
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -67,5 +67,5 @@ export {
 	notificationsSettings,
 	NEW_POST_URL,
 	ALL_POST_URL,
-	POST_URL,
+	POST_URL
 };

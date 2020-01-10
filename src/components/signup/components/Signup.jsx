@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import Switch from '@material-ui/core/Switch';
+import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import useReactRouter from 'use-react-router';
@@ -53,11 +53,18 @@ const renderInput = (formData, handleInputChange, error = false) => (
  */
 const renderCheckedLabel = (checked, handleChecked) => (
     <div className="a-formAuth__check-btn">
-        {signUpData.userText}
-        <Switch
-            checked={checked}
+        <Checkbox
+            checked={!checked}
             onChange={handleChecked}
-            value="checkedB"
+            value={0}
+            color="primary"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
+        {signUpData.userText}
+        <Checkbox
+            checked={!checked}
+            onChange={handleChecked}
+            value={1}
             color="primary"
             inputProps={{ 'aria-label': 'primary checkbox' }}
         />
