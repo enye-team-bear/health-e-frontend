@@ -15,4 +15,10 @@
     &__body {
         padding: 2rem;
     }
+
+    &__commentHead {
+        font-size: 1.4rem;
+        color: $color-grey-darker;
+        padding: 1.2rem 0;
+    }
 }
