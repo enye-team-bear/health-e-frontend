@@ -91,4 +91,13 @@
             margin-left: 5px;
         }
     }
+
+    &__createBtn {
+        .b-button {
+            @include defaultBtn;
+            color: #fff;
+            padding: 1rem 1rem;
+            margin-bottom: 2rem;
+        }
+    }
 }
