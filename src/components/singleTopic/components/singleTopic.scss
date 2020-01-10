@@ -1,0 +1,18 @@
+@import '../../../sass/abstract/variables';
+@import '../../../sass/abstract/mixin';
+@import '../../../sass/components/input';
+@import '../../../sass/utils/page';
+
+.p-singleTopic {
+    &__heading {
+        color: #fff;
+        font-size: 1.8rem;
+        text-decoration: underline;
+        text-align: center;
+        padding: 3rem 2rem;
+    }
+
+    &__body {
+        padding: 2rem;
+    }
+}
