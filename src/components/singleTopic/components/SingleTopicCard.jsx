@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import pencilIcon from '../../../assets/img/pencilIcon.svg';
 // import profileImg from '../../../assets/img/defaultImg.png';
@@ -54,6 +55,39 @@ const renderLike = () => (
     </div>
 );
 
+const renderCommentForm = () => (
+    <form className="f-postCard__bottom">
+        <input
+            type="text"
+            className="f-postCard__input"
+            placeholder="Write a comment"
+        />
+        <Button variant="contained" className="b-button" type="submit">
+            {pageData.saveText}
+        </Button>
+    </form>
+);
+
+const renderComments = () =>
+    new Array(2).fill(0).map((el, i) => (
+        <div className="f-postCard__comment-card" key={i}>
+            <img
+                src={profileImg}
+                alt="user"
+                className="f-postCard__comment-userImage"
+            />
+            <div className="f-postCard__comment-right">
+                <div className="f-postCard__comment-userName">
+                    {pageData.topicName}
+                </div>
+                <div className="f-postCard__comment-userProf">{'medical'}</div>
+                <div className="f-postCard__comment-comment">
+                    testing comment system available
+                </div>
+            </div>
+        </div>
+    ));
+
 /**
  * function used to render overview bottom section
  *
@@ -64,6 +98,9 @@ const renderBody = () => (
         {renderUserInfo()}
         {renderTopicInfo()}
         {renderLike()}
+        {renderCommentForm()}
+        <div className="p-singleTopic__commentHead">Comments</div>
+        {renderComments()}
     </div>
 );
 
