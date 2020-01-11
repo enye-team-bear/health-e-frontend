@@ -17,6 +17,9 @@ export const NEW_POST_NOT_LOADING = 'NEW_POST_NOT_LOADING';
 export const LIKE_POST = 'LIKE_POST';
 export const SET_LIKE_POST = 'SET_LIKE_POST';
 
+export const LIKE_COMMENT = 'LIKE_COMMENT';
+export const SET_LIKE_COMMENT = 'SET_LIKE_COMMENT';
+
 export const COMMENT_POST = 'COMMENT_POST';
 export const SET_COMMENT_POST = 'SET_COMMENT_POST';
 

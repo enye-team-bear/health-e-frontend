@@ -7,7 +7,7 @@ import {
 	GET_ALL_POSTS,
 	LIKE_POST,
 	COMMENT_POST,
-	GET_SINGLE_COMMENT,
+	GET_SINGLE_COMMENT
 } from './actionTypes';
 import {
 	newPostNotLoading,
@@ -16,7 +16,7 @@ import {
 	getAllPosts as getNewPosts,
 	getAllPostsFailed,
 	setCommentPost,
-	updateComment,
+	updateComment
 } from './actions';
 import { notificationsSettings } from './constants';
 import {
@@ -24,7 +24,7 @@ import {
 	getPosts,
 	postLike,
 	postComment,
-	singleComment,
+	singleComment
 } from './services';
 
 /**

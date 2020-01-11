@@ -36,6 +36,16 @@ export const setLikePost = data => ({
 	payload: data,
 });
 
+export const likeSingleComment = id => ({
+	type: actionTypes.LIKE_COMMENT,
+	payload: id,
+});
+
+export const setCommentLikePost = data => ({
+	type: actionTypes.SET_LIKE_COMMENT,
+	payload: data,
+});
+
 export const commentPost = (id, body) => ({
 	type: actionTypes.COMMENT_POST,
 	payload: { id, body },

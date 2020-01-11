@@ -57,6 +57,7 @@ const notificationsSettings = {
  */
 const DATABASE_API_URL =
 	'https://us-central1-health-e-api.cloudfunctions.net/api';
+const COMMENT_URL = `${DATABASE_API_URL}/comment`;
 const NEW_POST_URL = `${DATABASE_API_URL}/new_post`;
 const ALL_POST_URL = `${DATABASE_API_URL}/posts`;
 const POST_URL = `${DATABASE_API_URL}/post`;
@@ -65,6 +66,7 @@ export {
 	pageData,
 	topics,
 	notificationsSettings,
+	COMMENT_URL,
 	NEW_POST_URL,
 	ALL_POST_URL,
 	POST_URL
