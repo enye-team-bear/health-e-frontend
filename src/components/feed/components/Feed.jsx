@@ -6,6 +6,7 @@ import Experts from './experts';
 import { Navigation } from '../../Navigation';
 import FeedProfile from './profile';
 import Topic from './topic';
+import SelectTopic from './select-topic';
 import { Feeds } from './feeds';
 import { getAllPosts } from '../actions';
 import { actions as userActions } from '../../auth';
@@ -15,11 +16,15 @@ import { actions as userActions } from '../../auth';
  *
  * @function {*} renderGrid
  */
+// eslint-disable-next-line max-lines-per-function
 const renderGrid = userData => (
     <Grid container spacing={3}>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">
                 <FeedProfile userData={userData} />
+            </Card>
+            <Card className="p-page__card">
+                <SelectTopic />
             </Card>
             <Card className="p-page__card">
                 <Topic />
