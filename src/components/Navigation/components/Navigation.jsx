@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, Redirect } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -97,6 +97,13 @@ const renderNavMenuItems = () => (
     </div>
 );
 
+const rdr = () => {
+ 
+    return(
+        alert('control reached here')
+    )
+};
+
 /**
  * function used to render navigation component
  *
@@ -113,8 +120,10 @@ const Navigation = () => {
                             type="text"
                             className="n-navigation__input"
                             placeholder="Search for a topic"
+                            name="search_phrase"
+                            id="search_phrase"
                         />
-                        <div className="n-navigation__icon">{svg()}</div>
+                        <div className="n-navigation__icon"><Link to='/search'> {svg()} </Link> </div>
                     </form>
                     {renderNavMenuItems()}
                 </Toolbar>

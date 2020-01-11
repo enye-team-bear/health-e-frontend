@@ -1,0 +1,256 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/abstract/mixin';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.f-postForm {
+    text-align: left;
+
+    &__heading {
+        font-size: 1.6rem;
+        color: $color-grey-dark;
+        border-bottom: 1px solid #d0d0d0;
+        padding-bottom: 1rem;
+    }
+
+    &__textInput {
+        width: 100%;
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        font-family: 'Poppins', sans-serif;
+        color: $color-grey-dark;
+        padding: 1rem;
+        border: none;
+        transition: all 0.3s;
+
+        &::placeholder {
+            color: #c1c0c0;
+            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom: 2px solid $color-primary;
+        }
+    }
+
+    &__photoIcon {
+        height: 3.5rem;
+        background: transparent;
+        transition: all 0.2s;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 5px 7px 4px rgba(24, 119, 242, 0.24);
+            transform: translateY(-3px);
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+
+        .b-button {
+            @include defaultBtn;
+        }
+    }
+}
+
+.f-postCard {
+    text-align: left;
+
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 1.5rem;
+    }
+
+    &__userImg {
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__userData {
+        margin-left: 1rem;
+    }
+
+    &__userName {
+        font-size: 1.4rem;
+        color: $color-grey-darker;
+    }
+
+    &__userProfession {
+        font-size: 1.2rem;
+        color: $color-grey-light-1;
+        font-weight: 300;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+
+    &__time {
+        color: $color-grey-light-1;
+    }
+
+    &__body {
+        padding-top: 2rem;
+        border-bottom: 1px solid #d0d0d0;
+        padding-bottom: 1.5rem;
+    }
+
+    &__postText {
+        font-size: 1.2rem;
+        color: $color-grey-dark;
+    }
+
+    &__link {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        margin-top: 2rem;
+        img {
+            width: 100%;
+            border-radius: 1rem;
+        }
+    }
+
+    &__feedback {
+        display: flex;
+        margin-top: 1rem;
+    }
+
+    &__like {
+        margin-right: 1rem;
+    }
+
+    &__like,
+    &__comment {
+        display: flex;
+        align-items: center;
+
+        img {
+            cursor: pointer;
+            transition: all 0.3s;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        span {
+            font-size: 1.4rem;
+            color: $color-grey-light-1;
+            margin-left: 5px;
+        }
+    }
+
+    &__comment {
+        span:hover {
+            text-decoration: underline;
+            color: $color-grey-dark;
+            cursor: pointer;
+        }
+        &-section {
+            border-top: 1px solid #d0d0d0;
+            margin-top: 1rem;
+        }
+        &-card {
+            display: flex;
+            padding-top: 1rem;
+        }
+
+        &-userImage {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        &-userName {
+            font-size: 1.3rem;
+            color: $color-grey-darker;
+        }
+
+        &-userProf {
+            font-size: 1.2rem;
+            color: $color-grey-light-1;
+            font-weight: 300;
+        }
+
+        &-comment {
+            background-color: $color-grey-light;
+            font-size: 1.2rem;
+            color: #303030;
+            padding: 0.7rem 1rem;
+            border-radius: 50px;
+            margin-top: 0.6rem;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+
+        .b-button {
+            @include defaultBtn;
+        }
+    }
+
+    &__input {
+        flex: 1 1;
+        background-color: #f5f3f4;
+        padding: 1.2rem;
+        border-radius: 7px;
+        border: none;
+        transition: all 0.2s;
+
+        &:focus {
+            outline: none;
+            border: 1px solid #e7e7e7;
+            box-shadow: 2px 6px 7px rgba(0, 0, 0, 0.03);
+            transform: translateY(-2px);
+        }
+    }
+}
+
+.l-loading {
+    &__block {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        &--error {
+            color: red;
+            font-size: 1.4rem;
+
+            button {
+                border: none;
+                background: none;
+                color: $color-primary;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__progress.MuiCircularProgress-colorPrimary {
+        color: $color-primary;
+    }
+}
