@@ -1,0 +1,19 @@
+@import '../../../sass/abstract/variables';
+@import '../../../sass/components/input';
+@import '../../../sass/utils/page';
+
+.p-feedPage {
+    background-color: $color-grey-lighter;
+    flex-grow: 1;
+    padding-top: 4rem;
+}
+
+.MuiPaper-root.p-page__card {
+    box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-none {
+    @media only screen and (max-width: 600px) {
+        display: none;
+    }
+}

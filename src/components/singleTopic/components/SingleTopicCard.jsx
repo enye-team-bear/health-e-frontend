@@ -16,7 +16,7 @@ import { pageData } from '../constants';
 const renderTop = () => (
     <div className="p-profileOverview__top">
         <div className="p-singleTopic__heading">
-            What is the most predominante disease which mostly affects Nigerian
+            What is the most predominate disease which mostly affects Nigerian
             Children
         </div>
     </div>
@@ -80,7 +80,7 @@ const renderComments = () =>
                 <div className="f-postCard__comment-userName">
                     {pageData.topicName}
                 </div>
-                <div className="f-postCard__comment-userProf">{'medical'}</div>
+                <div className="f-postCard__comment-userProf">medical</div>
                 <div className="f-postCard__comment-comment">
                     testing comment system available
                 </div>
@@ -104,13 +104,11 @@ const renderBody = () => (
     </div>
 );
 
-const SingleTopicTag = () => {
-    return (
-        <Card className="p-page__card p-profileOverview">
-            {renderTop()}
-            {renderBody()}
-        </Card>
+const SingleTopicTag = () => (
+    <Card className="p-page__card p-profileOverview">
+        {renderTop()}
+        {renderBody()}
+    </Card>
     );
-};
 
 export default SingleTopicTag;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Feed } from '../../components/feed';
+import { Post } from '../../components/post';
 import { Signup } from '../../components/signup';
 import { Signin } from '../../components/signin';
 import { Profile } from '../../components/profile';
@@ -20,6 +21,7 @@ const Routes = () => (
             <PrivateRoute path="/topics" exact component={Topics} />
             <PrivateRoute path="/feed" exact component={Feed} />
             <PrivateRoute path="/profile" exact component={Profile} />
+            <PrivateRoute path="/post/:postId" exact component={Post} />
             <PrivateRoute path="/" exact component={Feed} />
             <NoMatch />
         </Switch>
