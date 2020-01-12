@@ -16,7 +16,11 @@ const Routes = () => (
             <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Signin} />
             <Route path="/forgotPassword" component={ForgotPassword} />
-            <PrivateRoute path="/singleTopic" exact component={SingleTopic} />
+            <PrivateRoute
+                path="/singleTopic/:topicId"
+                exact
+                component={SingleTopic}
+            />
             <PrivateRoute path="/topics" exact component={Topics} />
             <PrivateRoute path="/feed" exact component={Feed} />
             <PrivateRoute path="/profile" exact component={Profile} />

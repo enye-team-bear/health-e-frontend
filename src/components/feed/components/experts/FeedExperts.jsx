@@ -12,7 +12,7 @@ const renderExperts = () => {
     const experts = [];
     for (let i = 0; i < 4; i++) {
         experts.push(
-            <div className="e-feedExperts__expertBlock">
+            <div className="e-feedExperts__expertBlock" key={i}>
                 <Avatar src={defaultImg} />
                 <div className="e-feedExperts__details">
                     <div className="e-feedExperts__name">
@@ -22,7 +22,7 @@ const renderExperts = () => {
                         {pageData.expertProf}
                     </div>
                 </div>
-            </div>
+            </div>,
         );
     }
     return experts;

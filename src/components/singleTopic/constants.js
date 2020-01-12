@@ -8,7 +8,7 @@ const pageData = {
 		'What is the most predominante disease which mostly affects Nigerian Children',
 	topicContent:
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem	ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-	topicDiscuss: '20 people are in this discussion',
+	topicDiscuss: ' people are in this discussion',
 	zero: '0',
 	zeroComment: '0 comments',
 	topicName: 'Samuel Danielson',
