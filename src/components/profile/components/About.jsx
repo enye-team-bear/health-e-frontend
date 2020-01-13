@@ -12,15 +12,15 @@ import phoneIcon from '../../../assets/img/phoneIcon.svg';
  *
  * @function {*} renderFirstBlock
  */
-const renderFirstBlock = (email) => (
+const renderFirstBlock = (email, profession) => (
     <div className="p-profileAbout__block">
         <div className="p-profileAbout__item">
             <div className="p-profileAbout__img --text">{pageData.abbrev}</div>
             <div className="p-profileAbout__info">
-                <div className="p-profileAbout__sub">{pageData.profession}</div>
-                <div className="p-profileAbout__main">
+                <div className="p-profileAbout__sub">{profession}</div>
+                {/* <div className="p-profileAbout__main">
                     {pageData.workLocation}
-                </div>
+                </div> */}
             </div>
         </div>
         <div className="p-profileAbout__item">
@@ -37,7 +37,7 @@ const renderFirstBlock = (email) => (
  *
  * @function {*} renderSecondBlock
  */
-const renderSecondBlock = (number) => (
+const renderSecondBlock = number => (
     <div className="p-profileAbout__block">
         <div className="p-profileAbout__item">
             <img src={phoneIcon} alt="phone" className="p-profileAbout__img" />
@@ -48,7 +48,7 @@ const renderSecondBlock = (number) => (
     </div>
 );
 
-const renderEditBtn = (handleModalOpen) => (
+const renderEditBtn = handleModalOpen => (
     <div className="p-profileAbout__edit">
         <img
             src={pencilIcon}
@@ -65,14 +65,14 @@ const renderEditBtn = (handleModalOpen) => (
  * @function {*} About
  */
 const About = ({ handleModalOpen, userData }) => {
-    const { email, number } = userData;
+    const { email, number, profession } = userData;
     return (
         <Card className="p-page__card p-profileAbout">
             <div className="p-profileAbout__head">
                 <h2 className="p-profileAbout__title">{pageData.aboutTxt}</h2>
             </div>
             <div className="p-profileAbout__body">
-                {renderFirstBlock(email)}
+                {renderFirstBlock(email, profession)}
                 {renderSecondBlock(number)}
                 {renderEditBtn(handleModalOpen)}
             </div>
