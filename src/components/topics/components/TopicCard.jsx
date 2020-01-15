@@ -23,7 +23,13 @@ const renderHeader = data => (
 const renderBody = data => (
     <div className="p-topics__body">
         <div className="p-topics__heading">
-            <Link to={`/singleTopic/${data.topicId}`}>{data.topic}</Link>
+            <Link
+                to={`/singleTopic/${
+                    data.topicId ? data.topicId : data.objectID
+                }`}
+            >
+                {data.topic}
+            </Link>
         </div>
         <div className="p-topics__content">{data.thread}</div>
         <div className="p-topics__discuss">{`${data.commentCount} ${pageData.topicDiscuss}`}</div>

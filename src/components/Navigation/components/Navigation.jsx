@@ -1,5 +1,7 @@
 /* eslint-disable max-lines-per-function */
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
+import useReactRouter from 'use-react-router';
+import { SearchBox } from 'react-instantsearch-dom';
 import { NavLink, Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -103,19 +105,37 @@ const renderNavMenuItems = () => (
  * @function {*} Navigation
  */
 const Navigation = () => {
+    const { history, location } = useReactRouter();
+    let searchInput;
+
+    const inputFunction = useCallback(event => {
+        if (location.pathname !== '/topics') {
+            history.push('/topics');
+        }
+    }, []);
+
+    useEffect(() => {
+        searchInput = document.getElementsByClassName('ais-SearchBox-input')[0];
+
+        if (location.pathname === '/topics') {
+            searchInput.focus();
+        }
+
+        searchInput.addEventListener('focus', inputFunction);
+        return () => {
+            searchInput.removeEventListener('focus', inputFunction);
+        };
+    }, [inputFunction]);
+
     return (
         <div style={{ flexGrow: 1 }} className="n-navigation">
             <AppBar position="static">
                 <Toolbar className="n-navigation__bar">
                     {renderNavBrand()}
-                    <form action="" className="n-navigation__form">
-                        <input
-                            type="text"
-                            className="n-navigation__input"
-                            placeholder="Search for a topic"
-                        />
-                        <div className="n-navigation__icon">{svg()}</div>
-                    </form>
+                    <SearchBox
+                        className="search-bar"
+                        translations={{ placeholder: 'Search for Topics' }}
+                    />
                     {renderNavMenuItems()}
                 </Toolbar>
             </AppBar>

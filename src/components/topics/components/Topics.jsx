@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
+import { Hits, Stats, Pagination } from 'react-instantsearch-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -10,6 +11,18 @@ import { Experts, Topics as TopicOverview } from '../../feed/components';
 import TopicCard from './TopicCard';
 import pencilIcon from '../../../assets/img/pencilWhiteIcon.svg';
 import { clearTopic } from '../actions';
+
+const Hit = ({ hit }) => <TopicCard key={hit.objectID} data={hit} />;
+const Content = () => (
+    <main>
+        <Stats />
+
+        <Hits hitComponent={Hit} />
+        <div>
+            <Pagination />
+        </div>
+    </main>
+);
 
 const renderTopics = topicsData =>
     topicsData.allTopics.map((el, i) => (
@@ -39,7 +52,8 @@ const renderGrid = (handleModalOpen, topicsData) => (
     <Grid container spacing={3}>
         <Grid item xs={12} sm={9}>
             {renderCreateTopic(handleModalOpen)}
-            {renderTopics(topicsData)}
+            <Content />
+            {/* {renderTopics(topicsData)} */}
         </Grid>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">
@@ -68,7 +82,7 @@ const Topics = () => {
         setTopicModalOpen(false);
     };
     return (
-        <div>
+        <Fragment>
             <Navigation />
             <div className="p-feedPage">
                 <div className="p-page__center">
@@ -80,7 +94,7 @@ const Topics = () => {
                 modalOpen={topicModalOpen}
                 handleClose={handleModalClose}
             />
-        </div>
+        </Fragment>
     );
 };
 
