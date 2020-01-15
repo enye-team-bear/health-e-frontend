@@ -5,6 +5,7 @@ import { signinReducer } from './components/signin';
 import { signupReducer } from './components/signup';
 import { reducer as postReducer } from './components/feed';
 import { reducer as topicReducer } from './components/topics';
+import { reducer as profileReducer } from './components/profile';
 
 export default combineReducers({
 	auth: authReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
 	signup: signupReducer,
 	post: postReducer,
 	topic: topicReducer,
+	profile: profileReducer,
 });
