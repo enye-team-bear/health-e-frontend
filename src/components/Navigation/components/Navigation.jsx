@@ -1,16 +1,24 @@
 /* eslint-disable max-lines-per-function */
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { SearchBox } from 'react-instantsearch-dom';
 import { NavLink, Link } from 'react-router-dom';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Tooltip from '@material-ui/core/Tooltip';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ChatIcon from '@material-ui/icons/Chat';
 import { navData } from '../constants';
 import logo from '../../../assets/img/logo.png';
 
@@ -49,9 +57,28 @@ const svg = () => (
  * @function {*} badgeIcons
  * @return {Component} react component
  */
-const badgeIcons = (ariaLabel, badgeContent, Component, key) => (
-    <IconButton aria-label={ariaLabel} color="inherit" key={key}>
-        <Badge badgeContent={badgeContent} color="secondary">
+//
+const badgeIcons = (
+    ariaLabel,
+    badgeContent,
+    Component,
+    key,
+    handleClick,
+    unReadNotifications,
+) => (
+    <IconButton
+        aria-label={ariaLabel}
+        aria-haspopup
+        color="inherit"
+        key={key}
+        onClick={handleClick}
+    >
+        <Badge
+            badgeContent={
+                ariaLabel.includes('notifications') ? unReadNotifications : 0
+            }
+            color="secondary"
+        >
             {Component}
         </Badge>
     </IconButton>
@@ -78,25 +105,73 @@ const renderNavBrand = () => (
  *
  * @function {*} renderNavMenuItems
  */
-const renderNavMenuItems = () => (
+const renderNavMenuItems = (handleClick, unReadNotifications) => (
     <div className="n-navigation__items">
         <NavLink to="/topics" className="n-navigation_link">
             {navData.topicText}
         </NavLink>
         {iconButtons.map((el, i) =>
-            badgeIcons(el.ariaLabel, el.badgeContent, el.Component, i),
+            badgeIcons(
+                el.ariaLabel,
+                el.badgeContent,
+                el.Component,
+                i,
+                handleClick,
+                unReadNotifications,
+            ),
         )}
         <NavLink to="/profile">
             <IconButton
                 edge="end"
                 aria-label="account of current user"
-                aria-haspopup="true"
                 color="inherit"
             >
                 <AccountCircle />
             </IconButton>
         </NavLink>
     </div>
+);
+
+const renderMenuItems = (el, handleClose, currentUser) => {
+    dayjs.extend(relativeTime);
+    const icon =
+        el.type === 'like' ? (
+            <FavoriteIcon color="primary" style={{ marginRight: 10 }} />
+        ) : (
+            <ChatIcon color="primary" style={{ marginRight: 10 }} />
+        );
+    const sender = el.sender === currentUser.userName ? 'You' : el.sender;
+    const reciever =
+        el.recipient === currentUser.userName ? 'your' : el.recipient;
+    const type = el.type === 'like' ? 'liked' : 'commented on';
+    const notificationType = el.postId ? 'post' : 'topic';
+    const time = dayjs(el.createdAt).fromNow();
+    return (
+        <MenuItem onClick={handleClose}>
+            {icon}
+            <Typography
+                component={Link}
+                color="default"
+                variant="body1"
+                to={`/singleTopic/${el.topicId}`}
+                className="n-navigation__menuItem"
+            >
+                {`${sender} ${type} ${reciever} ${notificationType} ${time}`}
+            </Typography>
+        </MenuItem>
+    );
+};
+
+const renderMenu = (notifications, anchorEl, handleClose, currentUser) => (
+    <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+    >
+        {notifications.map(el => renderMenuItems(el, handleClose, currentUser))}
+    </Menu>
 );
 
 /**
@@ -106,9 +181,26 @@ const renderNavMenuItems = () => (
  */
 const Navigation = () => {
     const { history, location } = useReactRouter();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const notifyState = useSelector(state => state.notification);
+    const currentUser = useSelector(state => state.auth.userData);
+    const { notifications } = notifyState;
+
+    const unReadNotifications = notifyState.notifications.filter(
+        el => el.read === false,
+    ).length;
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     let searchInput;
 
-    const inputFunction = useCallback(event => {
+    const inputFunction = useCallback(() => {
         if (location.pathname !== '/topics') {
             history.push('/topics');
         }
@@ -136,7 +228,13 @@ const Navigation = () => {
                         className="search-bar"
                         translations={{ placeholder: 'Search for Topics' }}
                     />
-                    {renderNavMenuItems()}
+                    {renderNavMenuItems(handleClick, unReadNotifications)}
+                    {renderMenu(
+                        notifications,
+                        anchorEl,
+                        handleClose,
+                        currentUser,
+                    )}
                 </Toolbar>
             </AppBar>
         </div>

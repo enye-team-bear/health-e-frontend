@@ -15,25 +15,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// const firebaseDB = firebase.database();
-// const firebaseTopics = firebaseDB.ref('topics');
-
-// export { firebase, firebaseDB, firebaseTopics };
-
 const firebaseDB = firebase.firestore();
 const firebaseTopics = firebaseDB.collection('topics');
+const firebaseNotifications = firebaseDB.collection('notifications');
 
-// const getMarker = async () => {
-// 	let info;
-
-// 	const snapshot = await firebase
-// 		.firestore()
-// 		.collection('topics')
-// 		.get();
-
-// 	info = snapshot.docs.map(doc => doc.data());
-// 	console.lgo(info);
-// };
-// getMarker();
-
-export { firebase, firebaseDB, firebaseTopics };
+export { firebase, firebaseDB, firebaseTopics, firebaseNotifications };

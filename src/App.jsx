@@ -7,6 +7,7 @@ import { InstantSearch } from 'react-instantsearch-dom';
 import store from './store';
 import setAuthToken from './components/auth/utils/setAuthToken';
 import { AUTH_USER, AUTH_LOGOUT_USER } from './components/auth/authActionTypes';
+import { getUserData } from './components/auth/actions';
 import { Routes } from './router/components';
 // general style
 import 'react-notifications-component/dist/theme.css';
@@ -22,6 +23,7 @@ if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwtDecode(localStorage.jwtToken);
     store.dispatch({ type: AUTH_USER, payload: decoded });
+    store.dispatch(getUserData());
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
         console.log('expired');
