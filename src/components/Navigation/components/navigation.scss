@@ -171,6 +171,16 @@
         width: 4rem;
     }
 
+    &__menuItem {
+        text-decoration: none;
+        color: $color-grey-darker;
+
+        &.--new {
+            color: $color-primary;
+            margin-left: 1rem;
+        }
+    }
+
     a {
         .MuiIconButton-colorInherit {
             color: #fff;
