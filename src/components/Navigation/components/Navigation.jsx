@@ -146,6 +146,8 @@ const renderMenuItems = (el, handleClose, currentUser) => {
     const type = el.type === 'like' ? 'liked' : 'commented on';
     const notificationType = el.postId ? 'post' : 'topic';
     const time = dayjs(el.createdAt).fromNow();
+    const isTopic = el.postId ? 'singlePost' : 'singleTopic';
+    const id = el.postId ? el.postId : el.topicId;
     return (
         <MenuItem onClick={handleClose}>
             {icon}
@@ -153,7 +155,7 @@ const renderMenuItems = (el, handleClose, currentUser) => {
                 component={Link}
                 color="default"
                 variant="body1"
-                to={`/singleTopic/${el.topicId}`}
+                to={`/${isTopic}/${id}`}
                 className="n-navigation__menuItem"
             >
                 {`${sender} ${type} ${reciever} ${notificationType} ${time}`}

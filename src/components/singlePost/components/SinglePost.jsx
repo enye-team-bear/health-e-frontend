@@ -6,29 +6,29 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import { Navigation } from '../../Navigation';
 import { Experts } from '../../feed/components';
-import SingleTopicCard from './SingleTopicCard';
-import { actions } from '../../topics';
+import SinglePostCard from './SinglePostCard';
+import { actions } from '../../feed';
 
-const renderTopicCard = topicsData => {
-    let topic;
+const renderPostCard = postData => {
+    let post;
 
-    if (topicsData.topic && !topicsData.error) {
-        topic = <SingleTopicCard data={topicsData.topic} />;
+    if (postData.singlePost && !postData.error) {
+        post = <SinglePostCard data={postData.singlePost} />;
     }
 
-    if (topicsData.topicLoading) {
-        topic = (
+    if (postData.singlePostLoading) {
+        post = (
             <div className="l-loading__block">
                 <CircularProgress className="l-loading__progress" />
             </div>
         );
     }
 
-    if (topicsData.error) {
-        topic = <div>Data unavailable</div>;
+    if (postData.error) {
+        post = <div>Data unavailable</div>;
     }
 
-    return topic;
+    return post;
 };
 
 /**
@@ -36,10 +36,10 @@ const renderTopicCard = topicsData => {
  *
  * @function {*} renderGrid
  */
-const renderGrid = topicsData => (
+const renderGrid = postData => (
     <Grid container spacing={3}>
         <Grid item xs={12} sm={9}>
-            {renderTopicCard(topicsData)}
+            {renderPostCard(postData)}
         </Grid>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">
@@ -49,27 +49,27 @@ const renderGrid = topicsData => (
     </Grid>
 );
 
-const SibgleTopic = props => {
+const SinglePost = props => {
     const dispatch = useDispatch();
-    const topicsData = useSelector(state => state.topic);
+    const postData = useSelector(state => state.post);
     let prevId = '';
-
     useEffect(() => {
-        if (props.match.params.topicId) {
-            if (props.match.params.topicId !== prevId) {
-                dispatch(actions.getTopic(props.match.params.topicId));
-                prevId = props.match.params.topicId;
+        if (props.match.params.postId) {
+            if (props.match.params.postId !== prevId) {
+                dispatch(actions.getPost(props.match.params.postId));
+                prevId = props.match.params.postId;
             }
         }
-    }, [props.match.params.topicId]);
+    }, [props.match.params.postId]);
+
     return (
         <div>
             <Navigation />
             <div className="p-feedPage">
-                <div className="p-page__center">{renderGrid(topicsData)}</div>
+                <div className="p-page__center">{renderGrid(postData)}</div>
             </div>
         </div>
     );
 };
 
-export default SibgleTopic;
+export default SinglePost;

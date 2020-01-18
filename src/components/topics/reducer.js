@@ -14,7 +14,7 @@ import {
 const INITIAL_STATE = {
 	allTopics: [],
 	topic: null,
-	error: '',
+	error: null,
 	posting: false,
 	topicLoading: false,
 };
@@ -31,6 +31,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				posting: false,
+				error: null,
 			};
 		}
 		case NEW_TOPIC_FAILED: {
@@ -44,20 +45,22 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				allTopics: action.payload,
-				error: '',
+				error: null,
 			};
 		}
 		case GET_TOPIC: {
 			return {
 				...state,
 				topicLoading: true,
+				error: null,
 			};
 		}
 		case GET_TOPIC_SUCCESS: {
 			return {
 				...state,
 				topic: action.payload,
-				topicLoading: true,
+				topicLoading: false,
+				error: null,
 			};
 		}
 		case GET_TOPIC_FAILED: {
@@ -71,6 +74,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				topic: null,
+				error: null,
 			};
 		}
 		case LIKE_TOPIC_SUCCESS: {
@@ -79,6 +83,7 @@ export default (state = INITIAL_STATE, action) => {
 				topic: {
 					...state.topic,
 					likeCount: state.topic.likeCount + 1,
+					error: null,
 				},
 			};
 		}
