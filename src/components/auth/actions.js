@@ -2,9 +2,11 @@ import * as actionTypes from './authActionTypes';
 
 export const getUserData = () => ({ type: actionTypes.GET_USER_DATA });
 
-export const setUserData = (data) => ({
+export const setUserData = data => ({
 	type: actionTypes.SET_USER_DATA,
 	payload: data,
 });
 
 export const clearLoading = () => ({ type: actionTypes.CLEAR_LOADING });
+
+export const logoutUser = () => ({ type: actionTypes.AUTH_LOGOUT_USER });
