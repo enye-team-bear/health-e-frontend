@@ -10,13 +10,19 @@ import {
 	SET_LIKE_POST,
 	SET_COMMENT_POST,
 	UPDATE_SINGLE_COMMENT,
+	GET_POST,
+	GET_POST_SUCCESS,
+	GET_POST_FAILED,
+	CLEAR_POST,
 } from './actionTypes';
 
 const INITIAL_STATE = {
 	allPosts: [],
+	singlePost: null,
 	error: '',
 	posting: false,
 	postLoading: false,
+	singlePostLoading: false,
 };
 
 /**
@@ -108,6 +114,35 @@ export default (state = INITIAL_STATE, action) => {
 					action.payload,
 					...state.allPosts.slice(index + 1),
 				],
+			};
+		}
+		case GET_POST: {
+			return {
+				...state,
+				singlePostLoading: true,
+				error: null,
+			};
+		}
+		case GET_POST_SUCCESS: {
+			return {
+				...state,
+				singlePost: action.payload,
+				singlePostLoading: false,
+				error: null,
+			};
+		}
+		case GET_POST_FAILED: {
+			return {
+				...state,
+				singlePostLoading: false,
+				error: action.payload,
+			};
+		}
+		case CLEAR_POST: {
+			return {
+				...state,
+				post: {},
+				error: null,
 			};
 		}
 		default:
