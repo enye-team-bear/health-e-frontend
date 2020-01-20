@@ -3,8 +3,21 @@ import { firebaseNotifications } from '../../firebaseConfig';
 
 import { takeEvery, put, fork, take, select } from 'redux-saga/effects';
 import { eventChannel as EventChannel } from 'redux-saga';
+import { READ_NOTIFICATION } from './actionTypes';
 import { refreshNotifications } from './actions';
 import { getUserData } from '../auth/actions';
+import { readNot } from './services';
+
+function* readNotification(data) {
+	try {
+		const res = yield readNot(data.payload);
+		if (res.data.status === 'success') {
+			console.log('notification read');
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
 
 function* startListener() {
 	const channel = new EventChannel(emiter => {
@@ -40,5 +53,6 @@ function* startListener() {
 }
 
 export default function* root() {
+	yield takeEvery(READ_NOTIFICATION, readNotification);
 	yield fork(startListener);
 }

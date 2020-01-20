@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import React, { useEffect, useCallback, Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { SearchBox } from 'react-instantsearch-dom';
 import { NavLink, Link } from 'react-router-dom';
@@ -19,8 +19,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatIcon from '@material-ui/icons/Chat';
+import PowerIcon from '@material-ui/icons/PowerSettingsNewOutlined';
 import { navData } from '../constants';
 import logo from '../../../assets/img/logo.png';
+import { actions as authActions } from '../../auth';
+import { readNotification } from '../actions';
+
+const { logoutUser } = authActions;
 
 const iconButtons = [
     {
@@ -105,7 +110,7 @@ const renderNavBrand = () => (
  *
  * @function {*} renderNavMenuItems
  */
-const renderNavMenuItems = (handleClick, unReadNotifications) => (
+const renderNavMenuItems = (handleClick, unReadNotifications, dispatch) => (
     <div className="n-navigation__items">
         <NavLink to="/topics" className="n-navigation_link">
             {navData.topicText}
@@ -129,10 +134,13 @@ const renderNavMenuItems = (handleClick, unReadNotifications) => (
                 <AccountCircle />
             </IconButton>
         </NavLink>
+        <IconButton aria-label="account of current user" color="inherit">
+            <PowerIcon onClick={() => dispatch(logoutUser())} />
+        </IconButton>
     </div>
 );
 
-const renderMenuItems = (el, handleClose, currentUser) => {
+const renderMenuItems = (el, handleClose, currentUser, dispatch) => {
     dayjs.extend(relativeTime);
     const icon =
         el.type === 'like' ? (
@@ -157,14 +165,32 @@ const renderMenuItems = (el, handleClose, currentUser) => {
                 variant="body1"
                 to={`/${isTopic}/${id}`}
                 className="n-navigation__menuItem"
+                onClick={() => dispatch(readNotification(el.notificationId))}
             >
                 {`${sender} ${type} ${reciever} ${notificationType} ${time}`}
             </Typography>
+            {!el.read ? (
+                <Typography
+                    color="default"
+                    variant="body1"
+                    className="n-navigation__menuItem --new"
+                >
+                    unread
+                </Typography>
+            ) : (
+                ''
+            )}
         </MenuItem>
     );
 };
 
-const renderMenu = (notifications, anchorEl, handleClose, currentUser) => (
+const renderMenu = (
+    notifications,
+    anchorEl,
+    handleClose,
+    currentUser,
+    dispatch,
+) => (
     <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -172,7 +198,9 @@ const renderMenu = (notifications, anchorEl, handleClose, currentUser) => (
         open={Boolean(anchorEl)}
         onClose={handleClose}
     >
-        {notifications.map(el => renderMenuItems(el, handleClose, currentUser))}
+        {notifications.map(el =>
+            renderMenuItems(el, handleClose, currentUser, dispatch),
+        )}
     </Menu>
 );
 
@@ -184,6 +212,7 @@ const renderMenu = (notifications, anchorEl, handleClose, currentUser) => (
 const Navigation = () => {
     const { history, location } = useReactRouter();
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch();
 
     const notifyState = useSelector(state => state.notification);
     const currentUser = useSelector(state => state.auth.userData);
@@ -230,12 +259,17 @@ const Navigation = () => {
                         className="search-bar"
                         translations={{ placeholder: 'Search for Topics' }}
                     />
-                    {renderNavMenuItems(handleClick, unReadNotifications)}
+                    {renderNavMenuItems(
+                        handleClick,
+                        unReadNotifications,
+                        dispatch,
+                    )}
                     {renderMenu(
                         notifications,
                         anchorEl,
                         handleClose,
                         currentUser,
+                        dispatch,
                     )}
                 </Toolbar>
             </AppBar>

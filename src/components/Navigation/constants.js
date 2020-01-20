@@ -8,4 +8,7 @@ const navData = {
 	topicText: 'Topics',
 };
 
-export { navData };
+const NOTIFICATION_URL =
+	'https://us-central1-health-e-api.cloudfunctions.net/api/notification';
+
+export { navData, NOTIFICATION_URL };
