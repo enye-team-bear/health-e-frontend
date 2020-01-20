@@ -1,0 +1,100 @@
+@import '../../../sass/abstract/variables';
+@import '../../../sass/abstract/mixin';
+@import '../../../sass/components/input';
+@import '../../../sass/utils/page';
+
+.c-chat {
+    &__container {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__box {
+        width: 98%;
+        max-width: 1100px;
+        margin: 3rem auto;
+        border: 1px solid #d0d0d0;
+        overflow: hidden;
+        display: flex;
+    }
+
+    &__inbox {
+        flex: 0 0 40%;
+        border-right: 1px solid #d0d0d0;
+        background: #f8f8f8;
+    }
+
+    &__inboxHead {
+        font-size: 1.5rem;
+        padding: 1rem 1rem;
+        color: $color-primary;
+        font-weight: 500;
+        border-bottom: 1px solid #d0d0d0;
+    }
+
+    &__inboxChats {
+        height: 550px;
+        overflow-y: scroll;
+    }
+
+    &__inboxChatList {
+        border-bottom: 1px solid #c4c4c4;
+        margin: 0;
+        padding: 18px 16px 10px;
+        display: flex;
+
+        &.--chatActive {
+            background-color: #ebebeb;
+        }
+    }
+
+    &__userImage {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+    }
+
+    &__info {
+        margin-left: 1.2rem;
+    }
+
+    &__userName {
+        font-size: 1.5rem;
+        color: #464646;
+        margin: 0 0 4px 0;
+    }
+
+    &__chatText {
+        font-size: 1.2rem;
+        color: #989898;
+        margin: auto;
+        font-weight: 300;
+    }
+
+    &__msgs {
+        flex: 1 1;
+    }
+
+    &__msgHead {
+        font-size: 1.4rem;
+        padding: 1rem 1rem;
+        color: #464646;
+        font-weight: 500;
+        border-bottom: 1px solid #d0d0d0;
+    }
+
+    &__msgBody {
+        margin-bottom: 0;
+        height: 100%;
+    }
+
+    &__chatMsgs {
+        height: 470px;
+        overflow-y: scroll;
+    }
+
+    &__chatSend {
+        padding: 1.6rem;
+        margin-top: auto;
+    }
+}
