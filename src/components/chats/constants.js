@@ -10,6 +10,8 @@ const pageData = {
 	recentText: 'Recents',
 	messages: 'messages',
 	send: 'send',
+	time: '11:01 AM | June 9',
+	currentUser: 'You',
 };
 
 export { pageData };
