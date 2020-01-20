@@ -9,6 +9,7 @@ import { ForgotPassword } from '../../components/forgotPassword';
 import { Topics } from '../../components/topics';
 import { SingleTopic } from '../../components/singleTopic';
 import { SinglePost } from '../../components/singlePost';
+import { Chats } from '../../components/chats';
 import NoMatch from './NoMatch';
 import PrivateRoute from '../authRoutes/PrivateRoute';
 
@@ -18,6 +19,7 @@ const Routes = () => (
             <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Signin} />
             <Route path="/forgotPassword" component={ForgotPassword} />
+            <PrivateRoute path="/chats" exact component={Chats} />
             <PrivateRoute
                 path="/singlePost/:postId"
                 exact
