@@ -70,13 +70,20 @@ const badgeIcons = (
     key,
     handleClick,
     unReadNotifications,
+    history,
 ) => (
     <IconButton
         aria-label={ariaLabel}
         aria-haspopup
         color="inherit"
         key={key}
-        onClick={handleClick}
+        onClick={e => {
+            if (ariaLabel.includes('notifications')) {
+                handleClick(e);
+            } else {
+                history.push('/chats');
+            }
+        }}
     >
         <Badge
             badgeContent={
@@ -110,7 +117,12 @@ const renderNavBrand = () => (
  *
  * @function {*} renderNavMenuItems
  */
-const renderNavMenuItems = (handleClick, unReadNotifications, dispatch) => (
+const renderNavMenuItems = (
+    handleClick,
+    unReadNotifications,
+    dispatch,
+    history,
+) => (
     <div className="n-navigation__items">
         <NavLink to="/topics" className="n-navigation_link">
             {navData.topicText}
@@ -123,6 +135,7 @@ const renderNavMenuItems = (handleClick, unReadNotifications, dispatch) => (
                 i,
                 handleClick,
                 unReadNotifications,
+                history,
             ),
         )}
         <NavLink to="/profile">
@@ -263,6 +276,7 @@ const Navigation = () => {
                         handleClick,
                         unReadNotifications,
                         dispatch,
+                        history,
                     )}
                     {renderMenu(
                         notifications,

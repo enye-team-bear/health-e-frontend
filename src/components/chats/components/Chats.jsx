@@ -1,9 +1,26 @@
 /* eslint-disable max-lines-per-function */
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { Navigation } from '../../Navigation';
 import userImg from '../../../assets/img/profile2.png';
 import { pageData } from '../constants';
+
+const renderChatBubbles = () =>
+    new Array(20).fill(10).map((el, i) => (
+        <div className="c-chat__msgBlock" key={i}>
+            <div className={`c-chat__${i % 2 === 0 ? 'msgRight' : 'msgLeft'}`}>
+                <div className="c-chat__chatBlock">
+                    <div className="c-chat__user">
+                        {i % 2 === 0 ? pageData.currentUser : pageData.userName}
+                    </div>
+                    <div className="c-chat__chatBubble">
+                        {pageData.chatText}
+                    </div>
+                    <div className="c-chat__time">{pageData.time}</div>
+                </div>
+            </div>
+        </div>
+    ));
 
 const renderChatList = () =>
     new Array(20).fill(10).map((el, i) => (
@@ -51,13 +68,19 @@ const renderChatMsgSection = () => (
     <div className="c-chat__msgs">
         <div className="c-chat__msgHead">{pageData.userName}</div>
         <div className="c-chat__msgBody">
-            <div className="c-chat__chatMsgs">{pageData.messages}</div>
+            <div className="c-chat__chatMsgs" id="chatMsgs">
+                <div className="c-chat__msgBox">{renderChatBubbles()}</div>
+            </div>
             {renderChatSend()}
         </div>
     </div>
 );
 
 const Chats = () => {
+    useEffect(() => {
+        const element = document.getElementById('chatMsgs');
+        element.scrollTop = element.scrollHeight;
+    }, []);
     return (
         <Fragment>
             <Navigation />

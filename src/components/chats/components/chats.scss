@@ -42,8 +42,11 @@
         margin: 0;
         padding: 18px 16px 10px;
         display: flex;
+        cursor: pointer;
+        transition: all 0.2s;
 
-        &.--chatActive {
+        &.--chatActive,
+        &:hover {
             background-color: #ebebeb;
         }
     }
@@ -91,10 +94,79 @@
     &__chatMsgs {
         height: 470px;
         overflow-y: scroll;
+        display: flex;
     }
 
     &__chatSend {
         padding: 1.6rem;
         margin-top: auto;
+    }
+
+    &__msgBox {
+        width: 100%;
+        padding: 1.6em;
+        margin-top: auto;
+    }
+
+    &__msgBlock {
+        width: 100%;
+        display: block;
+    }
+
+    &__msgRight {
+        display: flex;
+        justify-content: flex-end;
+
+        .c-chat__chatBubble {
+            background-color: $color-primary;
+            color: $color-white;
+        }
+
+        .c-chat__user {
+            align-self: flex-end;
+        }
+    }
+
+    &__msgLeft {
+        display: flex;
+        justify-content: flex-start;
+
+        .c-chat__chatBubble {
+            background-color: #ebebeb;
+            color: #646464;
+        }
+
+        .c-chat__user {
+            align-self: flex-start;
+        }
+
+        .c-chat__time {
+            align-self: flex-end;
+        }
+    }
+
+    &__chatBlock {
+        max-width: 70%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__chatBubble {
+        padding: 1rem;
+        border-radius: 0.3rem;
+        font-size: 1.4rem;
+        font-weight: 300;
+    }
+
+    &__time {
+        color: #747474;
+        font-size: 1.3rem;
+        font-weight: 100;
+    }
+
+    &__user {
+        color: #747474;
+        font-size: 1.4rem;
+        font-weight: 100;
     }
 }
