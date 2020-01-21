@@ -10,12 +10,13 @@ import Button from '@material-ui/core/Button';
 import profileImg from '../../../../assets/img/profile2.png';
 import postImg from '../../../../assets/img/postImg1.png';
 import heartImg from '../../../../assets/img/heart.svg';
+import emptyHeartImg from '../../../../assets/img/heart-empty.png';
 import commentImg from '../../../../assets/img/comment.svg';
 import sendIcon from '../../../../assets/img/sendIcon.svg';
 import { pageData } from '../../constants';
-import { likeSinglePost } from '../../actions';
+import { likeSinglePost , commentPost, getComment } from '../../actions';
 import { useCommentInput } from '../../states';
-import { commentPost, getComment } from '../../actions';
+
 import timeConverter from '../../utils/timeConverter';
 
 const handleCommentSubmit = (e, body, id, resetState, dispatch) => {
@@ -64,20 +65,44 @@ const renderPostHead = postData => {
     );
 };
 
-const singleComment = (data, key) => (
-    <div className="f-postCard__comment-card" key={key}>
-        <img
-            src={data.userImage ? data.userImage : profileImg}
-            alt="user"
-            className="f-postCard__comment-userImage"
-        />
-        <div className="f-postCard__comment-right">
-            <div className="f-postCard__comment-userName">{data.userName}</div>
-            <div className="f-postCard__comment-userProf">{'medical'}</div>
-            <div className="f-postCard__comment-comment">{data.body}</div>
+const singleComment = (data, dispatch, key) => {
+    const postTime = timeConverter(data.createdAt);
+    // const id = data.id ? data.id : data.postId;
+    console.log(data);
+    return (
+        <div className="f-postCard__comment-box" key={key}>
+            <div className="f-postCard__head" key={key}>
+                <div className="f-postCard__left">
+                    <img
+                        src={data.userImage ? data.userImage : profileImg}
+                        alt="user"
+                        className="f-postCard__comment-userImage"
+                    />
+                    <div className="f-postCard__comment-userName">
+                        <p className="f-postCard__userName">{data.userName}</p>
+                        <p className="f-postCard__userProfession">Medical Personnel</p>
+                    </div>
+                
+                </div>
+                <div className="f-postCard__right">
+                    <div className="f-postCard__time">{postTime}</div>
+                </div>
+            </div>
+            <div className="f-postCard__comment-right">
+                <div className="f-postCard__comment-comment">{data.body}</div>
+            </div>
+            <div className="f-postCard__feedback">
+                <div className="f-postCard__like">
+                    <img
+                        src={emptyHeartImg}
+                        alt=""
+                    />
+                    <span />
+                </div>
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 /**
  * function used to render post body section
@@ -114,7 +139,7 @@ const renderPostBody = (postData, dispatch) => {
             {postData.comments ? (
                 <div className="f-postCard__comment-section">
                     {postData.comments.map((data, key) =>
-                        singleComment(data, key),
+                        singleComment(data, dispatch, key)
                     )}
                 </div>
             ) : null}
@@ -132,7 +157,7 @@ const renderPostBottom = (
     commentText,
     postId,
     resetState,
-    dispatch,
+    dispatch
 ) => (
     <form
         className="f-postCard__bottom"
@@ -178,7 +203,7 @@ const PostCard = ({ postData }) => {
                     commentText,
                     postId,
                     resetState,
-                    dispatch,
+                    dispatch
                 )}
             </div>
         </Paper>
