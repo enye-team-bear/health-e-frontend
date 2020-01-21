@@ -1,6 +1,95 @@
 @import '../../../sass/abstract/variables';
 @import '../../../sass/components/input';
 
+.ais-SearchBox.search-bar {
+    width: 40%;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    border-radius: 5px;
+
+    @media only screen and (max-width: $bp-medium) {
+        display: none;
+    }
+}
+
+.ais-SearchBox-form {
+    position: relative;
+}
+
+.ais-SearchBox-submit {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.2);
+    right: 0;
+    top: 0;
+    height: 100%;
+    border: none;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+}
+.ais-SearchBox-reset {
+    position: absolute;
+    background-color: transparent;
+    right: 45px;
+    top: 0;
+    height: 100%;
+    border: none;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.ais-SearchBox-submitIcon {
+    fill: #fff;
+}
+
+.ais-SearchBox-input {
+    width: 90%;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 1.5rem 1rem;
+    color: var(--color-white);
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.ais-Stats {
+    font-size: 1.6rem;
+    color: $color-grey-light-1;
+    font-weight: 300;
+}
+
+.ais-Hits-list {
+    list-style: none;
+}
+
+.ais-Pagination-list {
+    display: flex;
+    justify-content: left;
+    list-style: none;
+}
+.ais-Pagination-item {
+    margin: 5px;
+    font-size: 1.8rem;
+}
+
 .n-navigation {
     &__bar {
         justify-content: space-between;
@@ -80,6 +169,16 @@
 
     &__logo {
         width: 4rem;
+    }
+
+    &__menuItem {
+        text-decoration: none;
+        color: $color-grey-darker;
+
+        &.--new {
+            color: $color-primary;
+            margin-left: 1rem;
+        }
     }
 
     a {

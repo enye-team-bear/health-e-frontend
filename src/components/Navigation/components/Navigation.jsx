@@ -1,16 +1,31 @@
 /* eslint-disable max-lines-per-function */
-import React from 'react';
+import React, { useEffect, useCallback, Fragment } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import useReactRouter from 'use-react-router';
+import { SearchBox } from 'react-instantsearch-dom';
 import { NavLink, Link } from 'react-router-dom';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Tooltip from '@material-ui/core/Tooltip';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ChatIcon from '@material-ui/icons/Chat';
+import PowerIcon from '@material-ui/icons/PowerSettingsNewOutlined';
 import { navData } from '../constants';
 import logo from '../../../assets/img/logo.png';
+import { actions as authActions } from '../../auth';
+import { readNotification } from '../actions';
+
+const { logoutUser } = authActions;
 
 const iconButtons = [
     {
@@ -47,9 +62,35 @@ const svg = () => (
  * @function {*} badgeIcons
  * @return {Component} react component
  */
-const badgeIcons = (ariaLabel, badgeContent, Component, key) => (
-    <IconButton aria-label={ariaLabel} color="inherit" key={key}>
-        <Badge badgeContent={badgeContent} color="secondary">
+//
+const badgeIcons = (
+    ariaLabel,
+    badgeContent,
+    Component,
+    key,
+    handleClick,
+    unReadNotifications,
+    history,
+) => (
+    <IconButton
+        aria-label={ariaLabel}
+        aria-haspopup
+        color="inherit"
+        key={key}
+        onClick={e => {
+            if (ariaLabel.includes('notifications')) {
+                handleClick(e);
+            } else {
+                history.push('/chats');
+            }
+        }}
+    >
+        <Badge
+            badgeContent={
+                ariaLabel.includes('notifications') ? unReadNotifications : 0
+            }
+            color="secondary"
+        >
             {Component}
         </Badge>
     </IconButton>
@@ -76,25 +117,104 @@ const renderNavBrand = () => (
  *
  * @function {*} renderNavMenuItems
  */
-const renderNavMenuItems = () => (
+const renderNavMenuItems = (
+    handleClick,
+    unReadNotifications,
+    dispatch,
+    history,
+) => (
     <div className="n-navigation__items">
         <NavLink to="/topics" className="n-navigation_link">
             {navData.topicText}
         </NavLink>
         {iconButtons.map((el, i) =>
-            badgeIcons(el.ariaLabel, el.badgeContent, el.Component, i),
+            badgeIcons(
+                el.ariaLabel,
+                el.badgeContent,
+                el.Component,
+                i,
+                handleClick,
+                unReadNotifications,
+                history,
+            ),
         )}
         <NavLink to="/profile">
             <IconButton
                 edge="end"
                 aria-label="account of current user"
-                aria-haspopup="true"
                 color="inherit"
             >
                 <AccountCircle />
             </IconButton>
         </NavLink>
+        <IconButton aria-label="account of current user" color="inherit">
+            <PowerIcon onClick={() => dispatch(logoutUser())} />
+        </IconButton>
     </div>
+);
+
+const renderMenuItems = (el, handleClose, currentUser, dispatch) => {
+    dayjs.extend(relativeTime);
+    const icon =
+        el.type === 'like' ? (
+            <FavoriteIcon color="primary" style={{ marginRight: 10 }} />
+        ) : (
+            <ChatIcon color="primary" style={{ marginRight: 10 }} />
+        );
+    const sender = el.sender === currentUser.userName ? 'You' : el.sender;
+    const reciever =
+        el.recipient === currentUser.userName ? 'your' : el.recipient;
+    const type = el.type === 'like' ? 'liked' : 'commented on';
+    const notificationType = el.postId ? 'post' : 'topic';
+    const time = dayjs(el.createdAt).fromNow();
+    const isTopic = el.postId ? 'singlePost' : 'singleTopic';
+    const id = el.postId ? el.postId : el.topicId;
+    return (
+        <MenuItem onClick={handleClose}>
+            {icon}
+            <Typography
+                component={Link}
+                color="default"
+                variant="body1"
+                to={`/${isTopic}/${id}`}
+                className="n-navigation__menuItem"
+                onClick={() => dispatch(readNotification(el.notificationId))}
+            >
+                {`${sender} ${type} ${reciever} ${notificationType} ${time}`}
+            </Typography>
+            {!el.read ? (
+                <Typography
+                    color="default"
+                    variant="body1"
+                    className="n-navigation__menuItem --new"
+                >
+                    unread
+                </Typography>
+            ) : (
+                ''
+            )}
+        </MenuItem>
+    );
+};
+
+const renderMenu = (
+    notifications,
+    anchorEl,
+    handleClose,
+    currentUser,
+    dispatch,
+) => (
+    <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+    >
+        {notifications.map(el =>
+            renderMenuItems(el, handleClose, currentUser, dispatch),
+        )}
+    </Menu>
 );
 
 /**
@@ -103,20 +223,68 @@ const renderNavMenuItems = () => (
  * @function {*} Navigation
  */
 const Navigation = () => {
+    const { history, location } = useReactRouter();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch();
+
+    const notifyState = useSelector(state => state.notification);
+    const currentUser = useSelector(state => state.auth.userData);
+    const { notifications } = notifyState;
+
+    const unReadNotifications = notifyState.notifications.filter(
+        el => el.read === false,
+    ).length;
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    let searchInput;
+
+    const inputFunction = useCallback(() => {
+        if (location.pathname !== '/topics') {
+            history.push('/topics');
+        }
+    }, []);
+
+    useEffect(() => {
+        searchInput = document.getElementsByClassName('ais-SearchBox-input')[0];
+
+        if (location.pathname === '/topics') {
+            searchInput.focus();
+        }
+
+        searchInput.addEventListener('focus', inputFunction);
+        return () => {
+            searchInput.removeEventListener('focus', inputFunction);
+        };
+    }, [inputFunction]);
+
     return (
         <div style={{ flexGrow: 1 }} className="n-navigation">
             <AppBar position="static">
                 <Toolbar className="n-navigation__bar">
                     {renderNavBrand()}
-                    <form action="" className="n-navigation__form">
-                        <input
-                            type="text"
-                            className="n-navigation__input"
-                            placeholder="Search for a topic"
-                        />
-                        <div className="n-navigation__icon">{svg()}</div>
-                    </form>
-                    {renderNavMenuItems()}
+                    <SearchBox
+                        className="search-bar"
+                        translations={{ placeholder: 'Search for Topics' }}
+                    />
+                    {renderNavMenuItems(
+                        handleClick,
+                        unReadNotifications,
+                        dispatch,
+                        history,
+                    )}
+                    {renderMenu(
+                        notifications,
+                        anchorEl,
+                        handleClose,
+                        currentUser,
+                        dispatch,
+                    )}
                 </Toolbar>
             </AppBar>
         </div>

@@ -5,6 +5,9 @@ import { sagas as signupSaga } from './components/signup';
 import { sagas as signinSaga } from './components/signin';
 import { sagas as authSaga } from './components/auth';
 import { sagas as feedSaga } from './components/feed';
+import { sagas as topicSaga } from './components/topics';
+import { sagas as profileSaga } from './components/profile';
+import { sagas as notificationSaga } from './components/Navigation';
 
 const initialState = {};
 
@@ -22,5 +25,8 @@ sagaMiddleware.run(signinSaga);
 sagaMiddleware.run(signupSaga);
 sagaMiddleware.run(authSaga);
 sagaMiddleware.run(feedSaga);
+sagaMiddleware.run(topicSaga);
+sagaMiddleware.run(profileSaga);
+sagaMiddleware.run(notificationSaga);
 
 export default store;

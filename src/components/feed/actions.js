@@ -65,3 +65,22 @@ export const updateComment = data => ({
 	type: actionTypes.UPDATE_SINGLE_COMMENT,
 	payload: data,
 });
+
+export const getPost = data => ({
+	type: actionTypes.GET_POST,
+	payload: data,
+});
+
+export const getPostSuccess = data => ({
+	type: actionTypes.GET_POST_SUCCESS,
+	payload: data,
+});
+
+export const getPostFailed = data => ({
+	type: actionTypes.GET_POST_FAILED,
+	payload: data,
+});
+
+export const clearPost = () => ({
+	type: actionTypes.CLEAR_POST,
+});
