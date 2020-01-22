@@ -1,0 +1,28 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/abstract/mixin';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.t-copyright {
+    margin: 5px;
+    font-size: 1.3rem;
+    color: $color-grey-dark;
+    line-height: 2.5rem;
+    word-wrap: none;
+    
+
+    span {
+        margin: 5px;
+
+    }
+
+    &__about {
+        cursor: pointer;
+    }
+
+    &__copy {
+        margin-top: 10px;
+
+    }
+
+}
