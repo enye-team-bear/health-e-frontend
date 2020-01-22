@@ -63,11 +63,16 @@ const NEW_POST_URL = `${DATABASE_API_URL}/new_post`;
 const ALL_POST_URL = `${DATABASE_API_URL}/posts`;
 const POST_URL = `${DATABASE_API_URL}/post`;
 
+const URL = 'https://health-e-api.web.app/';
+const ICON_SIZE = 24;
+
 export {
 	pageData,
 	topics,
 	notificationsSettings,
 	NEW_POST_URL,
 	ALL_POST_URL,
-	POST_URL
+	POST_URL,
+	URL,
+	ICON_SIZE
 };
