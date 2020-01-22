@@ -56,6 +56,10 @@
         .b-button {
             @include defaultBtn;
         }
+
+        .b-button-inactive {
+            @include defaultBtnInActive;
+        }
     }
 }
 

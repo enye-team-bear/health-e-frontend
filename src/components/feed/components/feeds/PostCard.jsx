@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable max-lines-per-function */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { store } from 'react-notifications-component';
@@ -13,9 +13,9 @@ import heartImg from '../../../../assets/img/heart.svg';
 import commentImg from '../../../../assets/img/comment.svg';
 import sendIcon from '../../../../assets/img/sendIcon.svg';
 import { pageData } from '../../constants';
-import { likeSinglePost } from '../../actions';
+import { likeSinglePost , commentPost, getComment } from '../../actions';
 import { useCommentInput } from '../../states';
-import { commentPost, getComment } from '../../actions';
+
 import timeConverter from '../../utils/timeConverter';
 
 const handleCommentSubmit = (e, body, id, resetState, dispatch) => {
@@ -73,7 +73,7 @@ const singleComment = (data, key) => (
         />
         <div className="f-postCard__comment-right">
             <div className="f-postCard__comment-userName">{data.userName}</div>
-            <div className="f-postCard__comment-userProf">{'medical'}</div>
+            <div className="f-postCard__comment-userProf">medical</div>
             <div className="f-postCard__comment-comment">{data.body}</div>
         </div>
     </div>
@@ -114,7 +114,7 @@ const renderPostBody = (postData, dispatch) => {
             {postData.comments ? (
                 <div className="f-postCard__comment-section">
                     {postData.comments.map((data, key) =>
-                        singleComment(data, key),
+                        singleComment(data, key)
                     )}
                 </div>
             ) : null}
@@ -127,31 +127,52 @@ const renderPostBody = (postData, dispatch) => {
  *
  * @function {*} renderPostBottom
  */
-const renderPostBottom = (
+const RenderPostBottom = (
     handleCommentTextChanged,
     commentText,
     postId,
     resetState,
-    dispatch,
-) => (
-    <form
-        className="f-postCard__bottom"
-        onSubmit={e =>
-            handleCommentSubmit(e, commentText, postId, resetState, dispatch)
+    dispatch
+) => {
+
+    const [show, setShow] = useState(false);
+    const setCommentButton = (e, data) => {
+        if(data.length > 1){
+            setShow(true);
+        }else{
+            setShow(false);
         }
-    >
-        <input
-            type="text"
-            className="f-postCard__input"
-            placeholder="Write a comment"
-            value={commentText}
-            onChange={handleCommentTextChanged}
-        />
-        <Button variant="contained" className="b-button" type="submit">
-            {pageData.saveText}
-        </Button>
-    </form>
-);
+        
+    };
+
+    return (
+        <form
+            className="f-postCard__bottom"
+            onSubmit={e =>
+                handleCommentSubmit(e, commentText, postId, resetState, dispatch)
+            }
+            onChange={e => setCommentButton(e, commentText)}
+        >
+            <input
+                type="text"
+                className="f-postCard__input"
+                placeholder="Write a comment"
+                value={commentText}
+                onChange={handleCommentTextChanged}
+            />
+            {show ? (
+                <Button variant="contained" className="b-button" type="submit">
+                    {pageData.saveText}
+                </Button>
+            ) : (
+                <Button variant="contained" className="b-button" disabled>
+                    {pageData.saveText}
+                </Button>
+            )}  
+            
+        </form>
+    );
+};
 
 /**
  * function used to render Post Card component
@@ -173,12 +194,12 @@ const PostCard = ({ postData }) => {
             <div className="f-postCard">
                 {renderPostHead(postData)}
                 {renderPostBody(postData, dispatch)}
-                {renderPostBottom(
+                {RenderPostBottom(
                     handleCommentTextChanged,
                     commentText,
                     postId,
                     resetState,
-                    dispatch,
+                    dispatch
                 )}
             </div>
         </Paper>
