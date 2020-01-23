@@ -7,6 +7,7 @@ import { reducer as postReducer } from './components/feed';
 import { reducer as topicReducer } from './components/topics';
 import { reducer as profileReducer } from './components/profile';
 import { reducer as notificationReducer } from './components/Navigation';
+import { reducer as chatReducer } from './components/chats';
 
 export default combineReducers({
 	auth: authReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
 	topic: topicReducer,
 	profile: profileReducer,
 	notification: notificationReducer,
+	chat: chatReducer,
 });

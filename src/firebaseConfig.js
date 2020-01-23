@@ -18,5 +18,16 @@ firebase.initializeApp(firebaseConfig);
 const firebaseDB = firebase.firestore();
 const firebaseTopics = firebaseDB.collection('topics');
 const firebaseNotifications = firebaseDB.collection('notifications');
+const firebaseRooms = firebaseDB.collection('rooms');
+const firebaseUsers = firebaseDB.collection('users');
+const firebaseMessages = firebaseDB.collection('messages');
 
-export { firebase, firebaseDB, firebaseTopics, firebaseNotifications };
+export {
+	firebase,
+	firebaseDB,
+	firebaseTopics,
+	firebaseNotifications,
+	firebaseRooms,
+	firebaseUsers,
+	firebaseMessages,
+};

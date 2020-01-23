@@ -8,6 +8,7 @@ import { sagas as feedSaga } from './components/feed';
 import { sagas as topicSaga } from './components/topics';
 import { sagas as profileSaga } from './components/profile';
 import { sagas as notificationSaga } from './components/Navigation';
+import { sagas as chatSaga } from './components/chats';
 
 const initialState = {};
 
@@ -28,5 +29,6 @@ sagaMiddleware.run(feedSaga);
 sagaMiddleware.run(topicSaga);
 sagaMiddleware.run(profileSaga);
 sagaMiddleware.run(notificationSaga);
+sagaMiddleware.run(chatSaga);
 
 export default store;
