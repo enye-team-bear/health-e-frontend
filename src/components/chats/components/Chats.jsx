@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import React, { Fragment, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { Navigation } from '../../Navigation';
 import userImg from '../../../assets/img/profile2.png';
@@ -22,29 +23,37 @@ const renderChatBubbles = () =>
         </div>
     ));
 
-const renderChatList = () =>
-    new Array(20).fill(10).map((el, i) => (
+const renderChatList = rooms =>
+    rooms.map((el, i) => (
         <div className="c-chat__inboxChatList" key={i}>
-            <img src={userImg} alt="" className="c-chat__userImage" />
+            <img
+                src={el.attributes[0].imageUrl}
+                alt=""
+                className="c-chat__userImage"
+            />
             <div className="c-chat__info">
-                <div className="c-chat__userName">{pageData.userName}</div>
+                <div className="c-chat__userName">
+                    {el.attributes[0].fullName}
+                </div>
                 <div className="c-chat__chatText">{pageData.chatText}</div>
             </div>
         </div>
     ));
 
-const renderChatLeft = () => (
+const renderChatLeft = chatState => (
     <div className="c-chat__inbox">
         <div className="c-chat__inboxHead">{pageData.recentText}</div>
         <div className="c-chat__inboxChats">
-            <div className="c-chat__inboxChatList --chatActive">
+            {/* <div className="c-chat__inboxChatList --chatActive">
                 <img src={userImg} alt="" className="c-chat__userImage" />
                 <div className="c-chat__info">
                     <div className="c-chat__userName">{pageData.userName}</div>
                     <div className="c-chat__chatText">{pageData.chatText}</div>
                 </div>
-            </div>
-            {renderChatList()}
+            </div> */}
+            {chatState.rooms.length > 0
+                ? renderChatList(chatState.rooms)
+                : null}
         </div>
     </div>
 );
@@ -81,12 +90,14 @@ const Chats = () => {
         const element = document.getElementById('chatMsgs');
         element.scrollTop = element.scrollHeight;
     }, []);
+
+    const chatState = useSelector(state => state.chat);
     return (
         <Fragment>
             <Navigation />
             <div className="c-chat__container">
                 <div className="c-chat__box">
-                    {renderChatLeft()}
+                    {renderChatLeft(chatState)}
                     {renderChatMsgSection()}
                 </div>
             </div>
