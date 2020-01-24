@@ -14,4 +14,8 @@ const pageData = {
 	currentUser: 'You',
 };
 
-export { pageData };
+const DATABASE_API_URL =
+	'https://us-central1-health-e-api.cloudfunctions.net/api';
+const MESSAGE_URL = `${DATABASE_API_URL}/message`;
+
+export { pageData, MESSAGE_URL };

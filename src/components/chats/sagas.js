@@ -4,43 +4,18 @@ import { eventChannel as EventChannel } from 'redux-saga';
 import { takeEvery, put, fork, take, select } from 'redux-saga/effects';
 import { firebaseRooms, firebaseUsers } from '../../firebaseConfig';
 
-// import { READ_NOTIFICATION } from './actionTypes';
 import { refreshRooms } from './actions';
-// import { getUserData } from '../auth/actions';
-// import { readNot } from './services';
+import { SEND_MESSAGE } from './actionTypes';
+import { formatData, sendMessage as sendMsg } from './services';
 
-// }
-
-const formatData = async (data, state) => {
-	const { user_id } = state.auth.user;
-	const userRooms = data.filter(el => {
-		if (user_id === el.participant1 || user_id === el.participant2)
-			return el;
-	});
-
-	const promises = userRooms.map(async (el, i) => {
-		const attributes = [];
-		try {
-			const snapshot = await firebaseUsers
-				.where('userId', 'in', [el.participant1, el.participant2])
-				.get();
-
-			snapshot.forEach(doc => {
-				attributes.push({
-					...doc.data(),
-					userId: doc.id,
-				});
-			});
-		} catch (err) {
-			console.log('Error getting documents', err);
-		}
-		return { ...el, attributes };
-	});
-
-	const userChats = await Promise.all(promises);
-
-	return userChats;
-};
+function* sendMessage(data) {
+	const { msg, recieverId } = data.payload;
+	try {
+		yield sendMsg(msg, recieverId);
+	} catch (err) {
+		console.log(err);
+	}
+}
 
 function* roomListener() {
 	const channel = new EventChannel(emiter => {
@@ -66,6 +41,6 @@ function* roomListener() {
 }
 
 export default function* root() {
-	// yield takeEvery(READ_NOTIFICATION, readNotification);
+	yield takeEvery(SEND_MESSAGE, sendMessage);
 	yield fork(roomListener);
 }

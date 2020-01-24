@@ -16,6 +16,7 @@
         border: 1px solid #d0d0d0;
         overflow: hidden;
         display: flex;
+        position: relative;
     }
 
     &__inbox {
@@ -160,7 +161,7 @@
 
     &__time {
         color: #747474;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         font-weight: 100;
     }
 
