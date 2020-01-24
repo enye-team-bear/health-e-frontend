@@ -7,6 +7,7 @@ import { Navigation } from '../../Navigation';
 import FeedProfile from './profile';
 import Topic from './topic';
 import SelectTopic from './select-topic';
+import Copyright from './copyright';
 import { Feeds } from './feeds';
 import { getAllPosts } from '../actions';
 import { actions as userActions } from '../../auth';
@@ -36,6 +37,9 @@ const renderGrid = userData => (
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card mobile-none">
                 <Experts />
+            </Card>
+            <Card className="p-page__card mobile-none">
+                <Copyright />
             </Card>
         </Grid>
     </Grid>

@@ -66,8 +66,8 @@ export default function SelectTopics() {
 
   return (
       <div>
-          <Button variant="contained" className="b-button" color="primary" onClick={handleClickOpen}>
-              {pageData.selectTopic}
+          <Button variant="contained" className="b-button" onClick={handleClickOpen}>
+              <span className="select-topic-text">{pageData.selectTopic}</span>
           </Button>
           
           <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
