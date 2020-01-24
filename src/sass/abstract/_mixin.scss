@@ -109,3 +109,42 @@
         }
     }
 }
+
+
+
+
+@mixin defaultBtnInActive {
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background: linear-gradient(to right, $color-primary, $color-secondary);
+    opacity: 0.5;
+    border-radius: 7px;
+    text-transform: capitalize;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    color: $color-white;
+    margin-left: 1rem;
+
+    .MuiButton-label {
+        display: flex;
+        justify-items: space-between;
+    }
+
+    &__progress {
+        color: $color-white;
+        position: absolute;
+    }
+    &:disabled,
+    &[disabled] {
+        opacity: 0.5;
+    }
+
+    img {
+        margin-left: 2rem;
+        @media only screen and (max-width: $bp-small) {
+            display: none;
+        }
+    }
+}
+

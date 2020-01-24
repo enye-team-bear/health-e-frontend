@@ -1,0 +1,24 @@
+@import '../../../../sass/abstract/variables';
+@import '../../../../sass/components/input';
+@import '../../../../sass/utils/page';
+
+.t-feedTopic {
+    text-align: left;
+
+    &__head {
+        font-weight: 500;
+        color: $color-black;
+        font-size: 1.9rem;
+    }
+
+    &__topics {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px;
+        font-size: 1.3rem;
+        color: $color-black;
+        font-weight: 300;
+        line-height: 2.5rem;
+    }
+}

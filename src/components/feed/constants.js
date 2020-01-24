@@ -17,6 +17,8 @@ const pageData = {
 	allPostText: 'All posts',
 	saveText: 'Save',
 	createNewPost: 'Create new post',
+	selectTopic: 'Select Topics of Interest.',
+	topicsOfInterest: 'Select Topics you are interested in',
 	postDefaultText:
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 	postTime: '12 minutes ago',
@@ -33,12 +35,12 @@ const pageData = {
  * @constant
  */
 const topics = [
-	'breast Cancer',
-	'malaria',
-	'child Birth',
-	'breast Cancer',
-	'malaria',
-	'child Birth',
+	'Malaria',
+	'HIV',
+	'Maternal Health',
+	'Cancer',
+	'Fractures',
+	'Brain Disorder',
 ];
 
 const notificationsSettings = {
@@ -67,5 +69,5 @@ export {
 	notificationsSettings,
 	NEW_POST_URL,
 	ALL_POST_URL,
-	POST_URL,
+	POST_URL
 };
