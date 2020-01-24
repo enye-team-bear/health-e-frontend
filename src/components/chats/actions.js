@@ -19,3 +19,9 @@ export const sendMessage = (msg, recieverId) => ({
 	type: actionTypes.SEND_MESSAGE,
 	payload: { msg, recieverId },
 });
+
+export const getUsers = () => ({ type: actionTypes.GET_USERS });
+export const getUsersSuccess = data => ({
+	type: actionTypes.GET_USERS_SUCCESS,
+	payload: data,
+});

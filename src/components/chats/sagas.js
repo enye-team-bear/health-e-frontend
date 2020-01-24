@@ -2,11 +2,22 @@
 /* eslint-disable max-lines-per-function */
 import { eventChannel as EventChannel } from 'redux-saga';
 import { takeEvery, put, fork, take, select } from 'redux-saga/effects';
-import { firebaseRooms, firebaseUsers } from '../../firebaseConfig';
+import { firebaseRooms } from '../../firebaseConfig';
 
-import { refreshRooms } from './actions';
-import { SEND_MESSAGE } from './actionTypes';
-import { formatData, sendMessage as sendMsg } from './services';
+import { refreshRooms, getUsersSuccess } from './actions';
+import { SEND_MESSAGE, GET_USERS } from './actionTypes';
+import { formatData, sendMessage as sendMsg, getAllUsers } from './services';
+
+function* getUsers() {
+	try {
+		const res = yield getAllUsers();
+		if (res.data.status === 'success') {
+			yield put(getUsersSuccess(res.data.data));
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
 
 function* sendMessage(data) {
 	const { msg, recieverId } = data.payload;
@@ -41,6 +52,7 @@ function* roomListener() {
 }
 
 export default function* root() {
+	yield takeEvery(GET_USERS, getUsers);
 	yield takeEvery(SEND_MESSAGE, sendMessage);
 	yield fork(roomListener);
 }

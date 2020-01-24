@@ -3,11 +3,12 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { Navigation } from '../../Navigation';
 import userImg from '../../../assets/img/profile2.png';
 import { pageData } from '../constants';
 import { firebaseMessages } from '../../../firebaseConfig';
-import { changeRoom, setMessages, sendMessage } from '../actions';
+import { changeRoom, setMessages, sendMessage, getUsers } from '../actions';
 
 const renderChatBubbles = (messages, userId) =>
     messages.map((el, i) => (
@@ -53,9 +54,14 @@ const renderChatList = (rooms, dispatch, userId) =>
         </div>
     ));
 
-const renderChatLeft = (chatState, dispatch, userId) => (
+const renderChatLeft = (chatState, dispatch, userId, handleUserListActive) => (
     <div className="c-chat__inbox">
-        <div className="c-chat__inboxHead">{pageData.recentText}</div>
+        <div className="c-chat__inboxHead">
+            <div>{pageData.recentText}</div>
+            <div className="c-chat__inboxNew" onClick={handleUserListActive}>
+                new
+            </div>
+        </div>
         <div className="c-chat__inboxChats">
             {/* <div className="c-chat__inboxChatList --chatActive">
                 <img src={userImg} alt="" className="c-chat__userImage" />
@@ -70,6 +76,47 @@ const renderChatLeft = (chatState, dispatch, userId) => (
         </div>
     </div>
 );
+
+const renderChatUsers = (
+    userListActive,
+    handleUserListActive,
+    dispatch,
+    users,
+) => {
+    let allUsers = (
+        <div className="l-loading__block">
+            <CircularProgress className="l-loading__progress" />
+        </div>
+    );
+
+    if (users.length > 0) {
+        allUsers = users.map(user => (
+            <div className="c-chat__userChatList" key={user.userId}>
+                <img src={user.imageUrl} alt="" className="c-chat__userImage" />
+                <div className="c-chat__info">
+                    <div className="c-chat__userName">{user.fullName}</div>
+                    <div className="c-chat__chatText">{user.email}</div>
+                </div>
+            </div>
+        ));
+    }
+    return (
+        <div
+            className={`c-chat__user ${!userListActive ? '--userActive' : ''}`}
+        >
+            <div className="c-chat__userHead">
+                <div>Users</div>
+                <div
+                    className="c-chat__userBack"
+                    onClick={handleUserListActive}
+                >
+                    Back
+                </div>
+            </div>
+            <div className="c-chat__userLists">{allUsers}</div>
+        </div>
+    );
+};
 
 const handleSubmit = (e, message, dispatch, messages, userId) => {
     e.preventDefault();
@@ -101,21 +148,35 @@ const renderChatSend = (message, handleMessage, dispatch, messages, userId) => (
 );
 
 const renderChatMsgSection = (
-    messages,
+    chatState,
     userId,
     message,
     handleMessage,
     dispatch,
+    userListActive,
+    handleUserListActive,
 ) => (
     <div className="c-chat__msgs">
         <div className="c-chat__msgHead">{pageData.userName}</div>
         <div className="c-chat__msgBody">
             <div className="c-chat__chatMsgs" id="chatMsgs">
                 <div className="c-chat__msgBox">
-                    {renderChatBubbles(messages, userId)}
+                    {renderChatBubbles(chatState.messages, userId)}
                 </div>
             </div>
-            {renderChatSend(message, handleMessage, dispatch, messages, userId)}
+            {renderChatUsers(
+                userListActive,
+                handleUserListActive,
+                dispatch,
+                chatState.users,
+            )}
+            {renderChatSend(
+                message,
+                handleMessage,
+                dispatch,
+                chatState.messages,
+                userId,
+            )}
         </div>
     </div>
 );
@@ -131,6 +192,11 @@ const Chats = () => {
         firebaseMessages.where('roomId', '==', roomId),
     );
     const [message, setMessage] = useState('');
+    const [userListActive, setUserListActive] = useState(false);
+
+    const handleUserListActive = () => {
+        setUserListActive(!userListActive);
+    };
 
     const handleMessage = e => {
         setMessage(e.target.value);
@@ -165,20 +231,30 @@ const Chats = () => {
                 prevRoomId = roomId;
             }
         }
-    }, [roomId]);
+        if (userListActive) {
+            dispatch(getUsers());
+        }
+    }, [roomId, userListActive]);
 
     return (
         <Fragment>
             <Navigation />
             <div className="c-chat__container">
                 <div className="c-chat__box">
-                    {renderChatLeft(chatState, dispatch, userId)}
+                    {renderChatLeft(
+                        chatState,
+                        dispatch,
+                        userId,
+                        handleUserListActive,
+                    )}
                     {renderChatMsgSection(
-                        chatState.messages,
+                        chatState,
                         userId,
                         message,
                         handleMessage,
                         dispatch,
+                        userListActive,
+                        handleUserListActive,
                     )}
                 </div>
             </div>
