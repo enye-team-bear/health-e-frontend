@@ -25,17 +25,73 @@
         background: #f8f8f8;
     }
 
+    &__user {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40%;
+        transition: all 0.3s;
+    }
+
+    &__user.--userActive {
+        transform: translateX(-100%);
+    }
+
     &__inboxHead {
         font-size: 1.5rem;
         padding: 1rem 1rem;
         color: $color-primary;
         font-weight: 500;
         border-bottom: 1px solid #d0d0d0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__inboxNew {
+        font-weight: 300;
+        color: $color-grey-darker;
+        font-size: 1.3rem;
+        transition: all 0.2s;
+        cursor: pointer;
+
+        &:hover {
+            color: $color-primary;
+            text-decoration: underline;
+        }
+    }
+
+    &__userHead {
+        font-size: 1.5rem;
+        padding: 1rem 1rem;
+        color: $color-white;
+        font-weight: 500;
+        border-bottom: 1px solid #d0d0d0;
+        background-color: $color-primary;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__userBack {
+        font-weight: 300;
+        color: $color-white;
+        font-size: 1.3rem;
+        transition: all 0.2s;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     &__inboxChats {
         height: 550px;
         overflow-y: scroll;
+    }
+
+    &__userLists {
+        height: 550px;
+        overflow-y: scroll;
+        background-color: $color-white;
     }
 
     &__inboxChatList {
@@ -50,6 +106,16 @@
         &:hover {
             background-color: #ebebeb;
         }
+    }
+
+    &__userChatList {
+        border-bottom: 1px solid #ebebeb;
+        margin: 0;
+        padding: 18px 16px 10px;
+        display: flex;
+        cursor: pointer;
+        transition: all 0.2s;
+        align-items: center;
     }
 
     &__userImage {

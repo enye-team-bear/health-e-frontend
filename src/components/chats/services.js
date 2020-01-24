@@ -1,11 +1,16 @@
 /* eslint-disable camelcase */
 /* eslint-disable max-lines-per-function */
 import Axios from 'axios';
-import { MESSAGE_URL } from './constants';
+import { MESSAGE_URL, USERS_URL } from './constants';
 import { firebaseUsers, firebaseMessages } from '../../firebaseConfig';
 
 export const sendMessage = async (message, recieverId) => {
 	const res = await Axios.post(`${MESSAGE_URL}/${recieverId}`, { message });
+	return res;
+};
+
+export const getAllUsers = async () => {
+	const res = await Axios.get(USERS_URL);
 	return res;
 };
 
