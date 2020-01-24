@@ -1,21 +1,36 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable max-lines-per-function */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { store } from 'react-notifications-component';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    PinterestShareButton,
+    PinterestIcon,
+    RedditShareButton,
+    RedditIcon,
+    TwitterShareButton,
+    TwitterIcon,
+    WhatsappShareButton,
+    WhatsappIcon
+} from "react-share";
+import Typography from '@material-ui/core/Typography';
+import Popover from '@material-ui/core/Popover';
 import profileImg from '../../../../assets/img/profile2.png';
 import postImg from '../../../../assets/img/postImg1.png';
 import heartImg from '../../../../assets/img/heart.svg';
-import commentImg from '../../../../assets/img/comment.svg';
+import commentImg from '../../../../assets/img/comment2.svg';
+import shareImg from '../../../../assets/img/share.svg';
 import sendIcon from '../../../../assets/img/sendIcon.svg';
-import { pageData } from '../../constants';
-import { likeSinglePost } from '../../actions';
+import { pageData, URL, ICON_SIZE } from '../../constants';
+import { likeSinglePost , commentPost, getComment } from '../../actions';
 import { useCommentInput } from '../../states';
-import { commentPost, getComment } from '../../actions';
+
 import timeConverter from '../../utils/timeConverter';
 
 const handleCommentSubmit = (e, body, id, resetState, dispatch) => {
@@ -73,7 +88,7 @@ const singleComment = (data, key) => (
         />
         <div className="f-postCard__comment-right">
             <div className="f-postCard__comment-userName">{data.userName}</div>
-            <div className="f-postCard__comment-userProf">{'medical'}</div>
+            <div className="f-postCard__comment-userProf">medical</div>
             <div className="f-postCard__comment-comment">{data.body}</div>
         </div>
     </div>
@@ -84,8 +99,21 @@ const singleComment = (data, key) => (
  *
  * @function {*} renderPostBody
  */
-const renderPostBody = (postData, dispatch) => {
+const RenderPostBody = (postData, dispatch) => {
     const id = postData.id ? postData.id : postData.postId;
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = event => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+  
+    const open = Boolean(anchorEl);
+    const popoverId = open ? 'simple-popover' : undefined;
+
     return (
         <div className="f-postCard__body">
             <div className="f-postCard__postText">{postData.thread}</div>
@@ -101,20 +129,61 @@ const renderPostBody = (postData, dispatch) => {
                         src={heartImg}
                         alt=""
                         onClick={() => dispatch(likeSinglePost(id))}
+                        className="f-postCard__likeImage"
                     />
-                    <span>{postData.likeCount}</span>
+                    <span className="f-postCard__likeCount">{postData.likeCount}</span>
                 </div>
                 <div className="f-postCard__comment">
-                    <img src={commentImg} alt="" />
-                    <span onClick={() => dispatch(getComment(id))}>
-                        {`${postData.commentCount} comments`}
+                    <img src={commentImg} alt="" className="f-postCard__shareImage" />
+                    <span className="f-postCard__likeCount" onClick={() => dispatch(getComment(id))}>
+                        {postData.commentCount}
                     </span>
+                </div>
+                <div className="f-postCard__share">
+                    <img 
+                        aria-describedby={popoverId}
+                        src={shareImg} alt="" 
+                        className="f-postCard__shareImage" 
+                        onClick={handleClick}
+                    />
+                    <Popover
+                        id={popoverId}
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                        }}
+                    >
+                        <div className="">
+                            <FacebookShareButton url={URL}>
+                                <FacebookIcon size={ICON_SIZE} round />
+                            </FacebookShareButton>
+                            <PinterestShareButton url={URL}>
+                                <PinterestIcon size={ICON_SIZE} round />
+                            </PinterestShareButton>
+                            <RedditShareButton url={URL}>
+                                <RedditIcon size={ICON_SIZE} round />
+                            </RedditShareButton>
+                            <TwitterShareButton url={URL}>
+                                <TwitterIcon size={ICON_SIZE} round />
+                            </TwitterShareButton>
+                            <WhatsappShareButton url={URL}>
+                                <WhatsappIcon size={ICON_SIZE} round />
+                            </WhatsappShareButton>
+                        </div>
+                    </Popover>
                 </div>
             </div>
             {postData.comments ? (
                 <div className="f-postCard__comment-section">
                     {postData.comments.map((data, key) =>
-                        singleComment(data, key),
+                        singleComment(data, key)
                     )}
                 </div>
             ) : null}
@@ -127,31 +196,52 @@ const renderPostBody = (postData, dispatch) => {
  *
  * @function {*} renderPostBottom
  */
-const renderPostBottom = (
+const RenderPostBottom = (
     handleCommentTextChanged,
     commentText,
     postId,
     resetState,
-    dispatch,
-) => (
-    <form
-        className="f-postCard__bottom"
-        onSubmit={e =>
-            handleCommentSubmit(e, commentText, postId, resetState, dispatch)
+    dispatch
+) => {
+
+    const [show, setShow] = useState(false);
+    const setCommentButton = (e, data) => {
+        if(data.length > 1){
+            setShow(true);
+        }else{
+            setShow(false);
         }
-    >
-        <input
-            type="text"
-            className="f-postCard__input"
-            placeholder="Write a comment"
-            value={commentText}
-            onChange={handleCommentTextChanged}
-        />
-        <Button variant="contained" className="b-button" type="submit">
-            {pageData.saveText}
-        </Button>
-    </form>
-);
+        
+    };
+
+    return (
+        <form
+            className="f-postCard__bottom"
+            onSubmit={e =>
+                handleCommentSubmit(e, commentText, postId, resetState, dispatch)
+            }
+            onChange={e => setCommentButton(e, commentText)}
+        >
+            <input
+                type="text"
+                className="f-postCard__input"
+                placeholder="Write a comment"
+                value={commentText}
+                onChange={handleCommentTextChanged}
+            />
+            {show ? (
+                <Button variant="contained" className="b-button" type="submit">
+                    {pageData.saveText}
+                </Button>
+            ) : (
+                <Button variant="contained" className="b-button" disabled>
+                    {pageData.saveText}
+                </Button>
+            )}  
+            
+        </form>
+    );
+};
 
 /**
  * function used to render Post Card component
@@ -172,13 +262,13 @@ const PostCard = ({ postData }) => {
         <Paper className="p-page__card">
             <div className="f-postCard">
                 {renderPostHead(postData)}
-                {renderPostBody(postData, dispatch)}
-                {renderPostBottom(
+                {RenderPostBody(postData, dispatch)}
+                {RenderPostBottom(
                     handleCommentTextChanged,
                     commentText,
                     postId,
                     resetState,
-                    dispatch,
+                    dispatch
                 )}
             </div>
         </Paper>

@@ -73,10 +73,13 @@ const NEW_POST_URL = `${DATABASE_API_URL}/new_post`;
 const ALL_POST_URL = `${DATABASE_API_URL}/posts`;
 const POST_URL = `${DATABASE_API_URL}/post`;
 
+
 // eslint-disable-next-line max-len
 const DISCLAIMER_URL = 'https://www.disclaimergenerator.net/live.php?token=biKdMCTaYshivMWbTszoaVA5bepkxY17';
 // eslint-disable-next-line max-len
 const PRIVACY_POLICY_URL = 'https://www.privacypolicygenerator.info/live.php?token=1sFznfEKQnrwL5g8FpkxxFBTlwW4jHbY';
+const URL = 'https://health-e-api.web.app/';
+const ICON_SIZE = 24;
 
 export {
 	pageData,
@@ -86,5 +89,8 @@ export {
 	ALL_POST_URL,
 	POST_URL,
 	DISCLAIMER_URL,
-	PRIVACY_POLICY_URL
+	PRIVACY_POLICY_URL,
+	URL,
+	ICON_SIZE
+
 };

@@ -32,7 +32,7 @@ const profInput = {
 		value: '',
 		type: 'text',
 	},
-	phoneNumber: {
+	number: {
 		placeholder: 'Phone Number',
 		value: '',
 		type: 'text',
@@ -44,6 +44,33 @@ const profInput = {
 	},
 };
 
+const userInput = {
+	fullName: {
+		placeholder: 'Full name',
+		value: '',
+		type: 'text',
+	},
+	description: {
+		placeholder: 'Description',
+		value: '',
+		type: 'text',
+	},
+	profession: {
+		placeholder: 'Profession',
+		value: '',
+		type: 'text',
+	},
+};
+
+const notificationsSettings = {
+	container: 'bottom-left', // where to position the notifications
+	animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
+	animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
+	dismiss: {
+		duration: 3000,
+	},
+};
+
 /**
  * Defines the url for the database.
  *
@@ -51,5 +78,8 @@ const profInput = {
  */
 const DATABASE_API_URL =
 	'https://us-central1-health-e-api.cloudfunctions.net/api';
+const USER_URL = `${DATABASE_API_URL}/user`;
+// const ALL_POST_URL = `${DATABASE_API_URL}/posts`;
+// const POST_URL = `${DATABASE_API_URL}/post`;
 
-export { pageData, profInput };
+export { pageData, userInput, profInput, notificationsSettings, USER_URL };

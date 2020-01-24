@@ -1,0 +1,9 @@
+export const REFRESH_ROOMS = 'REFRESH_ROOMS';
+
+export const LISTEN_ROOM_MESSAGES = 'GET_ROOM_MESSAGES';
+export const CHANGE_ROOM = 'CHANGE_ROOM';
+export const SET_MESSAGES = 'SET_MESSAGES';
+export const SEND_MESSAGE = 'SEND_MESSAGE';
+
+export const GET_USERS = 'GET_USERS';
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';

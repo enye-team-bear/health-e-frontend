@@ -8,6 +8,7 @@ import {
 	LIKE_POST,
 	COMMENT_POST,
 	GET_SINGLE_COMMENT,
+	GET_POST,
 } from './actionTypes';
 import {
 	newPostNotLoading,
@@ -17,6 +18,8 @@ import {
 	getAllPostsFailed,
 	setCommentPost,
 	updateComment,
+	getPostSuccess,
+	getPostFailed,
 } from './actions';
 import { notificationsSettings } from './constants';
 import {
@@ -25,6 +28,7 @@ import {
 	postLike,
 	postComment,
 	singleComment,
+	getPost as getSinglePost,
 } from './services';
 
 /**
@@ -63,6 +67,17 @@ function* getAllPosts() {
 		}
 	} catch (err) {
 		yield put(getAllPostsFailed('Unable to load posts'));
+	}
+}
+
+function* getPost(data) {
+	try {
+		const res = yield getSinglePost(data.payload);
+		if (res.data.status === 'success') {
+			yield put(getPostSuccess(res.data.data));
+		}
+	} catch (err) {
+		yield put(getPostFailed(err.response.data.message));
 	}
 }
 
@@ -112,4 +127,5 @@ export default function* root() {
 	yield takeEvery(LIKE_POST, likePost);
 	yield takeEvery(COMMENT_POST, commentPost);
 	yield takeEvery(GET_SINGLE_COMMENT, getComments);
+	yield takeEvery(GET_POST, getPost);
 }

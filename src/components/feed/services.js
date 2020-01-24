@@ -28,3 +28,8 @@ export const singleComment = async id => {
 	const res = await Axios.get(`${POST_URL}/${id}`);
 	return res;
 };
+
+export const getPost = async id => {
+	const res = await Axios.get(`${POST_URL}/${id}`);
+	return res;
+};
