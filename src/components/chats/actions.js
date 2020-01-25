@@ -25,3 +25,11 @@ export const getUsersSuccess = data => ({
 	type: actionTypes.GET_USERS_SUCCESS,
 	payload: data,
 });
+
+export const addUser = data => ({ type: actionTypes.ADD_USER, payload: data });
+export const addUserSuccess = (user, roomId) => ({
+	type: actionTypes.ADD_USER_SUCCESS,
+	payload: { user, roomId },
+});
+
+export const clearNewUser = () => ({ type: actionTypes.CLEAR_NEW_USER });

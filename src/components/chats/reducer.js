@@ -4,14 +4,17 @@ import {
 	CHANGE_ROOM,
 	SET_MESSAGES,
 	GET_USERS_SUCCESS,
+	ADD_USER_SUCCESS,
+	CLEAR_NEW_USER,
 } from './actionTypes';
 
 const INITIAL_STATE = {
 	rooms: [],
-	currentRoom: 0,
+	currentRoom: '0',
 	messages: [],
 	loading: false,
 	users: [],
+	newUser: null,
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
@@ -38,6 +41,21 @@ export default (state = INITIAL_STATE, { type, payload }) => {
 			return {
 				...state,
 				users: payload,
+			};
+		}
+		case ADD_USER_SUCCESS: {
+			const { user, roomId } = payload;
+			return {
+				...state,
+				newUser: user,
+				currentRoom: roomId,
+				messages: [],
+			};
+		}
+		case CLEAR_NEW_USER: {
+			return {
+				...state,
+				newUser: null,
 			};
 		}
 		default:

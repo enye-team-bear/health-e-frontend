@@ -43,6 +43,7 @@
         color: $color-primary;
         font-weight: 500;
         border-bottom: 1px solid #d0d0d0;
+        background-color: #ededed;
         display: flex;
         justify-content: space-between;
     }
@@ -86,6 +87,7 @@
     &__inboxChats {
         height: 550px;
         overflow-y: scroll;
+        background-color: #fff;
     }
 
     &__userLists {
@@ -95,7 +97,7 @@
     }
 
     &__inboxChatList {
-        border-bottom: 1px solid #c4c4c4;
+        border-bottom: 1px solid #f2f2f2;
         margin: 0;
         padding: 18px 16px 10px;
         display: flex;
@@ -149,24 +151,33 @@
         font-size: 1.4rem;
         padding: 1rem 1rem;
         color: #464646;
-        font-weight: 500;
+        font-weight: 100;
         border-bottom: 1px solid #d0d0d0;
+        background-color: #ededed;
     }
 
     &__msgBody {
         margin-bottom: 0;
         height: 100%;
+        background-color: #f8f9fa;
     }
 
     &__chatMsgs {
-        height: 470px;
+        height: 487px;
         overflow-y: scroll;
         display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__chatSend {
         padding: 1.6rem;
         margin-top: auto;
+        background-color: #fff;
+
+        .f-postCard__bottom {
+            margin-top: unset;
+        }
     }
 
     &__msgBox {
@@ -235,5 +246,29 @@
         color: #747474;
         font-size: 1.4rem;
         font-weight: 100;
+    }
+
+    &__noUser {
+        width: 70%;
+        text-align: center;
+        img {
+            width: 60%;
+        }
+
+        &-heading {
+            font-weight: 100;
+            font-size: 3.2rem;
+            color: #525252;
+        }
+
+        &-desc {
+            font-size: 1.4rem;
+            color: rgba(0, 0, 0, 0.45);
+            font-weight: 100;
+
+            span {
+                color: $color-primary;
+            }
+        }
     }
 }
