@@ -17,7 +17,7 @@ const renderPosts = (postData, dispatch) => {
             <CircularProgress className="l-loading__progress" />
         </div>
     );
-    if (allPosts.length > 0 && !postLoading) {
+    if (allPosts.length > 0) {
         posts = allPosts.map(post => (
             <PostCard key={post.id ? post.id : post.postId} postData={post} />
         ));

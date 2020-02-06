@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/app';
 import 'firebase/firestore';
 
@@ -21,6 +21,7 @@ const firebaseNotifications = firebaseDB.collection('notifications');
 const firebaseRooms = firebaseDB.collection('rooms');
 const firebaseUsers = firebaseDB.collection('users');
 const firebaseMessages = firebaseDB.collection('messages');
+const firebaseChatNotifications = firebaseDB.collection('messageNotifications');
 
 export {
 	firebase,
@@ -30,4 +31,5 @@ export {
 	firebaseRooms,
 	firebaseUsers,
 	firebaseMessages,
+	firebaseChatNotifications,
 };
