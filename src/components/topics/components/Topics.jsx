@@ -52,8 +52,8 @@ const renderGrid = (handleModalOpen, topicsData) => (
     <Grid container spacing={3}>
         <Grid item xs={12} sm={9}>
             {renderCreateTopic(handleModalOpen)}
-            <Content />
-            {/* {renderTopics(topicsData)} */}
+            {/* <Content /> */}
+            {renderTopics(topicsData)}
         </Grid>
         <Grid item xs={12} sm={3}>
             <Card className="p-page__card">

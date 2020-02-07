@@ -61,6 +61,7 @@ function* roomListener() {
 			...el.data(),
 			roomId: el.id,
 		}));
+		console.log(data);
 		const state = yield select();
 		const chatData = yield formatData(newData, state);
 		yield put(refreshRooms(chatData));
