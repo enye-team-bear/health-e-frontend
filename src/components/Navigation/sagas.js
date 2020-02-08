@@ -19,7 +19,7 @@ function* readNotification(data) {
 	}
 }
 
-function* startListener() {
+function* notificationListener() {
 	const channel = new EventChannel(emiter => {
 		const listener = firebaseNotifications.onSnapshot(snapshot => {
 			emiter({ data: snapshot.docs || {} });
@@ -54,5 +54,5 @@ function* startListener() {
 
 export default function* root() {
 	yield takeEvery(READ_NOTIFICATION, readNotification);
-	yield fork(startListener);
+	yield fork(notificationListener);
 }

@@ -41,5 +41,9 @@ export const formatData = async (data, state) => {
 
 	const userChats = await Promise.all(promises);
 
-	return userChats;
+	return userChats.sort((a, b) => {
+		a = new Date(a.createdAt);
+		b = new Date(b.createdAt);
+		return a > b ? -1 : a < b ? 1 : 0;
+	});
 };
